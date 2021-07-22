@@ -83,7 +83,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     public static DBHelper dbHelper;
     public static SQLiteDatabase db;
     private dbData dbData = new dbData(this);
-    String pmay_id;
+    String kvvt_id;
 
 
 
@@ -110,7 +110,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mlocListener = new MyLocationListener();
 
-        pmay_id = getIntent().getStringExtra("lastInsertedID");
+        kvvt_id = getIntent().getStringExtra("lastInsertedID");
 
     }
 
@@ -141,7 +141,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
             ContentValues values = new ContentValues();
 
-            values.put(AppConstant.PMAY_ID, pmay_id);
+            values.put(AppConstant.PMAY_ID, kvvt_id);
             values.put(AppConstant.TYPE_OF_PHOTO, getIntent().getStringExtra(AppConstant.TYPE_OF_PHOTO));
             values.put(AppConstant.KEY_LATITUDE, offlatTextValue.toString());
             values.put(AppConstant.KEY_LONGITUDE, offlongTextValue.toString());
@@ -149,7 +149,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
             if(type_of_photo.equals("2")){
                 dbData.open();
-                ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"1");
+                ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(kvvt_id,"1");
 
                 if (imageOffline.size() > 0){
                     for (int i= 0; i<imageOffline.size(); i++){
@@ -177,8 +177,8 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             }
 
                 whereClause = "pmay_id = ? and type_of_photo = ?";
-                whereArgs = new String[]{pmay_id,type_of_photo};dbData.open();
-                ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,type_of_photo);
+                whereArgs = new String[]{kvvt_id,type_of_photo};dbData.open();
+                ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(kvvt_id,type_of_photo);
 
                 if(imageOffline.size() < 1) {
                     id = db.insert(DBHelper.SAVE_PMAY_IMAGES, null, values);
@@ -219,19 +219,24 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         return dist;
     }
     private void captureImage() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+        }else {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        File file = CameraUtils.getOutputMediaFile(MEDIA_TYPE_IMAGE);
-        if (file != null) {
-            imageStoragePath = file.getAbsolutePath();
+            File file = CameraUtils.getOutputMediaFile(MEDIA_TYPE_IMAGE);
+            if (file != null) {
+                imageStoragePath = file.getAbsolutePath();
+            }
+
+            Uri fileUri = CameraUtils.getOutputMediaFileUri(this, file);
+
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+            // start the image capture Intent
+            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
         }
-
-        Uri fileUri = CameraUtils.getOutputMediaFileUri(this, file);
-
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
-        // start the image capture Intent
-        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
         if (MyLocationListener.latitude > 0) {
             offlatTextValue = MyLocationListener.latitude;
             offlongTextValue = MyLocationListener.longitude;
@@ -379,12 +384,18 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+                    cameraScreenBinding.imageViewPreview.setVisibility(View.GONE);
+                    cameraScreenBinding.imageView.setVisibility(View.VISIBLE);
+                    cameraScreenBinding.imageView.setImageBitmap(photo);
+                }else {
                 // Refreshing the gallery
                 CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
 
                 // successfully captured the image
                 // display it in image view
-                previewCapturedImage();
+                previewCapturedImage();}
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),

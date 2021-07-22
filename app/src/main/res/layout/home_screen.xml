@@ -332,7 +332,7 @@
                     android:layout_marginLeft="@dimen/margin_left_20dp"
                     android:layout_marginTop="@dimen/padding"
                     android:layout_marginRight="@dimen/margin_left_20dp"
-                    android:text="Select Scheme"
+                    android:text="Select Automatic Exclusion Criteria"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_15sdp"
                     style="@string/font_circular_bold" />

@@ -41,7 +41,7 @@ public class AppConstant {
 
     public static String KEY_VILLAGE_LIST_DISTRICT_BLOCK_WISE = "village_list_district_block_wise";
     public static String KEY_HABITATION_LIST_DISTRICT_BLOCK_WISE = "habitation_list_district_block_wise";
-    public static String KEY_SCHEME_LIST_DISTRICT_BLOCK_WISE = "scheme_list_district_block_wise";
+    public static String KEY_AUTOMATIC_EXCLUSION_CRITERIA = "automatic_exclusion_criteria";
 
     public static String BENEFICIARY_NAME = "beneficiary_name";
     public static String BENEFICIARY_FATHER_NAME = "beneficiary_father_name";

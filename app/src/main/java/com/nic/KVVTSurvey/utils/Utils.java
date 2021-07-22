@@ -64,6 +64,9 @@ import com.nic.KVVTSurvey.application.NICApplication;
 import com.nic.KVVTSurvey.constant.AppConstant;
 import com.nic.KVVTSurvey.session.PrefManager;
 
+import static com.nic.KVVTSurvey.constant.AppConstant.KEY_AUTOMATIC_EXCLUSION_CRITERIA;
+
+
 
 public class Utils {
 
@@ -1171,9 +1174,9 @@ public class Utils {
     public static JSONObject schemeListDistrictBlockWiseJsonParams(Activity activity) throws JSONException {
         prefManager = new PrefManager(activity);
         JSONObject dataSet = new JSONObject();
-        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_VILLAGE_LIST_DISTRICT_BLOCK_WISE/*KEY_SCHEME_LIST_DISTRICT_BLOCK_WISE*/);
-        dataSet.put(AppConstant.DISTRICT_CODE, prefManager.getDistrictCode());
-        dataSet.put(AppConstant.BLOCK_CODE, prefManager.getBlockCode());
+        dataSet.put(AppConstant.KEY_SERVICE_ID, KEY_AUTOMATIC_EXCLUSION_CRITERIA);
+       /* dataSet.put(AppConstant.DISTRICT_CODE, prefManager.getDistrictCode());
+        dataSet.put(AppConstant.BLOCK_CODE, prefManager.getBlockCode());*/
         Log.d("schemeListDistBlock", "" + dataSet);
         return dataSet;
     }

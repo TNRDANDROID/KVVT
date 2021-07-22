@@ -256,7 +256,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
         Scheme.clear();
         KVVTSurvey villageListValue = new KVVTSurvey();
-        villageListValue.setPvName("Select Scheme");
+        villageListValue.setPvName("Select Exclusion Criteria");
         Scheme.add(villageListValue);
         if (VillageList.getCount() > 0) {
             if (VillageList.moveToFirst()) {
@@ -465,10 +465,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
         if ((homeScreenBinding.migYes.isChecked()) || homeScreenBinding.migNo.isChecked()) {
             if((homeScreenBinding.migYes.isChecked())){
-                if (!"Select Scheme".equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getPvName())) {
+                if (!"Select Exclusion Criteria".equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getPvName())) {
                     takePhoto(homeScreenBinding.takePhotoTv.getText().toString());
                 }else {
-                    Utils.showAlert(this, "Select Scheme!");
+                    Utils.showAlert(this, "Select Exclusion Criteria!");
                 }
             }else if((homeScreenBinding.migNo.isChecked())){
                 takePhoto(homeScreenBinding.takePhotoTv.getText().toString());

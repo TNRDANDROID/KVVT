@@ -334,7 +334,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:text="SECC Id"
+                                    android:text="KVVT Id"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
                                     android:textSize="18sp" />
@@ -386,6 +386,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
                             android:layout_gravity="bottom"
+                            android:visibility="gone"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:background="@drawable/background"

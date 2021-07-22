@@ -159,6 +159,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     public void checkLoginScreen() {
+        loginScreenBinding.userName.setText("prmaltrpy1");
+        loginScreenBinding.password.setText("pmay552#$");
         final String username = loginScreenBinding.userName.getText().toString().trim();
         final String password = loginScreenBinding.password.getText().toString().trim();
         prefManager.setUserPassword(password);
@@ -344,10 +346,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 String key = loginResponse.getString(AppConstant.ENCODE_DATA);
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                Log.d("SchemeListResponse", "" + responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     new InsertSchemeTask().execute(jsonObject);
                 }
-                Log.d("SchemeList", "" + responseDecryptedBlockKey);
+
             }
             if ("HabitationList".equals(urlType) && loginResponse != null) {
                 String key = loginResponse.getString(AppConstant.ENCODE_DATA);
