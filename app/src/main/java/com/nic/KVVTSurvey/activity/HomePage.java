@@ -260,28 +260,28 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
             homeScreenBinding.selectScheTv.setVisibility(View.VISIBLE);
             homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
-            homeScreenBinding.takePhotoTv.setText("Save details");
+            homeScreenBinding.saveData.setText("Save details");
         } else if (isMigrated.equalsIgnoreCase("N")) {
             homeScreenBinding.schemeSpinner.setSelection(0);
             prefManager.setKeySchemeCode("");
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
             homeScreenBinding.selectScheTv.setVisibility(View.GONE);
             homeScreenBinding.scheLayout.setVisibility(View.GONE);
-            homeScreenBinding.takePhotoTv.setText("Take Photo");
+            homeScreenBinding.saveData.setText("Take Photo");
         }
     }
 
 //    public boolean validateCheck() {
 //        if (isAlive.equalsIgnoreCase("") || isMigrated.equalsIgnoreCase("Y")) {
-//            homeScreenBinding.takePhotoTv.setText("Save details");
+//            homeScreenBinding.saveData.setText("Save details");
 //        } else if (isAlive.equalsIgnoreCase("Y") && isMigrated.equalsIgnoreCase("N")) {
-//            homeScreenBinding.takePhotoTv.setText("Take Photo");
+//            homeScreenBinding.saveData.setText("Take Photo");
 //        } else if (isAlive.equalsIgnoreCase("N") && isLegal.equalsIgnoreCase("N")) {
-//            homeScreenBinding.takePhotoTv.setText("Save details");
+//            homeScreenBinding.saveData.setText("Save details");
 //        } else if (isAlive.equalsIgnoreCase("N") && isLegal.equalsIgnoreCase("Y") && isMigrated.equalsIgnoreCase("Y")) {
-//            homeScreenBinding.takePhotoTv.setText("Save details");
+//            homeScreenBinding.saveData.setText("Save details");
 //        } else if (isAlive.equalsIgnoreCase("N") && isLegal.equalsIgnoreCase("Y") && isMigrated.equalsIgnoreCase("N")) {
-//            homeScreenBinding.takePhotoTv.setText("Take Photo");
+//            homeScreenBinding.saveData.setText("Take Photo");
 //        }
 //    }
 
@@ -574,12 +574,12 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         if ((homeScreenBinding.migYes.isChecked()) || homeScreenBinding.migNo.isChecked()) {
             if((homeScreenBinding.migYes.isChecked())){
                 if (!"Select Exclusion Criteria".equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getPvName())) {
-                    takePhoto(homeScreenBinding.takePhotoTv.getText().toString());
+                    takePhoto(homeScreenBinding.saveData.getText().toString());
                 }else {
                     Utils.showAlert(this, "Select Exclusion Criteria!");
                 }
             }else if((homeScreenBinding.migNo.isChecked())){
-                takePhoto(homeScreenBinding.takePhotoTv.getText().toString());
+                takePhoto(homeScreenBinding.saveData.getText().toString());
             }
         } else {
             Utils.showAlert(this, "Check the beneficiary is Eligible to reject or not!");
