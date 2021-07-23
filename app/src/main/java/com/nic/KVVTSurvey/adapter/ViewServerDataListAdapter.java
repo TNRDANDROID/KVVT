@@ -62,23 +62,11 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.viewServerDataAdapterBinding.name.setText(serverDataListValuesFiltered.get(position).getBeneficiaryName());
+        holder.viewServerDataAdapterBinding.fatherName.setText(serverDataListValuesFiltered.get(position).getBeneficiaryFatherName());
         holder.viewServerDataAdapterBinding.villageName.setText(serverDataListValuesFiltered.get(position).getPvName());
         holder.viewServerDataAdapterBinding.habName.setText(serverDataListValuesFiltered.get(position).getHabitationName());
-        holder.viewServerDataAdapterBinding.secId.setText(serverDataListValuesFiltered.get(position).getSeccId());
-        if(!serverDataListValuesFiltered.get(position).getPersonAlive().equalsIgnoreCase("")){
-            holder.viewServerDataAdapterBinding.aliveLayout.setVisibility(View.VISIBLE);
-            holder.viewServerDataAdapterBinding.aliveView.setVisibility(View.VISIBLE);
-            holder.viewServerDataAdapterBinding.beneficiaryAliveTv.setText(serverDataListValues.get(position).getPersonAlive());
-        }
-        if(!serverDataListValuesFiltered.get(position).getIsLegel().equalsIgnoreCase("")){
-            holder.viewServerDataAdapterBinding.legalHeirLayout.setVisibility(View.VISIBLE);
-            holder.viewServerDataAdapterBinding.legalView.setVisibility(View.VISIBLE);
-            holder.viewServerDataAdapterBinding.legalHeirTv.setText(serverDataListValues.get(position).getIsLegel());
-        }
-        if(!serverDataListValuesFiltered.get(position).getIsMigrated().equalsIgnoreCase("")){
-            holder.viewServerDataAdapterBinding.beneficiaryMigratedLayout.setVisibility(View.VISIBLE);
-            holder.viewServerDataAdapterBinding.beneficiaryMigratedTv.setText(serverDataListValues.get(position).getIsMigrated());
-        }
+        holder.viewServerDataAdapterBinding.secId.setText(serverDataListValuesFiltered.get(position).getBeneficiaryId());
+        holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getEligible_for_auto_exclusion());
         holder.viewServerDataAdapterBinding.viewServerImages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,7 +121,7 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
         Intent intent = new Intent(activity, FullImageActivity.class);
         intent.putExtra(AppConstant.PV_CODE, serverDataListValuesFiltered.get(pos).getPvCode());
         intent.putExtra(AppConstant.HAB_CODE, serverDataListValuesFiltered.get(pos).getHabCode());
-        intent.putExtra(AppConstant.SECC_ID, serverDataListValuesFiltered.get(pos).getSeccId());
+        intent.putExtra(AppConstant.BENEFICIARY_ID, serverDataListValuesFiltered.get(pos).getBeneficiaryId());
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

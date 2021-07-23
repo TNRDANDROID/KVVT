@@ -9,8 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
@@ -59,6 +62,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     String lastInsertedID;
     String isMigrated = "";
     private ProgressHUD progressHUD;
+    Boolean flag=false;
+    Boolean Etflag=false;
 
 
     String pref_Village;
@@ -86,6 +91,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         homeScreenBinding.selectScheTv.setVisibility(View.GONE);
         homeScreenBinding.scheLayout.setVisibility(View.GONE);
         homeScreenBinding.takePicLayout.setVisibility(View.GONE);
+        homeScreenBinding.nameLayout.setVisibility(View.GONE);
+        homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
         homeScreenBinding.villageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -95,6 +102,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     prefManager.setVillageListPvName(pref_Village);
                     prefManager.setPvCode(Village.get(position).getPvCode());
                     habitationFilterSpinner(prefManager.getDistrictCode(),prefManager.getBlockCode(),prefManager.getPvCode());
+                }else {
+                    prefManager.setVillageListPvName("");
+                    prefManager.setPvCode("");
+                    homeScreenBinding.habitationSpinner.setAdapter(null);
                 }
             }
 
@@ -125,6 +136,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
                     prefManager.setHabCode(Habitation.get(position).getHabCode());
+                }else {
+                    prefManager.setHabCode("");
                 }
             }
 
@@ -165,8 +178,57 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                 }
             }
         });
+        homeScreenBinding.seccId.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(!prefManager.getPvCode().equals("") && !prefManager.getHabCode().equals("")){
+                    Etflag=true;
+                }
+                else {
+                    Etflag=false;
+                    Utils.showAlert(HomePage.this,"First select Village and Habitation!");
+                }
+                return false;
+            }
+        });
+        homeScreenBinding.seccId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+               /* if(!prefManager.getPvCode().equals("") && !prefManager.getHabCode().equals("")){
+                    Etflag=true;
+                }else {
+                    Etflag=false;
+                }*/
 
-        myHandler.postDelayed(pmgsy, 1500);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!homeScreenBinding.seccId.getText().toString().isEmpty()){
+                    homeScreenBinding.tick.setVisibility(View.VISIBLE);
+                }else{
+                    homeScreenBinding.tick.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        homeScreenBinding.tick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Etflag){
+                    if(!homeScreenBinding.seccId.getText().equals("")){
+                        validateBenificiaryId(homeScreenBinding.seccId.getText().toString());}
+                }
+                else {
+                    Utils.showAlert(HomePage.this,"First select Village and Habitation!");
+                }
+            }
+        });
+       /* myHandler.postDelayed(pmgsy, 1500);
         homeScreenBinding.viewServerData.setAlpha(0);
         final Runnable block = new Runnable() {
             @Override
@@ -176,10 +238,19 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
             }
         };
-        myHandler.postDelayed(block, 2000);
+        myHandler.postDelayed(block, 2000);*/
 
         syncButtonVisibility();
         viewServerData();
+
+    }
+
+    private void validateBenificiaryId(String toString) {
+        try {
+            new ApiService(this).makeJSONObjectRequest("ValidateBenificiaryId", Api.Method.POST, UrlGenerator.getPMAYListUrl(), validateBenificiaryIdJsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -369,6 +440,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         Log.d("PMAYList", "" + authKey);
         return dataSet;
     }
+    public JSONObject validateBenificiaryIdJsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.validateBeniIdJsonParamsJsonParams(prefManager.getPvCode(), prefManager.getHabCode(),homeScreenBinding.seccId.getText().toString()).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("validateBenificiaryId", "" + dataSet);
+        return dataSet;
+    }
 
     @Override
     public void OnMyResponse(ServerResponse serverResponse) {
@@ -387,6 +466,36 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                 }else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("NO_RECORD") && jsonObject.getString("MESSAGE").equalsIgnoreCase("NO_RECORD")){
                     Utils.showAlert(this,"No Record Found!");
                 }
+
+            }
+            if ("ValidateBenificiaryId".equals(urlType) && responseObj != null) {
+                String key = responseObj.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                Log.d("ValidateBeniIdResponse", "" + responseDecryptedBlockKey);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    flag=true;
+                    JSONArray jsonArray=new JSONArray();
+                    jsonArray=jsonObject.getJSONArray("JSON_DATA");
+                    JSONObject js=jsonArray.getJSONObject(0);
+                    String name= js.getString("c_name");
+                    String fatherName= js.getString("beneficiary_father_name");
+                    homeScreenBinding.nameLayout.setVisibility(View.VISIBLE);
+                    homeScreenBinding.fatherNameLayout.setVisibility(View.VISIBLE);
+                    homeScreenBinding.name.setText(name);
+                    homeScreenBinding.fatherName.setText(fatherName);
+                }else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("NO_RECORD") && jsonObject.getString("MESSAGE").equalsIgnoreCase("NO_RECORD")){
+                    homeScreenBinding.nameLayout.setVisibility(View.GONE);
+                    homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
+                    homeScreenBinding.name.setText("");
+                    homeScreenBinding.fatherName.setText("");
+                    flag=false;
+                    Utils.showAlert(this,"Invalid Benificiary Id!");
+                }else {homeScreenBinding.nameLayout.setVisibility(View.GONE);
+                    homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
+                    homeScreenBinding.name.setText("");
+                    homeScreenBinding.fatherName.setText("");
+                    flag=false;}
 
             }
         } catch (JSONException e) {
@@ -442,12 +551,12 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         if (!"Select Village".equalsIgnoreCase(Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName())) {
             if (!"Select Habitation".equalsIgnoreCase(Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName())) {
                         if (!homeScreenBinding.seccId.getText().toString().isEmpty()) {
-                            if (Utils.isValidMobile(homeScreenBinding.seccId.getText().toString())) {
+//                            if (Utils.isValidMobile(homeScreenBinding.seccId.getText().toString())) {
                                 checkLegalYesNo();
 
-                            } else {
+                           /* } else {
                                 Utils.showAlert(this, "Seec Id Must be 7 Digit!");
-                            }
+                            }*/
                         } else {
                             Utils.showAlert(this, "Enter the  Seec Id!");
                         }
@@ -553,6 +662,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         homeScreenBinding.scheLayout.setVisibility(View.GONE);
         homeScreenBinding.selectScheTv.setVisibility(View.GONE);
         homeScreenBinding.takePicLayout.setVisibility(View.GONE);
+        homeScreenBinding.nameLayout.setVisibility(View.GONE);
+        homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
+        homeScreenBinding.name.setText("");
+        homeScreenBinding.fatherName.setText("");
         homeScreenBinding.seccId.setText("");
         homeScreenBinding.migYes.setChecked(false);
         homeScreenBinding.migNo.setChecked(false);
@@ -586,15 +699,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                         KVVTSurvey pmaySurvey = new KVVTSurvey();
                         try {
                             pmaySurvey.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
-                            pmaySurvey.setHabCode(jsonArray.getJSONObject(i).getString(AppConstant.HAB_CODE));
+                            pmaySurvey.setHabCode(jsonArray.getJSONObject(i).getString(AppConstant.HABIT_CODE));
+                            pmaySurvey.setBeneficiaryId(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_ID));
                             pmaySurvey.setBeneficiaryName(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_NAME));
-                            pmaySurvey.setSeccId(jsonArray.getJSONObject(i).getString(AppConstant.SECC_ID));
+                            pmaySurvey.setBeneficiaryFatherName(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_FATHER_NAME));
+                            pmaySurvey.setExclusion_criteria_id(jsonArray.getJSONObject(i).getString(AppConstant.EXCLUSION_CRITERIA_ID));
                             pmaySurvey.setHabitationName(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME));
                             pmaySurvey.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
-                            pmaySurvey.setPersonAlive(jsonArray.getJSONObject(i).getString(AppConstant.PERSON_ALIVE));
-                            pmaySurvey.setIsLegel(jsonArray.getJSONObject(i).getString(AppConstant.LEGAL_HEIR_AVAILABLE));
-                            pmaySurvey.setIsMigrated(jsonArray.getJSONObject(i).getString(AppConstant.PERSON_MIGRATED));
-
+                            pmaySurvey.setEligible_for_auto_exclusion(jsonArray.getJSONObject(i).getString(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION));
                             dbData.insertPMAY(pmaySurvey);
                         } catch (JSONException e) {
                             e.printStackTrace();

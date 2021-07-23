@@ -119,6 +119,7 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
                 String key = responseObj.getString(AppConstant.ENCODE_DATA);
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                Log.d("saved_response", "" + responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     Utils.showAlert(this, "Uploaded");
                     db.delete(DBHelper.SAVE_PMAY_DETAILS,"id = ?",new String[] {prefManager.getKeyDeleteId()});
@@ -133,7 +134,7 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
                     new fetchPendingtask().execute();
                     pendingAdapter.notifyDataSetChanged();
                 }
-                Log.d("saved_response", "" + responseDecryptedBlockKey);
+
             }
         }catch (JSONException e) {
             e.printStackTrace();

@@ -181,14 +181,13 @@ public class dbData {
         ContentValues values = new ContentValues();
         values.put(AppConstant.PV_CODE, pmgsySurvey.getPvCode());
         values.put(AppConstant.HAB_CODE, pmgsySurvey.getHabCode());
+        values.put(AppConstant.BENEFICIARY_ID, pmgsySurvey.getBeneficiaryId());
         values.put(AppConstant.BENEFICIARY_NAME, pmgsySurvey.getBeneficiaryName());
-        values.put(AppConstant.SECC_ID, pmgsySurvey.getSeccId());
+        values.put(AppConstant.BENEFICIARY_FATHER_NAME, pmgsySurvey.getBeneficiaryFatherName());
+        values.put(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION, pmgsySurvey.getEligible_for_auto_exclusion());
         values.put(AppConstant.HABITATION_NAME, pmgsySurvey.getHabitationName());
+        values.put(AppConstant.EXCLUSION_CRITERIA_ID, pmgsySurvey.getExclusion_criteria_id());
         values.put(AppConstant.PV_NAME, pmgsySurvey.getPvName());
-        values.put(AppConstant.PERSON_ALIVE, pmgsySurvey.getPersonAlive());
-        values.put(AppConstant.LEGAL_HEIR_AVAILABLE, pmgsySurvey.getIsLegel());
-        values.put(AppConstant.PERSON_MIGRATED, pmgsySurvey.getIsMigrated());
-
         long id = db.insert(DBHelper.PMAY_LIST_TABLE_NAME,null,values);
         Log.d("Inserted_id_PMAY_LIST", String.valueOf(id));
 
@@ -219,21 +218,20 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.PV_CODE)));
                     card.setHabCode(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.HAB_CODE)));
+                    card.setBeneficiaryId(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.BENEFICIARY_ID)));
                     card.setBeneficiaryName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_NAME)));
-                    card.setSeccId(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.SECC_ID)));
+                    card.setBeneficiaryFatherName(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.BENEFICIARY_FATHER_NAME)));
+                    card.setEligible_for_auto_exclusion(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION)));
                     card.setHabitationName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.HABITATION_NAME)));
+                    card.setExclusion_criteria_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
                     card.setPvName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PV_NAME)));
-                    card.setPersonAlive(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.PERSON_ALIVE)));
-                    card.setIsLegel(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.LEGAL_HEIR_AVAILABLE)));
-                    card.setIsMigrated(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.PERSON_MIGRATED)));
-
                     cards.add(card);
                 }
             }

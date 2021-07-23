@@ -12,7 +12,9 @@ public class AppConstant {
     public static String DATA_CONTENT = "data_content";
     public static String ENCODE_DATA = "enc_data";
 
-    public static String KEY_PMAY_SOURCE_ALL = "kvvt_source_data";
+//    public static String KEY_PMAY_SOURCE_ALL = "kvvt_source_data";
+    public static String KEY_PMAY_SOURCE_ALL = "kvvt_source_data_enterd";
+    public static String KEY_VALIDATE_BENIFICIARY_ID = "kvvt_source_data_single_benificiary";
 
 
     public static String USER_LOGIN_KEY = "user_login_key";
@@ -30,6 +32,7 @@ public class AppConstant {
     public static String BLOCK_CODE = "bcode";
     public static String PV_CODE = "pvcode";
     public static String HAB_CODE = "habcode";
+    public static String HABIT_CODE = "hab_code";
     public static String HABB_CODE = "habitation_code";
     public static String BLOCK_NAME = "bname";
     public static String PV_NAME = "pvname";
@@ -43,6 +46,7 @@ public class AppConstant {
     public static String KEY_HABITATION_LIST_DISTRICT_BLOCK_WISE = "habitation_list_district_block_wise";
     public static String KEY_AUTOMATIC_EXCLUSION_CRITERIA = "automatic_exclusion_criteria";
 
+    public static String BENEFICIARY_ID = "benificiary_id";
     public static String BENEFICIARY_NAME = "beneficiary_name";
     public static String BENEFICIARY_FATHER_NAME = "beneficiary_father_name";
     public static String HABITATION_NAME = "habitation_name";
@@ -54,12 +58,13 @@ public class AppConstant {
     public static String PMAY_SOURCE_SAVE = "kvvt_source_save";
     public static String KEY_TRACK_DATA = "track_data";
     public static String PMAY_ID = "pmay_id";
-    public static String KEY_PMAY_SOURCE_DATA_PHOTO = "pmay_source_data_photo";
+    public static String KEY_PMAY_SOURCE_DATA_PHOTO = "kvvt_source_data_photo";
     public static String PERSON_ALIVE = "person_alive";
     public static String LEGAL_HEIR_AVAILABLE = "legal_heir_available";
     public static String PERSON_MIGRATED = "person_migrated";
     public static String EXCLUSION_CRITERIA_ID = "exclusion_criteria_id";
     public static String EXCLUSION_CRITERIA = "exclusion_criteria";
+    public static String ELIGIBLE_FOR_AUTO_EXCLUSION = "eligible_for_auto_exclusion";
     public static String BUTTON_TEXT = "button_text";
 
 

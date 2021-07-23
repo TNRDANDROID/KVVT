@@ -48,14 +48,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + PMAY_LIST_TABLE_NAME + " ("
                 + "pvcode  TEXT," +
                 "habcode  TEXT," +
+                "benificiary_id  TEXT," +
                 "beneficiary_name  TEXT," +
-                "secc_id  TEXT," +
+                "beneficiary_father_name  TEXT," +
+                "eligible_for_auto_exclusion  TEXT," +
                 "habitation_name TEXT," +
-                "person_alive TEXT," +
-                "legal_heir_available TEXT," +
-                "person_migrated TEXT," +
+                "exclusion_criteria_id TEXT," +
                 "pvname TEXT)");
-
         db.execSQL("CREATE TABLE " + SAVE_PMAY_DETAILS + " ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "dcode TEXT," +

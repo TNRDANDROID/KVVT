@@ -1159,6 +1159,15 @@ public class Utils {
         Log.d("object", "" + dataSet);
         return dataSet;
     }
+    public static JSONObject validateBeniIdJsonParamsJsonParams(String pvCode, String habCode, String benificiaryId) throws JSONException {
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_VALIDATE_BENIFICIARY_ID);
+        dataSet.put(AppConstant.PV_CODE, pvCode);
+        dataSet.put(AppConstant.HAB_CODE, habCode);
+        dataSet.put(AppConstant.BENEFICIARY_ID, benificiaryId);
+        Log.d("object", "" + dataSet);
+        return dataSet;
+    }
 
 
 

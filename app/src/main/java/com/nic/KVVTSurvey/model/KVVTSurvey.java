@@ -27,11 +27,41 @@ public class KVVTSurvey {
     private String Description;
     private String Latitude;
     private String BeneficiaryName;
+    private String BeneficiaryFatherName;
+    private String BeneficiaryId;
     private String HabitationName;
     private String pmayId;
     private String fatherName;
     private String personAlive;
     private String buttonText;
+    private String eligible_for_auto_exclusion;
+
+    public String getEligible_for_auto_exclusion() {
+        return eligible_for_auto_exclusion;
+    }
+
+    public KVVTSurvey setEligible_for_auto_exclusion(String eligible_for_auto_exclusion) {
+        this.eligible_for_auto_exclusion = eligible_for_auto_exclusion;
+        return this;
+    }
+
+    public String getBeneficiaryFatherName() {
+        return BeneficiaryFatherName;
+    }
+
+    public KVVTSurvey setBeneficiaryFatherName(String beneficiaryFatherName) {
+        BeneficiaryFatherName = beneficiaryFatherName;
+        return this;
+    }
+
+    public String getBeneficiaryId() {
+        return BeneficiaryId;
+    }
+
+    public KVVTSurvey setBeneficiaryId(String beneficiaryId) {
+        BeneficiaryId = beneficiaryId;
+        return this;
+    }
 
     public String getExclusion_criteria_id() {
         return exclusion_criteria_id;
