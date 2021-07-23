@@ -176,6 +176,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         String bcode = pendingListValues.get(position).getBlockCode();
         String pvcode = pendingListValues.get(position).getPvCode();
         String habcode = pendingListValues.get(position).getHabCode();
+        String exclusion_criteria_id = pendingListValues.get(position).getExclusion_criteria_id();
         String beneficiary_name = pendingListValues.get(position).getBeneficiaryName();
         String father_name = pendingListValues.get(position).getFatherName();
         String secc_id = pendingListValues.get(position).getSeccId();
@@ -192,12 +193,13 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             dataset.put(AppConstant.KEY_SERVICE_ID,AppConstant.PMAY_SOURCE_SAVE);
             dataset.put(AppConstant.PV_CODE, pvcode);
             dataset.put(AppConstant.HAB_CODE, habcode);
-            dataset.put(AppConstant.BENEFICIARY_NAME, beneficiary_name);
+            /*dataset.put(AppConstant.BENEFICIARY_NAME, beneficiary_name);
             dataset.put(AppConstant.BENEFICIARY_FATHER_NAME, father_name);
             dataset.put(AppConstant.PERSON_ALIVE, person_alive);
-            dataset.put(AppConstant.LEGAL_HEIR_AVAILABLE, legal_heir_available);
-            dataset.put(AppConstant.PERSON_MIGRATED, person_migrated);
-            dataset.put(AppConstant.SECC_ID, secc_id);
+            dataset.put(AppConstant.LEGAL_HEIR_AVAILABLE, legal_heir_available);*/
+            dataset.put(AppConstant.EXCLUSION_CRITERIA_ID, exclusion_criteria_id);
+            dataset.put("eligible_for_auto_exclusion", person_migrated);
+            dataset.put("benificiary_id", secc_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }

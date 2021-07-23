@@ -106,7 +106,7 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
             e.printStackTrace();
         }
 
-        Log.d("savePMAYImages", "" + authKey);
+        Log.d("savePMAYImages", "" + dataSet);
         return dataSet;
     }
     @Override

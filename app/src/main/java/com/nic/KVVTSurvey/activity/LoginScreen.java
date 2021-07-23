@@ -159,8 +159,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     public void checkLoginScreen() {
-        loginScreenBinding.userName.setText("prmaltrpy1");
-        loginScreenBinding.password.setText("pmay552#$");
+        loginScreenBinding.userName.setText("maedemo");
+        loginScreenBinding.password.setText("test123#$");
         final String username = loginScreenBinding.userName.getText().toString().trim();
         final String password = loginScreenBinding.password.getText().toString().trim();
         prefManager.setUserPassword(password);
@@ -242,7 +242,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
     public void getSchemeList() {
         try {
-            new ApiService(this).makeJSONObjectRequest("SchemeList", Api.Method.POST, UrlGenerator.getServicesListUrl(), schemeListJsonParams(), "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("SchemeList", Api.Method.POST, UrlGenerator.getPMAYListUrl(), schemeListJsonParams(), "not cache", this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -273,7 +273,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
-        Log.d("schemeListDistrictWise", "" + authKey);
+        Log.d("schemeListDistrictWise", "" + dataSet);
         return dataSet;
     }
 
@@ -407,7 +407,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         @Override
         protected Void doInBackground(JSONObject... params) {
             dbData.open();
-            ArrayList<KVVTSurvey> villagelist_count = dbData.getAll_scheme(prefManager.getDistrictCode(),prefManager.getBlockCode());
+            ArrayList<KVVTSurvey> villagelist_count = dbData.getAll_scheme();
             if (villagelist_count.size() <= 0) {
                 if (params.length > 0) {
                     JSONArray jsonArray = new JSONArray();
@@ -419,10 +419,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     for (int i = 0; i < jsonArray.length(); i++) {
                         KVVTSurvey villageListValue = new KVVTSurvey();
                         try {
-                            villageListValue.setDistictCode(jsonArray.getJSONObject(i).getString(AppConstant.DISTRICT_CODE));
-                            villageListValue.setBlockCode(jsonArray.getJSONObject(i).getString(AppConstant.BLOCK_CODE));
-                            villageListValue.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
-                            villageListValue.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
+                            villageListValue.setExclusion_criteria_id(jsonArray.getJSONObject(i).getString("exclusion_criteria_id"));
+                            villageListValue.setExclusion_criteria(jsonArray.getJSONObject(i).getString("exclusion_criteria"));
 
                             dbData.insertscheme(villageListValue);
                         } catch (JSONException e) {

@@ -12,6 +12,7 @@ public class KVVTSurvey {
     private String districtName;
 
     private String blockCode;
+    private String exclusion_criteria_id;
 
     public String getHabCode() {
         return HabCode;
@@ -31,6 +32,15 @@ public class KVVTSurvey {
     private String fatherName;
     private String personAlive;
     private String buttonText;
+
+    public String getExclusion_criteria_id() {
+        return exclusion_criteria_id;
+    }
+
+    public KVVTSurvey setExclusion_criteria_id(String exclusion_criteria_id) {
+        this.exclusion_criteria_id = exclusion_criteria_id;
+        return this;
+    }
 
     public String getButtonText() {
         return buttonText;
@@ -115,6 +125,17 @@ public class KVVTSurvey {
     private String PvName;
 
     private String blockName;
+
+    private String exclusion_criteria;
+
+    public String getExclusion_criteria() {
+        return exclusion_criteria;
+    }
+
+    public KVVTSurvey setExclusion_criteria(String exclusion_criteria) {
+        this.exclusion_criteria = exclusion_criteria;
+        return this;
+    }
 
     public String getTypeOfPhoto() {
         return typeOfPhoto;

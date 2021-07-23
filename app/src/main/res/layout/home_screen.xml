@@ -222,7 +222,7 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_toRightOf="@+id/tn"
-                            android:background="#7535AD" />
+                            android:background="@color/colorPrimary" />
 
                         <EditText
                             android:id="@+id/secc_id"

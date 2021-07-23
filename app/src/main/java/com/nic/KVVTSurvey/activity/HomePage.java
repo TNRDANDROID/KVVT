@@ -108,9 +108,9 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
 
-                    pref_Scheme = Scheme.get(position).getPvName();
+                    pref_Scheme = Scheme.get(position).getExclusion_criteria();
                     prefManager.setKeySchemeListName(pref_Scheme);
-                    prefManager.setKeySchemeCode(Scheme.get(position).getPvCode());
+                    prefManager.setKeySchemeCode(Scheme.get(position).getExclusion_criteria_id());
                 }
             }
 
@@ -191,6 +191,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
             homeScreenBinding.takePhotoTv.setText("Save details");
         } else if (isMigrated.equalsIgnoreCase("N")) {
+            homeScreenBinding.schemeSpinner.setSelection(0);
+            prefManager.setKeySchemeCode("");
             homeScreenBinding.takePicLayout.setVisibility(View.VISIBLE);
             homeScreenBinding.selectScheTv.setVisibility(View.GONE);
             homeScreenBinding.scheLayout.setVisibility(View.GONE);
@@ -252,25 +254,21 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     }
     public void schemeFilterSpinner(String filterVillage) {
         Cursor VillageList = null;
-        VillageList = db.rawQuery("SELECT * FROM " + DBHelper.SCHEME_TABLE_NAME + " where dcode = "+prefManager.getDistrictCode()+ " and bcode = '" + filterVillage + "'", null);
+        VillageList = db.rawQuery("SELECT * FROM " + DBHelper.SCHEME_TABLE_NAME , null);
 
         Scheme.clear();
         KVVTSurvey villageListValue = new KVVTSurvey();
-        villageListValue.setPvName("Select Exclusion Criteria");
+        villageListValue.setExclusion_criteria("Select Exclusion Criteria");
         Scheme.add(villageListValue);
         if (VillageList.getCount() > 0) {
             if (VillageList.moveToFirst()) {
                 do {
                     KVVTSurvey villageList = new KVVTSurvey();
-                    String districtCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.DISTRICT_CODE));
-                    String blockCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.BLOCK_CODE));
-                    String pvCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_CODE));
-                    String pvname = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_NAME));
+                    String EXCLUSION_CRITERIA_ID = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID));
+                    String EXCLUSION_CRITERIA = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA));
 
-                    villageList.setDistictCode(districtCode);
-                    villageList.setBlockCode(blockCode);
-                    villageList.setPvCode(pvCode);
-                    villageList.setPvName(pvname);
+                    villageList.setExclusion_criteria_id(EXCLUSION_CRITERIA_ID);
+                    villageList.setExclusion_criteria(EXCLUSION_CRITERIA);
 
                     Scheme.add(villageList);
                     Log.d("spinnersize", "" + Scheme.size());
@@ -382,6 +380,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             if ("PMAYList".equals(urlType) && responseObj != null) {
                 String key = responseObj.getString(AppConstant.ENCODE_DATA);
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                Log.d("PMAYListResponse", "" + responseDecryptedBlockKey);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     new InsertPMAYTask().execute(jsonObject);
@@ -497,6 +496,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         registerValue.put(AppConstant.BENEFICIARY_NAME, "");
         registerValue.put(AppConstant.BENEFICIARY_FATHER_NAME, "");
         registerValue.put(AppConstant.SECC_ID, secc_id);
+        registerValue.put(AppConstant.EXCLUSION_CRITERIA_ID, prefManager.getKeySchemeCode());
         registerValue.put(AppConstant.PERSON_ALIVE, "");
         registerValue.put(AppConstant.LEGAL_HEIR_AVAILABLE, "");
         registerValue.put(AppConstant.PERSON_MIGRATED, isMigrated);

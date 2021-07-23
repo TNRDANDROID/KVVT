@@ -12,7 +12,7 @@ public class AppConstant {
     public static String DATA_CONTENT = "data_content";
     public static String ENCODE_DATA = "enc_data";
 
-    public static String KEY_PMAY_SOURCE_ALL = "pmay_source_data";
+    public static String KEY_PMAY_SOURCE_ALL = "kvvt_source_data";
 
 
     public static String USER_LOGIN_KEY = "user_login_key";
@@ -51,13 +51,15 @@ public class AppConstant {
     public static String KEY_LATITUDE = "latitude";
     public static String KEY_LONGITUDE = "longitude";
     public static String KEY_IMAGE = "image";
-    public static String PMAY_SOURCE_SAVE = "pmay_source_save";
+    public static String PMAY_SOURCE_SAVE = "kvvt_source_save";
     public static String KEY_TRACK_DATA = "track_data";
     public static String PMAY_ID = "pmay_id";
     public static String KEY_PMAY_SOURCE_DATA_PHOTO = "pmay_source_data_photo";
     public static String PERSON_ALIVE = "person_alive";
     public static String LEGAL_HEIR_AVAILABLE = "legal_heir_available";
     public static String PERSON_MIGRATED = "person_migrated";
+    public static String EXCLUSION_CRITERIA_ID = "exclusion_criteria_id";
+    public static String EXCLUSION_CRITERIA = "exclusion_criteria";
     public static String BUTTON_TEXT = "button_text";
 
 

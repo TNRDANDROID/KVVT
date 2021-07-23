@@ -56,13 +56,10 @@ public class dbData {
     public KVVTSurvey insertscheme(KVVTSurvey pmgsySurvey) {
 
         ContentValues values = new ContentValues();
-        values.put(AppConstant.DISTRICT_CODE, pmgsySurvey.getDistictCode());
-        values.put(AppConstant.BLOCK_CODE, pmgsySurvey.getBlockCode());
-        values.put(AppConstant.PV_CODE, pmgsySurvey.getPvCode());
-        values.put(AppConstant.PV_NAME, pmgsySurvey.getPvName());
-
+        values.put(AppConstant.EXCLUSION_CRITERIA_ID, pmgsySurvey.getExclusion_criteria_id());
+        values.put(AppConstant.EXCLUSION_CRITERIA, pmgsySurvey.getExclusion_criteria());
         long id = db.insert(DBHelper.SCHEME_TABLE_NAME,null,values);
-        Log.d("Inserted_id_village", String.valueOf(id));
+        Log.d("Inserted_id_criteria", String.valueOf(id));
 
         return pmgsySurvey;
     }
@@ -99,26 +96,22 @@ public class dbData {
         }
         return cards;
     }
-    public ArrayList<KVVTSurvey> getAll_scheme(String dcode, String bcode) {
+    public ArrayList<KVVTSurvey> getAll_scheme() {
 
         ArrayList<KVVTSurvey> cards = new ArrayList<>();
         Cursor cursor = null;
 
         try {
-            cursor = db.rawQuery("select * from "+DBHelper.SCHEME_TABLE_NAME+" where dcode = "+dcode+" and bcode = "+bcode+" order by pvname asc",null);
+            cursor = db.rawQuery("select * from "+DBHelper.SCHEME_TABLE_NAME,null);
             // cursor = db.query(CardsDBHelper.TABLE_CARDS,
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
                     KVVTSurvey card = new KVVTSurvey();
-                    card.setDistictCode(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.DISTRICT_CODE)));
-                    card.setBlockCode(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.BLOCK_CODE)));
-                    card.setPvCode(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.PV_CODE)));
-                    card.setPvName(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.PV_NAME)));
+                    card.setExclusion_criteria_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
+                    card.setExclusion_criteria(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA)));
 
                     cards.add(card);
                 }
@@ -288,6 +281,8 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.HABITATION_NAME)));
                     card.setSeccId(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.SECC_ID)));
+                    card.setExclusion_criteria_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
                     card.setBeneficiaryName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_NAME)));
                     card.setFatherName(cursor.getString(cursor
@@ -337,6 +332,8 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.HABITATION_NAME)));
                     card.setSeccId(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.SECC_ID)));
+                    card.setExclusion_criteria_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
                     card.setBeneficiaryName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_NAME)));
                     card.setFatherName(cursor.getString(cursor

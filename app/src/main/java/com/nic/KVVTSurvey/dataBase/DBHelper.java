@@ -35,10 +35,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "pvcode INTEGER," +
                 "pvname TEXT)");
         db.execSQL("CREATE TABLE " + SCHEME_TABLE_NAME + " ("
-                + "dcode INTEGER," +
-                "bcode INTEGER," +
-                "pvcode INTEGER," +
-                "pvname TEXT)");
+                + "exclusion_criteria_id TEXT," +
+                "exclusion_criteria TEXT)");
 
         db.execSQL("CREATE TABLE " + HABITATION_TABLE_NAME + " ("
                 + "dcode TEXT," +
@@ -67,6 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "pvname TEXT," +
                 "habitation_name TEXT," +
                 "secc_id TEXT," +
+                "exclusion_criteria_id TEXT," +
                 "beneficiary_name TEXT," +
                 "person_alive TEXT," +
                 "legal_heir_available TEXT," +

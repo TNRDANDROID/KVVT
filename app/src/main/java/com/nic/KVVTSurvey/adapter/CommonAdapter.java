@@ -58,7 +58,7 @@ public class CommonAdapter extends BaseAdapter {
         } else if (type.equalsIgnoreCase("HabitationList")) {
             tv_type.setText(pmgsySurvey.getHabitationName());
         }else if (type.equalsIgnoreCase("SchemeList")) {
-            tv_type.setText(pmgsySurvey.getPvName());
+            tv_type.setText(pmgsySurvey.getExclusion_criteria());
         }
         return view;
     }
