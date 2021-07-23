@@ -60,19 +60,20 @@
 
 
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_above="@+id/developer_layout">
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
 
             <RelativeLayout
                 android:id="@+id/parent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
 
 
                 <TextView
@@ -262,6 +263,7 @@
                     android:layout_width="match_parent"
                     android:layout_below="@+id/seec_id_layout"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <TextView
@@ -313,6 +315,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/name_layout"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <TextView
@@ -485,20 +488,20 @@
 
                 </RelativeLayout>
                 <LinearLayout
-                    android:id="@+id/take_pic_layout"
+                    android:padding="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/take_pic_layout"
                     android:layout_below="@+id/sche_layout"
+                    android:visibility="gone"
                     android:layout_alignParentRight="true"
                     android:onClick="@{()-> activity.validateFields()}"
                     android:layout_marginTop="@dimen/_25sdp"
-                    android:background="@drawable/white_background_left_two_corners"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                    android:background="@drawable/rectangle_box">
 
                     <TextView
                         android:id="@+id/take_photo_tv"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:paddingLeft="5dp"
@@ -507,9 +510,37 @@
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="normal"
-                        style="@string/font_normal" />
+                        style="@string/font_normal"></TextView>
 
                 </LinearLayout>
+
+                <!-- <LinearLayout
+                     android:id="@+id/take_pic_layout"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_below="@+id/sche_layout"
+                     android:layout_alignParentRight="true"
+                     android:onClick="@{()-> activity.validateFields()}"
+                     android:layout_marginTop="@dimen/_25sdp"
+                     android:background="@drawable/white_background_left_two_corners"
+                     android:orientation="horizontal"
+                     android:padding="@dimen/_8sdp">
+
+                     <TextView
+                         android:id="@+id/take_photo_tv"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="left"
+                         android:paddingLeft="5dp"
+                         android:paddingRight="5dp"
+                         android:text="Take Photo"
+                         android:textColor="@android:color/black"
+                         android:textSize="18sp"
+                         android:textStyle="normal"
+                         style="@string/font_normal" />
+
+                 </LinearLayout>
+ -->
 
 
                 <RelativeLayout
@@ -517,11 +548,11 @@
                     android:onClick="@{()-> activity.openPendingScreen()}"
                     android:layout_width="190dp"
                     android:layout_height="45dp"
-                    android:layout_below="@+id/take_pic_layout"
+                    android:layout_below="@+id/save_data_layout"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/padding"
                     android:background="@drawable/rectangle_box"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
 
                     <TextView
@@ -541,6 +572,35 @@
 
 
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/save_data_layout"
+                    android:onClick="@{()-> activity.validateFields()}"
+                    android:layout_width="190dp"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/take_pic_layout"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/padding"
+                    android:background="@drawable/rectangle_box"
+                    android:visibility="visible">
+
+
+                    <TextView
+                        android:id="@+id/save_data"
+                        style="@string/font_circular_medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="Take Photo"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp" />
+
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/view_server_data"
@@ -551,7 +611,7 @@
                     android:background="@drawable/white_background_right_two_corners"
                     android:orientation="horizontal"
                     android:padding="@dimen/_10sdp"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
 
                     <TextView
@@ -584,7 +644,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_14sdp" />
 
-                <TextView
+               <!-- <TextView
                     android:id="@+id/save"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -596,11 +656,30 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_14sdp"
                     android:background="@drawable/background"
-                    style="@string/font_circular_medium" />
+                    style="@string/font_circular_medium" />-->
 
             </RelativeLayout>
 
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/developer_layout"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/save"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentBottom="true"
+                android:padding="15dp"
+                android:text="Sofware Designed &amp; Developed by NIC"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_14sdp"
+                android:background="@drawable/background"
+                style="@string/font_circular_medium" />
+        </RelativeLayout>
 
 
     </RelativeLayout>

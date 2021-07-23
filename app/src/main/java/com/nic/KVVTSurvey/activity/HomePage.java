@@ -90,7 +90,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         schemeFilterSpinner(prefManager.getBlockCode());
         homeScreenBinding.selectScheTv.setVisibility(View.GONE);
         homeScreenBinding.scheLayout.setVisibility(View.GONE);
-        homeScreenBinding.takePicLayout.setVisibility(View.GONE);
+//        homeScreenBinding.takePicLayout.setVisibility(View.GONE);
         homeScreenBinding.nameLayout.setVisibility(View.GONE);
         homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
         homeScreenBinding.villageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -257,14 +257,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void validateYesNo() {
         if ( isMigrated.equalsIgnoreCase("Y")) {
-            homeScreenBinding.takePicLayout.setVisibility(View.VISIBLE);
+            homeScreenBinding.takePicLayout.setVisibility(View.GONE);
             homeScreenBinding.selectScheTv.setVisibility(View.VISIBLE);
             homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
             homeScreenBinding.takePhotoTv.setText("Save details");
         } else if (isMigrated.equalsIgnoreCase("N")) {
             homeScreenBinding.schemeSpinner.setSelection(0);
             prefManager.setKeySchemeCode("");
-            homeScreenBinding.takePicLayout.setVisibility(View.VISIBLE);
+            homeScreenBinding.takePicLayout.setVisibility(View.GONE);
             homeScreenBinding.selectScheTv.setVisibility(View.GONE);
             homeScreenBinding.scheLayout.setVisibility(View.GONE);
             homeScreenBinding.takePhotoTv.setText("Take Photo");
@@ -661,7 +661,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         homeScreenBinding.schemeSpinner.setSelection(0);
         homeScreenBinding.scheLayout.setVisibility(View.GONE);
         homeScreenBinding.selectScheTv.setVisibility(View.GONE);
-        homeScreenBinding.takePicLayout.setVisibility(View.GONE);
+//        homeScreenBinding.takePicLayout.setVisibility(View.GONE);
         homeScreenBinding.nameLayout.setVisibility(View.GONE);
         homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
         homeScreenBinding.name.setText("");
