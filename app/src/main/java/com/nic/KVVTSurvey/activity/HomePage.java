@@ -105,9 +105,24 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     prefManager.setVillageListPvName(pref_Village);
                     prefManager.setPvCode(Village.get(position).getPvCode());
                     habitationFilterSpinner(prefManager.getDistrictCode(),prefManager.getBlockCode(),prefManager.getPvCode());
+
+                    homeScreenBinding.seccId.setText("");
+                    homeScreenBinding.name.setText("");
+                    homeScreenBinding.fatherName.setText("");
+                    homeScreenBinding.tick.setVisibility(View.GONE);
+                    homeScreenBinding.nameLayout.setVisibility(View.GONE);
+                    homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
                 }else {
+                    Etflag=false;
                     prefManager.setVillageListPvName("");
                     prefManager.setPvCode("");
+                    prefManager.setHabCode("");
+                    homeScreenBinding.seccId.setText("");
+                    homeScreenBinding.name.setText("");
+                    homeScreenBinding.fatherName.setText("");
+                    homeScreenBinding.tick.setVisibility(View.GONE);
+                    homeScreenBinding.nameLayout.setVisibility(View.GONE);
+                    homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
                     homeScreenBinding.habitationSpinner.setAdapter(null);
                 }
             }
@@ -139,8 +154,20 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
                     prefManager.setHabCode(Habitation.get(position).getHabCode());
+                    homeScreenBinding.seccId.setText("");
+                    homeScreenBinding.name.setText("");
+                    homeScreenBinding.fatherName.setText("");
+                    homeScreenBinding.tick.setVisibility(View.GONE);
+                    homeScreenBinding.nameLayout.setVisibility(View.GONE);
+                    homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
                 }else {
                     prefManager.setHabCode("");
+                    homeScreenBinding.seccId.setText("");
+                    homeScreenBinding.name.setText("");
+                    homeScreenBinding.fatherName.setText("");
+                    homeScreenBinding.tick.setVisibility(View.GONE);
+                    homeScreenBinding.nameLayout.setVisibility(View.GONE);
+                    homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -709,6 +736,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 //        homeScreenBinding.takePicLayout.setVisibility(View.GONE);
         homeScreenBinding.nameLayout.setVisibility(View.GONE);
         homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
+        homeScreenBinding.tick.setVisibility(View.GONE);
         homeScreenBinding.name.setText("");
         homeScreenBinding.fatherName.setText("");
         homeScreenBinding.seccId.setText("");
