@@ -453,7 +453,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
                             android:layout_gravity="bottom"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:background="@drawable/background"
@@ -462,7 +462,7 @@
                             android:id="@+id/eligible_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -751,11 +751,18 @@
 
 
                         <RelativeLayout
-                            android:id="@+id/view_server_images"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="@drawable/bottom_curve_background"
+                            android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:id="@+id/view_server_images"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="visible"
                             android:orientation="horizontal">
 
 
@@ -771,6 +778,7 @@
                                 android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
+                        </RelativeLayout>
                         </RelativeLayout>
 
 

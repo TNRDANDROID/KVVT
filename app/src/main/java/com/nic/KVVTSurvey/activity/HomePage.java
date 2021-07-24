@@ -223,8 +223,11 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             @Override
             public void onClick(View view) {
                 if(Etflag){
-                    if(!homeScreenBinding.seccId.getText().equals("")){
+                    if(!homeScreenBinding.seccId.getText().toString().equals("")){
                         validateBenificiaryId(homeScreenBinding.seccId.getText().toString());}
+                    else {
+                        Utils.showAlert(HomePage.this,"Enter Benificiary Id!");
+                    }
                 }
                 else {
                     Utils.showAlert(HomePage.this,"First select Village and Habitation!");
@@ -589,14 +592,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         if (!"Select Village".equalsIgnoreCase(Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName())) {
             if (!"Select Habitation".equalsIgnoreCase(Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName())) {
                         if (!homeScreenBinding.seccId.getText().toString().isEmpty()) {
-//                            if (Utils.isValidMobile(homeScreenBinding.seccId.getText().toString())) {
+                            if (flag) {
                                 checkLegalYesNo();
 
-                           /* } else {
-                                Utils.showAlert(this, "Seec Id Must be 7 Digit!");
-                            }*/
+                            } else {
+                                Utils.showAlert(this, "First validate benificiary Id!");
+                            }
                         } else {
-                            Utils.showAlert(this, "Enter the  Seec Id!");
+                            Utils.showAlert(this, "Enter the  benificiary Id!");
                         }
             } else {
                 Utils.showAlert(this, "Select Habitation!");
@@ -611,7 +614,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
         if ((homeScreenBinding.migYes.isChecked()) || homeScreenBinding.migNo.isChecked()) {
             if((homeScreenBinding.migYes.isChecked())){
-                if (!"Select Exclusion Criteria".equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getPvName())) {
+                if (!"Select Exclusion Criteria".equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria())) {
                     takePhoto(homeScreenBinding.saveData.getText().toString());
                 }else {
                     Utils.showAlert(this, "Select Exclusion Criteria!");
@@ -651,6 +654,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
         long id = db.insert(DBHelper.SAVE_PMAY_DETAILS, null, registerValue);
         Log.d("insert_id",String.valueOf(id));
+        flag=false;
 
         if(buttonTxt.equals("Take Photo")){
             if(id > 0) {
@@ -694,6 +698,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     }
 
     public void emptyValue() {
+        flag=false;
         homeScreenBinding.villageSpinner.setSelection(0);
         homeScreenBinding.habitationSpinner.setSelection(0);
         homeScreenBinding.schemeSpinner.setSelection(0);

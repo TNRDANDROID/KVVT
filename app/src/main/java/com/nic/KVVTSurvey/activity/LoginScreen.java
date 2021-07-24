@@ -105,7 +105,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         try {
             String versionName = getPackageManager()
                     .getPackageInfo(getPackageName(), 0).versionName;
-            loginScreenBinding.tvVersion.setText("Version" + " " + versionName);
+            loginScreenBinding.tvVersion.setText("Version" + " " + "1"/*versionName*/);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

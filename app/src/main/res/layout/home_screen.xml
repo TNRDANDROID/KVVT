@@ -248,10 +248,10 @@
                             android:layout_alignParentEnd="true"
                             android:layout_gravity="center"
                             android:layout_margin="@dimen/_5sdp"
-                            android:background="@mipmap/tick"
-                            android:focusable="true"
-                            android:visibility="gone"/>
-
+                            android:background="@drawable/button_background"
+                            android:src="@drawable/ic_arrow_forward_black_24dp"
+                        android:focusable="true"
+                            android:visibility="visible"/>
 
                     </RelativeLayout>
 
