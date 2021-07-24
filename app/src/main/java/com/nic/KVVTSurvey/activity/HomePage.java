@@ -207,10 +207,12 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                flag=false;
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                flag=false;
                 if(!homeScreenBinding.seccId.getText().toString().isEmpty()){
                     homeScreenBinding.tick.setVisibility(View.VISIBLE);
                 }else{
