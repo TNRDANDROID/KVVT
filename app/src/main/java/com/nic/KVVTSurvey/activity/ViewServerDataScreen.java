@@ -34,6 +34,7 @@ import com.nic.KVVTSurvey.model.KVVTSurvey;
 import com.nic.KVVTSurvey.session.PrefManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ViewServerDataScreen extends AppCompatActivity implements Api.ServerResponseListener {
@@ -46,6 +47,8 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
     String pref_Village;
     private List<KVVTSurvey> Village = new ArrayList<>();
     private List<KVVTSurvey> Habitation = new ArrayList<>();
+    private List<KVVTSurvey> VillageOrdered = new ArrayList<>();
+    private List<KVVTSurvey> HabitationOrdered  = new ArrayList<>();
     public static SQLiteDatabase db;
     public static DBHelper dbHelper;
 
@@ -78,7 +81,11 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     habitationFilterSpinner(prefManager.getDistrictCode(), prefManager.getBlockCode(), prefManager.getPvCode());
                     viewServerDataScreenBinding.serverDataList.setVisibility(View.GONE);
                     viewServerDataScreenBinding.notFoundTv.setVisibility(View.GONE);
-                }
+                }else {
+                prefManager.setVillageListPvName("");
+                prefManager.setPvCode("");
+                    viewServerDataScreenBinding.habitationSpinner.setAdapter(null);
+            }
             }
 
             @Override
@@ -93,6 +100,8 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                 if (position > 0) {
                     prefManager.setHabCode(Habitation.get(position).getHabCode());
                     new fetchScheduletask().execute();
+                }else {
+                    prefManager.setHabCode("");
                 }
             }
 
@@ -108,9 +117,8 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         VillageList = db.rawQuery("SELECT * FROM " + DBHelper.VILLAGE_TABLE_NAME + " where dcode = " + prefManager.getDistrictCode() + " and bcode = '" + filterVillage + "'", null);
 
         Village.clear();
-        KVVTSurvey villageListValue = new KVVTSurvey();
-        villageListValue.setPvName("Select Village");
-        Village.add(villageListValue);
+        VillageOrdered.clear();
+
         if (VillageList.getCount() > 0) {
             if (VillageList.moveToFirst()) {
                 do {
@@ -125,10 +133,28 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     villageList.setPvCode(pvCode);
                     villageList.setPvName(pvname);
 
-                    Village.add(villageList);
+                    VillageOrdered.add(villageList);
                     Log.d("spinnersize", "" + Village.size());
                 } while (VillageList.moveToNext());
             }
+        }
+        Collections.sort(VillageOrdered, (lhs, rhs) -> lhs.getPvName().compareTo(rhs.getPvName()));
+        KVVTSurvey villageListValue = new KVVTSurvey();
+        villageListValue.setPvName("Select Village");
+        Village.add(villageListValue);
+        for (int i = 0; i < VillageOrdered.size(); i++) {
+            KVVTSurvey villageList = new KVVTSurvey();
+            String districtCode = VillageOrdered.get(i).getDistictCode();
+            String blockCode = VillageOrdered.get(i).getBlockCode();
+            String pvCode =  VillageOrdered.get(i).getPvCode();
+            String pvname =  VillageOrdered.get(i).getPvName();
+
+            villageList.setDistictCode(districtCode);
+            villageList.setBlockCode(blockCode);
+            villageList.setPvCode(pvCode);
+            villageList.setPvName(pvname);
+
+            Village.add(villageList);
         }
         viewServerDataScreenBinding.villageSpinner.setAdapter(new CommonAdapter(this, Village, "VillageList"));
     }
@@ -138,9 +164,7 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         HABList = db.rawQuery("SELECT * FROM " + DBHelper.HABITATION_TABLE_NAME + " where dcode = '" + dcode + "'and bcode = '" + bcode + "' and pvcode = '" + pvcode + "' order by habitation_name asc", null);
 
         Habitation.clear();
-        KVVTSurvey habitationListValue = new KVVTSurvey();
-        habitationListValue.setHabitationName("Select Habitation");
-        Habitation.add(habitationListValue);
+        HabitationOrdered.clear();
         if (HABList.getCount() > 0) {
             if (HABList.moveToFirst()) {
                 do {
@@ -157,10 +181,30 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     habList.setHabCode(habCode);
                     habList.setHabitationName(habName);
 
-                    Habitation.add(habList);
-                    Log.d("spinnersize", "" + Habitation.size());
+                    HabitationOrdered.add(habList);
+                    Log.d("spinnersize", "" + HabitationOrdered.size());
                 } while (HABList.moveToNext());
             }
+        }
+        Collections.sort(HabitationOrdered, (lhs, rhs) -> lhs.getHabitationName().compareTo(rhs.getHabitationName()));
+        KVVTSurvey habitationListValue = new KVVTSurvey();
+        habitationListValue.setHabitationName("Select Habitation");
+        Habitation.add(habitationListValue);
+        for (int i = 0; i < HabitationOrdered.size(); i++) {
+            KVVTSurvey habList = new KVVTSurvey();
+            String districtCode = HabitationOrdered.get(i).getDistictCode();
+            String blockCode = HabitationOrdered.get(i).getBlockCode();
+            String pvCode = HabitationOrdered.get(i).getPvCode();
+            String habCode = HabitationOrdered.get(i).getHabCode();
+            String habName = HabitationOrdered.get(i).getHabitationName();
+
+            habList.setDistictCode(districtCode);
+            habList.setBlockCode(blockCode);
+            habList.setPvCode(pvCode);
+            habList.setHabCode(habCode);
+            habList.setHabitationName(habName);
+
+            Habitation.add(habList);
         }
         viewServerDataScreenBinding.habitationSpinner.setAdapter(new CommonAdapter(this, Habitation, "HabitationList"));
     }
