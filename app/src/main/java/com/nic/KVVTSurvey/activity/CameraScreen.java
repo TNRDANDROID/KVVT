@@ -194,8 +194,9 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                 overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
 
                 if(type_of_photo.equals("2")){
-                    Intent intent = new Intent(this,HomePage.class);
-                    startActivity(intent);
+                   /* Intent intent = new Intent(this,HomePage.class);
+                    startActivity(intent);*/
+                   homePage();
                 }
             }
             Log.d("insIdsavePMAY", String.valueOf(id));

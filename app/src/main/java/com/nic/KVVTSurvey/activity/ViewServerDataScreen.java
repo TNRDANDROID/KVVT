@@ -258,6 +258,7 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
 
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -288,13 +289,14 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         });
         return true;
     }
+*/
 
     @Override
     public void onBackPressed() {
-        if (!searchView.isIconified()) {
+       /* if (!searchView.isIconified()) {
             searchView.setIconified(true);
             return;
-        }
+        }*/
         super.onBackPressed();
         setResult(Activity.RESULT_CANCELED);
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
