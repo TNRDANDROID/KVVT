@@ -76,37 +76,37 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
         @Override
         protected ArrayList<KVVTSurvey> doInBackground(Void... params) {
             dbData.open();
-            ArrayList<KVVTSurvey> pmaySurveys = new ArrayList<>();
-            pmaySurveys = dbData.getSavedPMAYDetails();
-            Log.d("PMAY_COUNT", String.valueOf(pmaySurveys.size()));
-            return pmaySurveys;
+            ArrayList<KVVTSurvey> kvvtSurveys = new ArrayList<>();
+            kvvtSurveys = dbData.getSavedKVVTDetails();
+            Log.d("KVVT_COUNT", String.valueOf(kvvtSurveys.size()));
+            return kvvtSurveys;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<KVVTSurvey> pmaySurveys) {
-            super.onPostExecute(pmaySurveys);
+        protected void onPostExecute(ArrayList<KVVTSurvey> kvvtSurveys) {
+            super.onPostExecute(kvvtSurveys);
             recyclerView.setVisibility(View.VISIBLE);
-            pendingAdapter = new PendingAdapter(PendingScreen.this, pmaySurveys);
+            pendingAdapter = new PendingAdapter(PendingScreen.this, kvvtSurveys);
             recyclerView.setAdapter(pendingAdapter);
         }
     }
 
 
 
-    public JSONObject savePMAYImagesJsonParams(JSONObject savePMAYDataSet) {
-        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), savePMAYDataSet.toString());
+    public JSONObject saveKVVTImagesJsonParams(JSONObject saveKVVTDataSet) {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), saveKVVTDataSet.toString());
         JSONObject dataSet = new JSONObject();
         try {
             dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
             dataSet.put(AppConstant.DATA_CONTENT, authKey);
 
-            new ApiService(this).makeJSONObjectRequest("savePMAYImages", Api.Method.POST, UrlGenerator.getPMAYListUrl(), dataSet, "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("saveKVVTImages", Api.Method.POST, UrlGenerator.getKVVTListUrl(), dataSet, "not cache", this);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Log.d("savePMAYImages", "" + dataSet);
+        Log.d("saveKVVTImages", "" + dataSet);
         return dataSet;
     }
     @Override
@@ -115,22 +115,22 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
             String urlType = serverResponse.getApi();
             JSONObject responseObj = serverResponse.getJsonResponse();
 
-            if ("savePMAYImages".equals(urlType) && responseObj != null) {
+            if ("saveKVVTImages".equals(urlType) && responseObj != null) {
                 String key = responseObj.getString(AppConstant.ENCODE_DATA);
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 Log.d("saved_response", "" + responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     Utils.showAlert(this, "Uploaded");
-                    db.delete(DBHelper.SAVE_PMAY_DETAILS,"id = ?",new String[] {prefManager.getKeyDeleteId()});
-                    db.delete(DBHelper.SAVE_PMAY_IMAGES, "pmay_id = ? ", new String[]{prefManager.getKeyDeleteId()});
+                    db.delete(DBHelper.SAVE_KVVT_DETAILS,"id = ?",new String[] {prefManager.getKeyDeleteId()});
+                    db.delete(DBHelper.SAVE_KVVT_IMAGES, "kvvt_id = ? ", new String[]{prefManager.getKeyDeleteId()});
                     new fetchPendingtask().execute();
                     pendingAdapter.notifyDataSetChanged();
                 }
                 else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("FAIL")){
                     Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
-                    db.delete(DBHelper.SAVE_PMAY_DETAILS,"id = ?",new String[] {prefManager.getKeyDeleteId()});
-                    db.delete(DBHelper.SAVE_PMAY_IMAGES, "pmay_id = ? ", new String[]{prefManager.getKeyDeleteId()});
+                    db.delete(DBHelper.SAVE_KVVT_DETAILS,"id = ?",new String[] {prefManager.getKeyDeleteId()});
+                    db.delete(DBHelper.SAVE_KVVT_IMAGES, "kvvt_id = ? ", new String[]{prefManager.getKeyDeleteId()});
                     new fetchPendingtask().execute();
                     pendingAdapter.notifyDataSetChanged();
                 }

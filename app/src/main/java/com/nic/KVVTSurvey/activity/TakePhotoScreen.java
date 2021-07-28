@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class TakePhotoScreen extends AppCompatActivity {
     public TakePhotoBinding takePhotoBinding;
     private dbData dbData = new dbData(this);
-    String pmay_id;
+    String kvvt_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,14 +30,14 @@ public class TakePhotoScreen extends AppCompatActivity {
         takePhotoBinding = DataBindingUtil.setContentView(this, R.layout.take_photo);
         takePhotoBinding.setActivity(this);
 
-        pmay_id = getIntent().getStringExtra("lastInsertedID");
+        kvvt_id = getIntent().getStringExtra("lastInsertedID");
     }
 
     public void viewCamera(final int type_of_photo) {
 
         if(type_of_photo == 2){
             dbData.open();
-            ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"1");
+            ArrayList<KVVTSurvey> imageOffline = dbData.getSavedKVVTImages(kvvt_id,"1");
 
             if (!(imageOffline.size() > 0)){
                 Utils.showAlert(this, "Please Capture Beneficiary Image");
@@ -86,7 +86,7 @@ public class TakePhotoScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         dbData.open();
-        ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"");
+        ArrayList<KVVTSurvey> imageOffline = dbData.getSavedKVVTImages(kvvt_id,"");
         if(imageOffline.size() == 2){
             super.onBackPressed();
             overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
@@ -109,7 +109,7 @@ public class TakePhotoScreen extends AppCompatActivity {
 
     public void onBackPress() {
         dbData.open();
-        ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"");
+        ArrayList<KVVTSurvey> imageOffline = dbData.getSavedKVVTImages(kvvt_id,"");
         if(imageOffline.size() == 2){
             super.onBackPressed();
             setResult(Activity.RESULT_CANCELED);

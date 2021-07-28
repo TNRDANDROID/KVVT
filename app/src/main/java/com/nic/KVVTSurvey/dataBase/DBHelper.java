@@ -13,9 +13,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String VILLAGE_TABLE_NAME = " villageTable";
     public static final String SCHEME_TABLE_NAME = " schemeTable";
     public static final String HABITATION_TABLE_NAME = " habitaionTable";
-    public static final String PMAY_LIST_TABLE_NAME = "PMAYList";
-    public static final String SAVE_PMAY_DETAILS = "SavePMAYDetails";
-    public static final String SAVE_PMAY_IMAGES = "SavePMAYImages";
+    public static final String KVVT_LIST_TABLE_NAME = "KVVTList";
+    public static final String SAVE_KVVT_DETAILS = "SaveKVVTDetails";
+    public static final String SAVE_KVVT_IMAGES = "SaveKVVTImages";
 
     private Context context;
 
@@ -45,7 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "habitation_code TEXT," +
                 "habitation_name TEXT)");
 
-        db.execSQL("CREATE TABLE " + PMAY_LIST_TABLE_NAME + " ("
+        db.execSQL("CREATE TABLE " + KVVT_LIST_TABLE_NAME + " ("
                 + "pvcode  TEXT," +
                 "habcode  TEXT," +
                 "benificiary_id  TEXT," +
@@ -55,7 +55,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "habitation_name TEXT," +
                 "exclusion_criteria_id TEXT," +
                 "pvname TEXT)");
-        db.execSQL("CREATE TABLE " + SAVE_PMAY_DETAILS + " ("
+        db.execSQL("CREATE TABLE " + SAVE_KVVT_DETAILS + " ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "dcode TEXT," +
                 "bcode TEXT," +
@@ -63,18 +63,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 "habcode TEXT," +
                 "pvname TEXT," +
                 "habitation_name TEXT," +
-                "secc_id TEXT," +
+                "benificiary_id TEXT," +
                 "exclusion_criteria_id TEXT," +
                 "beneficiary_name TEXT," +
                 "person_alive TEXT," +
                 "legal_heir_available TEXT," +
-                "person_migrated TEXT," +
+                "person_eligible TEXT," +
                 "button_text TEXT," +
                 "beneficiary_father_name TEXT)");
 
 
-        db.execSQL("CREATE TABLE " + SAVE_PMAY_IMAGES + " ("
-                + "pmay_id INTEGER,"+
+        db.execSQL("CREATE TABLE " + SAVE_KVVT_IMAGES + " ("
+                + "kvvt_id INTEGER,"+
                 "image BLOB," +
                 "latitude TEXT," +
                 "longitude TEXT," +
@@ -89,10 +89,10 @@ public class DBHelper extends SQLiteOpenHelper {
             //drop table if already exists
             db.execSQL("DROP TABLE IF EXISTS " + VILLAGE_TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + SCHEME_TABLE_NAME);
-            db.execSQL("DROP TABLE IF EXISTS " + PMAY_LIST_TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + KVVT_LIST_TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + HABITATION_TABLE_NAME);
-            db.execSQL("DROP TABLE IF EXISTS " + SAVE_PMAY_DETAILS);
-            db.execSQL("DROP TABLE IF EXISTS " + SAVE_PMAY_IMAGES);
+            db.execSQL("DROP TABLE IF EXISTS " + SAVE_KVVT_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + SAVE_KVVT_IMAGES);
             onCreate(db);
         }
     }

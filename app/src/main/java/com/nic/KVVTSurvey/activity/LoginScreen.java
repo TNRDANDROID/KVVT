@@ -29,7 +29,6 @@ import com.nic.KVVTSurvey.api.ServerResponse;
 import com.nic.KVVTSurvey.constant.AppConstant;
 import com.nic.KVVTSurvey.dataBase.DBHelper;
 import com.nic.KVVTSurvey.dataBase.dbData;
-import com.nic.KVVTSurvey.databinding.LoginScreenBinding;
 import com.nic.KVVTSurvey.databinding.LoginScreenNewBinding;
 import com.nic.KVVTSurvey.model.KVVTSurvey;
 import com.nic.KVVTSurvey.session.PrefManager;
@@ -161,8 +160,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     public void checkLoginScreen() {
         //loginScreenBinding.userName.setText("maedemo");
 //        loginScreenBinding.password.setText("test123#$");
-        /*loginScreenBinding.userName.setText("prmaltrpy1");
-        loginScreenBinding.password.setText("pmay552#$");*/
+        loginScreenBinding.userName.setText("prmaltrpy1");
+        loginScreenBinding.password.setText("pmay552#$");
         final String username = loginScreenBinding.userName.getText().toString().trim();
         final String password = loginScreenBinding.password.getText().toString().trim();
         prefManager.setUserPassword(password);
@@ -244,7 +243,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
     public void getSchemeList() {
         try {
-            new ApiService(this).makeJSONObjectRequest("SchemeList", Api.Method.POST, UrlGenerator.getPMAYListUrl(), schemeListJsonParams(), "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("SchemeList", Api.Method.POST, UrlGenerator.getKVVTListUrl(), schemeListJsonParams(), "not cache", this);
         } catch (JSONException e) {
             e.printStackTrace();
         }

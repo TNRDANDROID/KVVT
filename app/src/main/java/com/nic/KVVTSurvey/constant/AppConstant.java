@@ -12,8 +12,8 @@ public class AppConstant {
     public static String DATA_CONTENT = "data_content";
     public static String ENCODE_DATA = "enc_data";
 
-//    public static String KEY_PMAY_SOURCE_ALL = "kvvt_source_data";
-    public static String KEY_PMAY_SOURCE_ALL = "kvvt_source_data_enterd";
+//    public static String KEY_KVVT_SOURCE_ALL = "kvvt_source_data";
+    public static String KEY_KVVT_SOURCE_ALL = "kvvt_source_data_enterd";
     public static String KEY_VALIDATE_BENIFICIARY_ID = "kvvt_source_data_single_benificiary";
 
 
@@ -50,18 +50,17 @@ public class AppConstant {
     public static String BENEFICIARY_NAME = "beneficiary_name";
     public static String BENEFICIARY_FATHER_NAME = "beneficiary_father_name";
     public static String HABITATION_NAME = "habitation_name";
-    public static String SECC_ID = "secc_id";
     public static String TYPE_OF_PHOTO = "type_of_photo";
     public static String KEY_LATITUDE = "latitude";
     public static String KEY_LONGITUDE = "longitude";
     public static String KEY_IMAGE = "image";
-    public static String PMAY_SOURCE_SAVE = "kvvt_source_save";
+    public static String KVVT_SOURCE_SAVE = "kvvt_source_save";
     public static String KEY_TRACK_DATA = "track_data";
-    public static String PMAY_ID = "pmay_id";
-    public static String KEY_PMAY_SOURCE_DATA_PHOTO = "kvvt_source_data_photo";
+    public static String KVVT_ID = "kvvt_id";
+    public static String KEY_KVVT_SOURCE_DATA_PHOTO = "kvvt_source_data_photo";
     public static String PERSON_ALIVE = "person_alive";
     public static String LEGAL_HEIR_AVAILABLE = "legal_heir_available";
-    public static String PERSON_MIGRATED = "person_migrated";
+    public static String PERSON_ELIGIBLE = "person_eligible";
     public static String EXCLUSION_CRITERIA_ID = "exclusion_criteria_id";
     public static String EXCLUSION_CRITERIA = "exclusion_criteria";
     public static String ELIGIBLE_FOR_AUTO_EXCLUSION = "eligible_for_auto_exclusion";

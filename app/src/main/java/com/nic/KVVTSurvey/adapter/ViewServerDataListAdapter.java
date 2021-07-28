@@ -102,7 +102,7 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getSeccId().toLowerCase().contains(charString.toLowerCase()) || row.getBeneficiaryName().contains(charString.toUpperCase())) {
+                        if (row.getBeneficiaryId().toLowerCase().contains(charString.toLowerCase()) || row.getBeneficiaryName().contains(charString.toUpperCase())) {
                             filteredList.add(row);
                         }
                     }
@@ -128,7 +128,7 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
         Intent intent = new Intent(activity, FullImageActivity.class);
         intent.putExtra(AppConstant.PV_CODE, serverDataListValuesFiltered.get(pos).getPvCode());
         intent.putExtra(AppConstant.HAB_CODE, serverDataListValuesFiltered.get(pos).getHabCode());
-        intent.putExtra(AppConstant.BENEFICIARY_ID, serverDataListValuesFiltered.get(pos).getBeneficiaryId());
+        intent.putExtra(AppConstant.KVVT_ID, serverDataListValuesFiltered.get(pos).getBeneficiaryId());
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

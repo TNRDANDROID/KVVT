@@ -141,7 +141,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
             ContentValues values = new ContentValues();
 
-            values.put(AppConstant.PMAY_ID, kvvt_id);
+            values.put(AppConstant.KVVT_ID, kvvt_id);
             values.put(AppConstant.TYPE_OF_PHOTO, getIntent().getStringExtra(AppConstant.TYPE_OF_PHOTO));
             values.put(AppConstant.KEY_LATITUDE, offlatTextValue.toString());
             values.put(AppConstant.KEY_LONGITUDE, offlongTextValue.toString());
@@ -149,7 +149,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
             if(type_of_photo.equals("2")){
                 dbData.open();
-                ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(kvvt_id,"1");
+                ArrayList<KVVTSurvey> imageOffline = dbData.getSavedKVVTImages(kvvt_id,"1");
 
                 if (imageOffline.size() > 0){
                     for (int i= 0; i<imageOffline.size(); i++){
@@ -176,15 +176,15 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-                whereClause = "pmay_id = ? and type_of_photo = ?";
+                whereClause = "kvvt_id = ? and type_of_photo = ?";
                 whereArgs = new String[]{kvvt_id,type_of_photo};dbData.open();
-                ArrayList<KVVTSurvey> imageOffline = dbData.getSavedPMAYImages(kvvt_id,type_of_photo);
+                ArrayList<KVVTSurvey> imageOffline = dbData.getSavedKVVTImages(kvvt_id,type_of_photo);
 
                 if(imageOffline.size() < 1) {
-                    id = db.insert(DBHelper.SAVE_PMAY_IMAGES, null, values);
+                    id = db.insert(DBHelper.SAVE_KVVT_IMAGES, null, values);
                 }
                 else {
-                    id = db.update(DBHelper.SAVE_PMAY_IMAGES, values, whereClause, whereArgs);
+                    id = db.update(DBHelper.SAVE_KVVT_IMAGES, values, whereClause, whereArgs);
                 }
 
 
@@ -199,7 +199,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                    homePage();
                 }
             }
-            Log.d("insIdsavePMAY", String.valueOf(id));
+            Log.d("insIdsavesaveKVVTImages", String.valueOf(id));
 
         } catch (Exception e) {
 //            Utils.showAlert(CameraScreen.this, "Atleast Capture one Photo");

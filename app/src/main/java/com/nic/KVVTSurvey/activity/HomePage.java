@@ -63,7 +63,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     private List<KVVTSurvey> Habitation = new ArrayList<>();
     private List<KVVTSurvey> Scheme = new ArrayList<>();
     String lastInsertedID;
-    String isMigrated = "";
+    String isEligible = "";
     private ProgressHUD progressHUD;
     Boolean flag=false;
     Boolean Etflag=false;
@@ -106,7 +106,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     prefManager.setPvCode(Village.get(position).getPvCode());
                     habitationFilterSpinner(prefManager.getDistrictCode(),prefManager.getBlockCode(),prefManager.getPvCode());
 
-                    homeScreenBinding.seccId.setText("");
+                    homeScreenBinding.benificiaryId.setText("");
                     homeScreenBinding.name.setText("");
                     homeScreenBinding.fatherName.setText("");
                     homeScreenBinding.tick.setVisibility(View.GONE);
@@ -117,7 +117,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     prefManager.setVillageListPvName("");
                     prefManager.setPvCode("");
                     prefManager.setHabCode("");
-                    homeScreenBinding.seccId.setText("");
+                    homeScreenBinding.benificiaryId.setText("");
                     homeScreenBinding.name.setText("");
                     homeScreenBinding.fatherName.setText("");
                     homeScreenBinding.tick.setVisibility(View.GONE);
@@ -154,7 +154,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
                     prefManager.setHabCode(Habitation.get(position).getHabCode());
-                    homeScreenBinding.seccId.setText("");
+                    homeScreenBinding.benificiaryId.setText("");
                     homeScreenBinding.name.setText("");
                     homeScreenBinding.fatherName.setText("");
                     homeScreenBinding.tick.setVisibility(View.GONE);
@@ -162,7 +162,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
                 }else {
                     prefManager.setHabCode("");
-                    homeScreenBinding.seccId.setText("");
+                    homeScreenBinding.benificiaryId.setText("");
                     homeScreenBinding.name.setText("");
                     homeScreenBinding.fatherName.setText("");
                     homeScreenBinding.tick.setVisibility(View.GONE);
@@ -191,7 +191,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    isMigrated = "Y";
+                    isEligible = "Y";
                     homeScreenBinding.migNo.setChecked(false);
                     validateYesNo();
                 }
@@ -202,13 +202,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    isMigrated = "N";
+                    isEligible = "N";
                     homeScreenBinding.migYes.setChecked(false);
                     validateYesNo();
                 }
             }
         });
-        homeScreenBinding.seccId.setOnTouchListener(new View.OnTouchListener() {
+        homeScreenBinding.benificiaryId.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(!prefManager.getPvCode().equals("") && !prefManager.getHabCode().equals("")){
@@ -221,7 +221,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                 return false;
             }
         });
-        homeScreenBinding.seccId.addTextChangedListener(new TextWatcher() {
+        homeScreenBinding.benificiaryId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                /* if(!prefManager.getPvCode().equals("") && !prefManager.getHabCode().equals("")){
@@ -240,7 +240,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             @Override
             public void afterTextChanged(Editable editable) {
                 flag=false;
-                if(!homeScreenBinding.seccId.getText().toString().isEmpty()){
+                if(!homeScreenBinding.benificiaryId.getText().toString().isEmpty()){
                     homeScreenBinding.tick.setVisibility(View.VISIBLE);
                 }else{
                     homeScreenBinding.tick.setVisibility(View.GONE);
@@ -252,8 +252,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             @Override
             public void onClick(View view) {
                 if(Etflag){
-                    if(!homeScreenBinding.seccId.getText().toString().equals("")){
-                        validateBenificiaryId(homeScreenBinding.seccId.getText().toString());}
+                    if(!homeScreenBinding.benificiaryId.getText().toString().equals("")){
+                        validateBenificiaryId(homeScreenBinding.benificiaryId.getText().toString());}
                     else {
                         Utils.showAlert(HomePage.this,"Enter Benificiary Id!");
                     }
@@ -282,7 +282,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     private void validateBenificiaryId(String toString) {
         try {
-            new ApiService(this).makeJSONObjectRequest("ValidateBenificiaryId", Api.Method.POST, UrlGenerator.getPMAYListUrl(), validateBenificiaryIdJsonParams(), "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("ValidateBenificiaryId", Api.Method.POST, UrlGenerator.getKVVTListUrl(), validateBenificiaryIdJsonParams(), "not cache", this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -291,12 +291,12 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
 
     public void validateYesNo() {
-        if ( isMigrated.equalsIgnoreCase("Y")) {
+        if ( isEligible.equalsIgnoreCase("Y")) {
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
             homeScreenBinding.selectScheTv.setVisibility(View.VISIBLE);
             homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
             homeScreenBinding.saveData.setText("Save details");
-        } else if (isMigrated.equalsIgnoreCase("N")) {
+        } else if (isEligible.equalsIgnoreCase("N")) {
             homeScreenBinding.schemeSpinner.setSelection(0);
             prefManager.setKeySchemeCode("");
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
@@ -461,7 +461,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void logout() {
         dbData.open();
-        ArrayList<KVVTSurvey> ImageCount = dbData.getSavedPMAYDetails();
+        ArrayList<KVVTSurvey> ImageCount = dbData.getSavedKVVTDetails();
         if (!Utils.isOnline()) {
             Utils.showAlert(this, "Logging out while offline may leads to loss of data!");
         } else {
@@ -486,7 +486,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             @Override
             public void onClick(View view) {
                 if (Utils.isOnline()) {
-                    getPMAYList();
+                    getKVVTList();
                 } else {
                     Utils.showAlert(HomePage.this, "Your Internet seems to be Offline.Data can be viewed only in Online mode.");
                 }
@@ -494,24 +494,24 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         });
     }
 
-    public void getPMAYList() {
+    public void getKVVTList() {
         try {
-            new ApiService(this).makeJSONObjectRequest("PMAYList", Api.Method.POST, UrlGenerator.getPMAYListUrl(), pmayListJsonParams(), "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("KVVTList", Api.Method.POST, UrlGenerator.getKVVTListUrl(), kvvtListJsonParams(), "not cache", this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public JSONObject pmayListJsonParams() throws JSONException {
-        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.pmayListJsonParams().toString());
+    public JSONObject kvvtListJsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.kvvtListJsonParams().toString());
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
-        Log.d("PMAYList", "" + authKey);
+        Log.d("KVVTList", "" + authKey);
         return dataSet;
     }
     public JSONObject validateBenificiaryIdJsonParams() throws JSONException {
-        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.validateBeniIdJsonParamsJsonParams(prefManager.getPvCode(), prefManager.getHabCode(),homeScreenBinding.seccId.getText().toString()).toString());
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.validateBeniIdJsonParamsJsonParams(prefManager.getPvCode(), prefManager.getHabCode(),homeScreenBinding.benificiaryId.getText().toString()).toString());
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
@@ -526,13 +526,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             String urlType = serverResponse.getApi();
             JSONObject responseObj = serverResponse.getJsonResponse();
 
-            if ("PMAYList".equals(urlType) && responseObj != null) {
+            if ("KVVTList".equals(urlType) && responseObj != null) {
                 String key = responseObj.getString(AppConstant.ENCODE_DATA);
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
-                Log.d("PMAYListResponse", "" + responseDecryptedBlockKey);
+                Log.d("KVVTListResponse", "" + responseDecryptedBlockKey);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
-                    new InsertPMAYTask().execute(jsonObject);
+                    new InsertKVVTTask().execute(jsonObject);
                 }else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("NO_RECORD") && jsonObject.getString("MESSAGE").equalsIgnoreCase("NO_RECORD")){
                     Utils.showAlert(this,"No Record Found!");
                 }
@@ -620,7 +620,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     public void validateFields() {
         if (!"Select Village".equalsIgnoreCase(Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName())) {
             if (!"Select Habitation".equalsIgnoreCase(Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName())) {
-                        if (!homeScreenBinding.seccId.getText().toString().isEmpty()) {
+                        if (!homeScreenBinding.benificiaryId.getText().toString().isEmpty()) {
                             if (flag) {
                                 checkLegalYesNo();
 
@@ -663,7 +663,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         String habcode = Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabCode();
        /* String beneficiary_name = homeScreenBinding.name.getText().toString();
         String father_name = homeScreenBinding.fatherName.getText().toString();*/
-        String secc_id = homeScreenBinding.seccId.getText().toString();
+        String benificiary_id = homeScreenBinding.benificiaryId.getText().toString();
 
         ContentValues registerValue = new ContentValues();
         registerValue.put(AppConstant.DISTRICT_CODE, prefManager.getDistrictCode());
@@ -674,21 +674,21 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         registerValue.put(AppConstant.HABITATION_NAME, Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName());
         registerValue.put(AppConstant.BENEFICIARY_NAME, "");
         registerValue.put(AppConstant.BENEFICIARY_FATHER_NAME, "");
-        registerValue.put(AppConstant.SECC_ID, secc_id);
+        registerValue.put(AppConstant.BENEFICIARY_ID, benificiary_id);
         registerValue.put(AppConstant.EXCLUSION_CRITERIA_ID, prefManager.getKeySchemeCode());
         registerValue.put(AppConstant.PERSON_ALIVE, "");
         registerValue.put(AppConstant.LEGAL_HEIR_AVAILABLE, "");
-        registerValue.put(AppConstant.PERSON_MIGRATED, isMigrated);
+        registerValue.put(AppConstant.PERSON_ELIGIBLE, isEligible);
         registerValue.put(AppConstant.BUTTON_TEXT, buttonTxt);
 
-        long id = db.insert(DBHelper.SAVE_PMAY_DETAILS, null, registerValue);
+        long id = db.insert(DBHelper.SAVE_KVVT_DETAILS, null, registerValue);
         Log.d("insert_id",String.valueOf(id));
         flag=false;
 
         if(buttonTxt.equals("Take Photo")){
             if(id > 0) {
 
-                Cursor cursor = db.rawQuery("SELECT MAX(id) FROM " + DBHelper.SAVE_PMAY_DETAILS, null);
+                Cursor cursor = db.rawQuery("SELECT MAX(id) FROM " + DBHelper.SAVE_KVVT_DETAILS, null);
                 Log.d("cursor_count", String.valueOf(cursor.getCount()));
                 if (cursor.getCount() > 0) {
                     if (cursor.moveToFirst()) {
@@ -717,7 +717,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void syncButtonVisibility() {
         dbData.open();
-        ArrayList<KVVTSurvey> workImageCount = dbData.getSavedPMAYDetails();
+        ArrayList<KVVTSurvey> workImageCount = dbData.getSavedKVVTDetails();
 
         if (workImageCount.size() > 0) {
             homeScreenBinding.synData.setVisibility(View.VISIBLE);
@@ -739,10 +739,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         homeScreenBinding.tick.setVisibility(View.GONE);
         homeScreenBinding.name.setText("");
         homeScreenBinding.fatherName.setText("");
-        homeScreenBinding.seccId.setText("");
+        homeScreenBinding.benificiaryId.setText("");
         homeScreenBinding.migYes.setChecked(false);
         homeScreenBinding.migNo.setChecked(false);
-        isMigrated = "";
+        isEligible = "";
 
     }
 
@@ -753,14 +753,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     }
 
 
-    public class InsertPMAYTask extends AsyncTask<JSONObject, Void, Void> {
+    public class InsertKVVTTask extends AsyncTask<JSONObject, Void, Void> {
 
         @Override
         protected Void doInBackground(JSONObject... params) {
-            dbData.deletePMAYTable();
+            dbData.deleteKVVTTable();
             dbData.open();
-            ArrayList<KVVTSurvey> all_pmayListCount = dbData.getAll_PMAYList("","");
-            if (all_pmayListCount.size() <= 0) {
+            ArrayList<KVVTSurvey> all_kvvtListCount = dbData.getAll_KVVTList("","");
+            if (all_kvvtListCount.size() <= 0) {
                 if (params.length > 0) {
                     JSONArray jsonArray = new JSONArray();
                     try {
@@ -769,18 +769,18 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                         e.printStackTrace();
                     }
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        KVVTSurvey pmaySurvey = new KVVTSurvey();
+                        KVVTSurvey kvvtSurvey = new KVVTSurvey();
                         try {
-                            pmaySurvey.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
-                            pmaySurvey.setHabCode(jsonArray.getJSONObject(i).getString(AppConstant.HABIT_CODE));
-                            pmaySurvey.setBeneficiaryId(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_ID));
-                            pmaySurvey.setBeneficiaryName(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_NAME));
-                            pmaySurvey.setBeneficiaryFatherName(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_FATHER_NAME));
-                            pmaySurvey.setExclusion_criteria_id(jsonArray.getJSONObject(i).getString(AppConstant.EXCLUSION_CRITERIA_ID));
-                            pmaySurvey.setHabitationName(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME));
-                            pmaySurvey.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
-                            pmaySurvey.setEligible_for_auto_exclusion(jsonArray.getJSONObject(i).getString(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION));
-                            dbData.insertPMAY(pmaySurvey);
+                            kvvtSurvey.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
+                            kvvtSurvey.setHabCode(jsonArray.getJSONObject(i).getString(AppConstant.HABIT_CODE));
+                            kvvtSurvey.setBeneficiaryId(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_ID));
+                            kvvtSurvey.setBeneficiaryName(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_NAME));
+                            kvvtSurvey.setBeneficiaryFatherName(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_FATHER_NAME));
+                            kvvtSurvey.setExclusion_criteria_id(jsonArray.getJSONObject(i).getString(AppConstant.EXCLUSION_CRITERIA_ID));
+                            kvvtSurvey.setHabitationName(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME));
+                            kvvtSurvey.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
+                            kvvtSurvey.setEligible_for_auto_exclusion(jsonArray.getJSONObject(i).getString(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION));
+                            dbData.insertKVVT(kvvtSurvey);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -75,7 +75,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.pendingAdapterBinding.habName.setText(pendingListValues.get(position).getHabitationName());
         holder.pendingAdapterBinding.villageName.setText(pendingListValues.get(position).getPvName());
-        holder.pendingAdapterBinding.secId.setText(pendingListValues.get(position).getSeccId());
+        holder.pendingAdapterBinding.secId.setText(pendingListValues.get(position).getBeneficiaryId());
         holder.pendingAdapterBinding.name.setText(pendingListValues.get(position).getBeneficiaryName());
         if(!pendingListValues.get(position).getPersonAlive().equalsIgnoreCase("")){
             holder.pendingAdapterBinding.aliveLayout.setVisibility(View.VISIBLE);
@@ -87,15 +87,15 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             holder.pendingAdapterBinding.legalView.setVisibility(View.GONE);
             holder.pendingAdapterBinding.legalHeirTv.setText(pendingListValues.get(position).getIsLegel());
         }
-        if(!pendingListValues.get(position).getIsMigrated().equalsIgnoreCase("")){
+        if(!pendingListValues.get(position).getIsEligible().equalsIgnoreCase("")){
             holder.pendingAdapterBinding.legalView.setVisibility(View.VISIBLE);
             holder.pendingAdapterBinding.beneficiaryMigratedLayout.setVisibility(View.VISIBLE);
-            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(pendingListValues.get(position).getIsMigrated());
+            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(pendingListValues.get(position).getIsEligible());
         }
         String button_text = pendingListValues.get(position).getButtonText();
 
-        String pmay_id = pendingListValues.get(position).getPmayId();
-       final Cursor image = db.rawQuery("Select * from " + DBHelper.SAVE_PMAY_IMAGES + " where pmay_id =" + pmay_id, null);
+        String kvvt_id = pendingListValues.get(position).getKvvtId();
+       final Cursor image = db.rawQuery("Select * from " + DBHelper.SAVE_KVVT_IMAGES + " where kvvt_id =" + kvvt_id, null);
 
         if(image.getCount() > 0) {
             holder.pendingAdapterBinding.viewOfflineImages.setVisibility(View.VISIBLE);
@@ -151,10 +151,10 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
 
     public void deletePending(int position) {
-        String pmay_id = pendingListValues.get(position).getPmayId();
+        String kvvt_id = pendingListValues.get(position).getKvvtId();
 
-        int sdsm = db.delete(DBHelper.SAVE_PMAY_DETAILS, "id = ? ", new String[]{pmay_id});
-        int sdsm1 = db.delete(DBHelper.SAVE_PMAY_IMAGES, "pmay_id = ? ", new String[]{pmay_id});
+        int sdsm = db.delete(DBHelper.SAVE_KVVT_DETAILS, "id = ? ", new String[]{kvvt_id});
+        int sdsm1 = db.delete(DBHelper.SAVE_KVVT_IMAGES, "kvvt_id = ? ", new String[]{kvvt_id});
         pendingListValues.remove(position);
         notifyItemRemoved(position);
         notifyItemChanged(position, pendingListValues.size());
@@ -164,7 +164,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
     public void viewImages(int position){
         Activity activity = (Activity) context;
         Intent intent = new Intent(context, FullImageActivity.class);
-        intent.putExtra(AppConstant.PMAY_ID, pendingListValues.get(position).getPmayId());
+        intent.putExtra(AppConstant.KVVT_ID, pendingListValues.get(position).getKvvtId());
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
@@ -179,18 +179,18 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         String exclusion_criteria_id = pendingListValues.get(position).getExclusion_criteria_id();
         String beneficiary_name = pendingListValues.get(position).getBeneficiaryName();
         String father_name = pendingListValues.get(position).getFatherName();
-        String secc_id = pendingListValues.get(position).getSeccId();
+        String benificiary_id = pendingListValues.get(position).getBeneficiaryId();
         String person_alive = pendingListValues.get(position).getPersonAlive();
         String legal_heir_available = pendingListValues.get(position).getIsLegel();
-        String person_migrated = pendingListValues.get(position).getIsMigrated();
+        String person_eligible = pendingListValues.get(position).getIsEligible();
         String button_text = pendingListValues.get(position).getButtonText();
 
-        String pmay_id = pendingListValues.get(position).getPmayId();
+        String kvvt_id = pendingListValues.get(position).getKvvtId();
         prefManager.setKeyDeletePosition(position);
-        prefManager.setKeyDeleteId(pmay_id);
+        prefManager.setKeyDeleteId(kvvt_id);
 
         try {
-            dataset.put(AppConstant.KEY_SERVICE_ID,AppConstant.PMAY_SOURCE_SAVE);
+            dataset.put(AppConstant.KEY_SERVICE_ID,AppConstant.KVVT_SOURCE_SAVE);
             dataset.put(AppConstant.PV_CODE, pvcode);
             dataset.put(AppConstant.HAB_CODE, habcode);
             /*dataset.put(AppConstant.BENEFICIARY_NAME, beneficiary_name);
@@ -198,8 +198,8 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             dataset.put(AppConstant.PERSON_ALIVE, person_alive);
             dataset.put(AppConstant.LEGAL_HEIR_AVAILABLE, legal_heir_available);*/
             dataset.put(AppConstant.EXCLUSION_CRITERIA_ID, exclusion_criteria_id);
-            dataset.put("eligible_for_auto_exclusion", person_migrated);
-            dataset.put("benificiary_id", secc_id);
+            dataset.put("eligible_for_auto_exclusion", person_eligible);
+            dataset.put("benificiary_id", benificiary_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -207,7 +207,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         JSONArray imageArray = new JSONArray();
 
         if(button_text.equals("Take Photo")){
-            String image_sql = "Select * from " + DBHelper.SAVE_PMAY_IMAGES + " where pmay_id =" + pmay_id ;
+            String image_sql = "Select * from " + DBHelper.SAVE_KVVT_IMAGES + " where kvvt_id =" + kvvt_id ;
             Log.d("sql", image_sql);
             Cursor image = db.rawQuery(image_sql, null);
 
@@ -244,7 +244,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         }
 
         if (Utils.isOnline()) {
-            ((PendingScreen)context).savePMAYImagesJsonParams(dataset);
+            ((PendingScreen)context).saveKVVTImagesJsonParams(dataset);
         } else {
             Utils.showAlert(context, "Turn On Mobile Data To Upload");
         }

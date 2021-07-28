@@ -227,7 +227,7 @@
                             android:background="@color/colorPrimary" />
 
                         <EditText
-                            android:id="@+id/secc_id"
+                            android:id="@+id/benificiary_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toEndOf="@+id/view"

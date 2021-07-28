@@ -1153,9 +1153,9 @@ public class Utils {
         Date date = new Date();
         return formatter.format(date);
     }
-    public static JSONObject pmayListJsonParams() throws JSONException {
+    public static JSONObject kvvtListJsonParams() throws JSONException {
         JSONObject dataSet = new JSONObject();
-        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_PMAY_SOURCE_ALL);
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_KVVT_SOURCE_ALL);
         Log.d("object", "" + dataSet);
         return dataSet;
     }

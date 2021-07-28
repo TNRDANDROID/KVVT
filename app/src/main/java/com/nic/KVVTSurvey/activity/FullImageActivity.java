@@ -72,11 +72,11 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
         @Override
         protected ArrayList<KVVTSurvey> doInBackground(Void... params) {
 
-            final String pmay_id = getIntent().getStringExtra(AppConstant.PMAY_ID);
+            final String kvvt_id = getIntent().getStringExtra(AppConstant.KVVT_ID);
 
             dbData.open();
             activityImage = new ArrayList<>();
-            activityImage = dbData.getSavedPMAYImages(pmay_id,"");
+            activityImage = dbData.getSavedKVVTImages(kvvt_id,"");
 
 
             Log.d("IMAGE_COUNT", String.valueOf(activityImage.size()));
@@ -117,7 +117,7 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
 
     public void getOnlineImage() {
         try {
-            new ApiService(this).makeJSONObjectRequest("OnlineImage", Api.Method.POST, UrlGenerator.getPMAYListUrl(), ImagesJsonParams(), "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("OnlineImage", Api.Method.POST, UrlGenerator.getKVVTListUrl(), ImagesJsonParams(), "not cache", this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -134,12 +134,12 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
 
     public JSONObject ImagesListJsonParams() throws JSONException {
         JSONObject dataSet = new JSONObject();
-        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_PMAY_SOURCE_DATA_PHOTO);
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_KVVT_SOURCE_DATA_PHOTO);
         dataSet.put(AppConstant.DISTRICT_CODE, prefManager.getDistrictCode());
         dataSet.put(AppConstant.BLOCK_CODE, prefManager.getBlockCode());
         dataSet.put(AppConstant.PV_CODE, getIntent().getStringExtra(AppConstant.PV_CODE));
         dataSet.put(AppConstant.HAB_CODE, getIntent().getStringExtra(AppConstant.HAB_CODE));
-        dataSet.put(AppConstant.BENEFICIARY_ID, getIntent().getStringExtra(AppConstant.BENEFICIARY_ID));
+        dataSet.put(AppConstant.BENEFICIARY_ID, getIntent().getStringExtra(AppConstant.KVVT_ID));
         Log.d("utils_imageDataset", "" + dataSet);
         return dataSet;
     }

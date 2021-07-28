@@ -30,7 +30,7 @@ public class KVVTSurvey {
     private String BeneficiaryFatherName;
     private String BeneficiaryId;
     private String HabitationName;
-    private String pmayId;
+    private String kvvtId;
     private String fatherName;
     private String personAlive;
     private String buttonText;
@@ -96,16 +96,16 @@ public class KVVTSurvey {
         this.isLegel = isLegel;
     }
 
-    public String getIsMigrated() {
-        return isMigrated;
+    public String getIsEligible() {
+        return isEligible;
     }
 
-    public void setIsMigrated(String isMigrated) {
-        this.isMigrated = isMigrated;
+    public void setIsEligible(String isEligible) {
+        this.isEligible = isEligible;
     }
 
     private String isLegel;
-    private String isMigrated;
+    private String isEligible;
 
     public String getFatherName() {
         return fatherName;
@@ -115,12 +115,12 @@ public class KVVTSurvey {
         this.fatherName = fatherName;
     }
 
-    public String getPmayId() {
-        return pmayId;
+    public String getKvvtId() {
+        return kvvtId;
     }
 
-    public void setPmayId(String pmayId) {
-        this.pmayId = pmayId;
+    public void setKvvtId(String kvvtId) {
+        this.kvvtId = kvvtId;
     }
 
 
@@ -140,15 +140,6 @@ public class KVVTSurvey {
         HabitationName = habitationName;
     }
 
-    public String getSeccId() {
-        return SeccId;
-    }
-
-    public void setSeccId(String seccId) {
-        SeccId = seccId;
-    }
-
-    private String SeccId;
 
 
     private String PvCode;
