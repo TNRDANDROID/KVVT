@@ -1,22 +1,25 @@
 package com.nic.KVVTSurvey.activity;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,8 +54,7 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
     private List<KVVTSurvey> Habitation = new ArrayList<>();
     private List<KVVTSurvey> VillageOrdered = new ArrayList<>();
     private List<KVVTSurvey> HabitationOrdered = new ArrayList<>();
-    ArrayList<KVVTSurvey> savedAllList = new ArrayList<>();
-
+    ArrayList<KVVTSurvey> savedList = new ArrayList<>();
     public static SQLiteDatabase db;
     public static DBHelper dbHelper;
 
@@ -72,9 +74,8 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
 
         setSupportActionBar(viewServerDataScreenBinding.toolbar);
         initRecyclerView();
-        viewServerDataScreenBinding.headerLayout.setVisibility(View.VISIBLE);
-        viewServerDataScreenBinding.searchLayout.setVisibility(View.GONE);
-        viewServerDataScreenBinding.searchImg.setVisibility(View.GONE);
+        viewServerDataListAdapter = new ViewServerDataListAdapter(ViewServerDataScreen.this, savedList);
+        recyclerView.setAdapter(viewServerDataListAdapter);
         villageFilterSpinner(prefManager.getBlockCode());
         viewServerDataScreenBinding.villageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -87,9 +88,7 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     habitationFilterSpinner(prefManager.getDistrictCode(), prefManager.getBlockCode(), prefManager.getPvCode());
                     viewServerDataScreenBinding.serverDataList.setVisibility(View.GONE);
                     viewServerDataScreenBinding.notFoundTv.setVisibility(View.GONE);
-                    viewServerDataScreenBinding.searchImg.setVisibility(View.GONE);
                 } else {
-                    viewServerDataScreenBinding.searchImg.setVisibility(View.GONE);
                     prefManager.setVillageListPvName("");
                     prefManager.setPvCode("");
                     prefManager.setHabCode("");
@@ -117,24 +116,6 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        viewServerDataScreenBinding.searchImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewServerDataScreenBinding.headerLayout.setVisibility(View.GONE);
-                viewServerDataScreenBinding.searchLayout.setVisibility(View.VISIBLE);
-            }
-        });
-        viewServerDataScreenBinding.searchEt.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    //do here your stuff f
-                    searchAction();
-                    return true;
-                }
-                return false;
             }
         });
     }
@@ -250,7 +231,7 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         @Override
         protected ArrayList<KVVTSurvey> doInBackground(Void... params) {
             dbData.open();
-            savedAllList.clear();
+            ArrayList<KVVTSurvey> savedAllList = new ArrayList<>();
             savedAllList = dbData.getAll_KVVTList(prefManager.getPvCode(), prefManager.getHabCode());
             Log.d("savedList_COUNT", String.valueOf(savedAllList.size()));
             return savedAllList;
@@ -262,7 +243,6 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
 
             viewServerDataListAdapter = new ViewServerDataListAdapter(ViewServerDataScreen.this, savedList);
             if (savedList.size() > 0) {
-                viewServerDataScreenBinding.searchImg.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.VISIBLE);
                 viewServerDataScreenBinding.notFoundTv.setVisibility(View.GONE);
                 recyclerView.setAdapter(viewServerDataListAdapter);
@@ -274,7 +254,6 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     }
                 }, 1000);
             } else {
-                viewServerDataScreenBinding.searchImg.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 viewServerDataScreenBinding.notFoundTv.setVisibility(View.VISIBLE);
             }
@@ -289,7 +268,6 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
 
     }
 
-/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -320,14 +298,13 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         });
         return true;
     }
-*/
 
     @Override
     public void onBackPressed() {
-       /* if (!searchView.isIconified()) {
+        if (!searchView.isIconified()) {
             searchView.setIconified(true);
             return;
-        }*/
+        }
         super.onBackPressed();
         setResult(Activity.RESULT_CANCELED);
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
@@ -349,83 +326,4 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
     }
 
-    public void searchAction() {
-        hideKeyboard(this);
-        if (savedAllList.size() > 0) {
-            ArrayList<KVVTSurvey> filteredList = new ArrayList<>();
-            if (!viewServerDataScreenBinding.searchEt.getText().toString().equals("") && viewServerDataScreenBinding.searchEt.getText().toString().length() > 0) {
-                String text = viewServerDataScreenBinding.searchEt.getText().toString();
-                for (int i = 0; i < savedAllList.size(); i++) {
-                    if (text.equals(savedAllList.get(i).getBeneficiaryId())) {
-                        KVVTSurvey card = new KVVTSurvey();
-                        card.setPvCode(savedAllList.get(i).getPvCode());
-                        card.setHabCode(savedAllList.get(i).getHabCode());
-                        card.setBeneficiaryId(savedAllList.get(i).getBeneficiaryId());
-                        card.setBeneficiaryName(savedAllList.get(i).getBeneficiaryName());
-                        card.setBeneficiaryFatherName(savedAllList.get(i).getBeneficiaryFatherName());
-                        card.setEligible_for_auto_exclusion(savedAllList.get(i).getEligible_for_auto_exclusion());
-                        card.setHabitationName(savedAllList.get(i).getHabitationName());
-                        card.setExclusion_criteria_id(savedAllList.get(i).getExclusion_criteria_id());
-                        card.setPvName(savedAllList.get(i).getPvName());
-                        filteredList.add(card);
-                    } else {
-
-                    }
-                }
-                viewServerDataListAdapter = new ViewServerDataListAdapter(ViewServerDataScreen.this, filteredList);
-                if (filteredList.size() > 0) {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    viewServerDataScreenBinding.notFoundTv.setVisibility(View.GONE);
-                    recyclerView.setAdapter(viewServerDataListAdapter);
-                    recyclerView.showShimmerAdapter();
-                    recyclerView.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadCards();
-                        }
-                    }, 1000);
-                } else {
-                    recyclerView.setVisibility(View.GONE);
-                    viewServerDataScreenBinding.notFoundTv.setVisibility(View.VISIBLE);
-                }
-
-            }
-        }
-
-    }
-
-    public void reloadPreviousList() {
-        viewServerDataScreenBinding.headerLayout.setVisibility(View.VISIBLE);
-        viewServerDataScreenBinding.searchLayout.setVisibility(View.GONE);
-        viewServerDataScreenBinding.searchEt.setText("");
-        if (savedAllList.size() > 0) {
-            viewServerDataListAdapter = new ViewServerDataListAdapter(ViewServerDataScreen.this, savedAllList);
-            if (savedAllList.size() > 0) {
-                recyclerView.setVisibility(View.VISIBLE);
-                viewServerDataScreenBinding.notFoundTv.setVisibility(View.GONE);
-                recyclerView.setAdapter(viewServerDataListAdapter);
-                recyclerView.showShimmerAdapter();
-                recyclerView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadCards();
-                    }
-                }, 1000);
-            } else {
-                recyclerView.setVisibility(View.GONE);
-                viewServerDataScreenBinding.notFoundTv.setVisibility(View.VISIBLE);
-            }
-
-        }
-    }
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
 }
