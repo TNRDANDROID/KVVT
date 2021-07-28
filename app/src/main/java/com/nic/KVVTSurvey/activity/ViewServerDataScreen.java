@@ -129,7 +129,7 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         viewServerDataScreenBinding.searchEt.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     //do here your stuff f
                     searchAction();
                     return true;

@@ -81,7 +81,7 @@
                         android:layout_toLeftOf="@id/close_img"
                         android:gravity="start"
                         android:inputType="number"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionSearch"
                         android:background="@color/full_transparent"
                         android:layout_marginRight="@dimen/margin"
                         android:layout_marginLeft="@dimen/_8sdp"
