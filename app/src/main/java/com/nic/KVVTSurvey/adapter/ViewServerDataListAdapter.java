@@ -66,9 +66,14 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
         holder.viewServerDataAdapterBinding.villageName.setText(serverDataListValuesFiltered.get(position).getPvName());
         holder.viewServerDataAdapterBinding.habName.setText(serverDataListValuesFiltered.get(position).getHabitationName());
         holder.viewServerDataAdapterBinding.secId.setText(serverDataListValuesFiltered.get(position).getBeneficiaryId());
-        holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getEligible_for_auto_exclusion());
+//        holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getEligible_for_auto_exclusion());
 
-        if(serverDataListValuesFiltered.get(position).getEligible_for_auto_exclusion().toString().equals("N")){
+        if(serverDataListValuesFiltered.get(position).getEligible_for_auto_exclusion().toString().equals("Y")){
+            holder.viewServerDataAdapterBinding.eligibleId.setText("Yes");
+        }else {
+            holder.viewServerDataAdapterBinding.eligibleId.setText("No");
+        }
+        if(serverDataListValuesFiltered.get(position).getPhoto_availavle().toString().equals("Y")){
             holder.viewServerDataAdapterBinding.viewServerImages.setVisibility(View.VISIBLE);
         }else {
             holder.viewServerDataAdapterBinding.viewServerImages.setVisibility(View.GONE);

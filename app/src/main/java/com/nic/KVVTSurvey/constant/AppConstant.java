@@ -63,6 +63,8 @@ public class AppConstant {
     public static String PERSON_ELIGIBLE = "person_eligible";
     public static String EXCLUSION_CRITERIA_ID = "exclusion_criteria_id";
     public static String EXCLUSION_CRITERIA = "exclusion_criteria";
+    public static String PHOTO_REQUIRED = "photo_required";
+    public static String PHOTO_AVAILABLE = "photo_available";
     public static String ELIGIBLE_FOR_AUTO_EXCLUSION = "eligible_for_auto_exclusion";
     public static String BUTTON_TEXT = "button_text";
 

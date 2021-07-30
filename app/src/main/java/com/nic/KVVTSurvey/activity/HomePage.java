@@ -71,6 +71,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     String pref_Village;
     String pref_Scheme;
+    String photoRequired="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,8 +139,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                 if (position > 0) {
 
                     pref_Scheme = Scheme.get(position).getExclusion_criteria();
+                    photoRequired = Scheme.get(position).getPhoto_required();
                     prefManager.setKeySchemeListName(pref_Scheme);
                     prefManager.setKeySchemeCode(Scheme.get(position).getExclusion_criteria_id());
+                    if(photoRequired.equals("Y")){
+                        homeScreenBinding.saveData.setText("Take Photo");
+                    }else {
+                        homeScreenBinding.saveData.setText("Save details");
+                    }
                 }
             }
 
@@ -194,6 +201,11 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     isEligible = "Y";
                     homeScreenBinding.migNo.setChecked(false);
                     validateYesNo();
+                }else {
+                    homeScreenBinding.schemeSpinner.setSelection(0);
+                    prefManager.setKeySchemeCode("");
+                    homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+                    homeScreenBinding.scheLayout.setVisibility(View.GONE);
                 }
             }
         });
@@ -205,6 +217,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     isEligible = "N";
                     homeScreenBinding.migYes.setChecked(false);
                     validateYesNo();
+                }else {
+
                 }
             }
         });
@@ -295,7 +309,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
             homeScreenBinding.selectScheTv.setVisibility(View.VISIBLE);
             homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
-            homeScreenBinding.saveData.setText("Save details");
+            homeScreenBinding.saveData.setText("Take Photo");
         } else if (isEligible.equalsIgnoreCase("N")) {
             homeScreenBinding.schemeSpinner.setSelection(0);
             prefManager.setKeySchemeCode("");
@@ -350,9 +364,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     villageList.setPvName(pvname);
 
                     VillageOrdered.add(villageList);
-                    Log.d("spinnersize", "" + VillageOrdered.size());
                 } while (VillageList.moveToNext());
             }
+            Log.d("Villagespinnersize", "" + VillageOrdered.size());
+
         }
         Collections.sort(VillageOrdered, (lhs, rhs) -> lhs.getPvName().compareTo(rhs.getPvName()));
         KVVTSurvey villageListValue = new KVVTSurvey();
@@ -388,14 +403,17 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     KVVTSurvey villageList = new KVVTSurvey();
                     String EXCLUSION_CRITERIA_ID = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID));
                     String EXCLUSION_CRITERIA = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA));
+                    String PHOTO_REQUIRED = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PHOTO_REQUIRED));
 
                     villageList.setExclusion_criteria_id(EXCLUSION_CRITERIA_ID);
                     villageList.setExclusion_criteria(EXCLUSION_CRITERIA);
+                    villageList.setPhoto_required(PHOTO_REQUIRED);
 
                     Scheme.add(villageList);
-                    Log.d("spinnersize", "" + Scheme.size());
                 } while (VillageList.moveToNext());
             }
+            Log.d("Schemespinnersize", "" + Scheme.size());
+
         }
         homeScreenBinding.schemeSpinner.setAdapter(new CommonAdapter(this, Scheme, "SchemeList"));
     }
@@ -425,9 +443,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     habList.setHabitationName(habName);
 
                     HabitationOrdered.add(habList);
-                    Log.d("spinnersize", "" + HabitationOrdered.size());
                 } while (HABList.moveToNext());
             }
+            Log.d("Habitationspinnersize", "" + HabitationOrdered.size());
+
         }
         Collections.sort(HabitationOrdered, (lhs, rhs) -> lhs.getHabitationName().compareTo(rhs.getHabitationName()));
         KVVTSurvey habitationListValue = new KVVTSurvey();
@@ -644,7 +663,11 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         if ((homeScreenBinding.migYes.isChecked()) || homeScreenBinding.migNo.isChecked()) {
             if((homeScreenBinding.migYes.isChecked())){
                 if (!"Select Exclusion Criteria".equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria())) {
-                    takePhoto(homeScreenBinding.saveData.getText().toString());
+                     if(photoRequired.equals("Y")){
+                         takePhoto("Take Photo");
+                     }else {
+                         takePhoto("Save details");
+                     }
                 }else {
                     Utils.showAlert(this, "Select Exclusion Criteria!");
                 }
@@ -780,6 +803,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                             kvvtSurvey.setHabitationName(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME));
                             kvvtSurvey.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
                             kvvtSurvey.setEligible_for_auto_exclusion(jsonArray.getJSONObject(i).getString(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION));
+                            kvvtSurvey.setPhoto_availavle(jsonArray.getJSONObject(i).getString(AppConstant.PHOTO_AVAILABLE));
                             dbData.insertKVVT(kvvtSurvey);
                         } catch (JSONException e) {
                             e.printStackTrace();

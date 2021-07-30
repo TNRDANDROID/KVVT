@@ -92,6 +92,13 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             holder.pendingAdapterBinding.beneficiaryMigratedLayout.setVisibility(View.VISIBLE);
             holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(pendingListValues.get(position).getIsEligible());
         }
+
+        if(pendingListValues.get(position).getIsEligible().toString().equals("Y")){
+            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText("Yes");
+        }else {
+            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText("No");
+        }
+
         String button_text = pendingListValues.get(position).getButtonText();
 
         String kvvt_id = pendingListValues.get(position).getKvvtId();

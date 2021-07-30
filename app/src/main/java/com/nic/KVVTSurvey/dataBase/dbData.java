@@ -58,6 +58,7 @@ public class dbData {
         ContentValues values = new ContentValues();
         values.put(AppConstant.EXCLUSION_CRITERIA_ID, kvvtSurvey.getExclusion_criteria_id());
         values.put(AppConstant.EXCLUSION_CRITERIA, kvvtSurvey.getExclusion_criteria());
+        values.put(AppConstant.PHOTO_REQUIRED, kvvtSurvey.getPhoto_required());
         long id = db.insert(DBHelper.SCHEME_TABLE_NAME,null,values);
         Log.d("Inserted_id_criteria", String.valueOf(id));
 
@@ -112,6 +113,8 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
                     card.setExclusion_criteria(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA)));
+                    card.setPhoto_required(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PHOTO_REQUIRED)));
 
                     cards.add(card);
                 }
@@ -188,6 +191,7 @@ public class dbData {
         values.put(AppConstant.HABITATION_NAME, kvvtSurvey.getHabitationName());
         values.put(AppConstant.EXCLUSION_CRITERIA_ID, kvvtSurvey.getExclusion_criteria_id());
         values.put(AppConstant.PV_NAME, kvvtSurvey.getPvName());
+        values.put(AppConstant.PHOTO_AVAILABLE, kvvtSurvey.getPhoto_availavle());
         long id = db.insert(DBHelper.KVVT_LIST_TABLE_NAME,null,values);
         Log.d("Inserted_id_KVVT_LIST", String.valueOf(id));
 
@@ -232,6 +236,8 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
                     card.setPvName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PV_NAME)));
+                    card.setPhoto_availavle(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PHOTO_AVAILABLE)));
                     cards.add(card);
                 }
             }

@@ -104,7 +104,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         try {
             String versionName = getPackageManager()
                     .getPackageInfo(getPackageName(), 0).versionName;
-            loginScreenBinding.tvVersion.setText("Version" + " " + "1"/*versionName*/);
+            loginScreenBinding.tvVersion.setText("Version" + " " + versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -158,9 +158,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     public void checkLoginScreen() {
-        //loginScreenBinding.userName.setText("maedemo");
-//        loginScreenBinding.password.setText("test123#$");
-       /* loginScreenBinding.userName.setText("prmaltrpy1");
+        /*loginScreenBinding.userName.setText("maedemo");
+        loginScreenBinding.password.setText("test123#$");*/
+        /*loginScreenBinding.userName.setText("prmaltrpy1");
         loginScreenBinding.password.setText("pmay552#$");*/
         final String username = loginScreenBinding.userName.getText().toString().trim();
         final String password = loginScreenBinding.password.getText().toString().trim();
@@ -422,6 +422,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         try {
                             villageListValue.setExclusion_criteria_id(jsonArray.getJSONObject(i).getString("exclusion_criteria_id"));
                             villageListValue.setExclusion_criteria(jsonArray.getJSONObject(i).getString("exclusion_criteria"));
+                            villageListValue.setPhoto_required(jsonArray.getJSONObject(i).getString("photo_required"));
 
                             dbData.insertscheme(villageListValue);
                         } catch (JSONException e) {

@@ -36,6 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "pvname TEXT)");
         db.execSQL("CREATE TABLE " + SCHEME_TABLE_NAME + " ("
                 + "exclusion_criteria_id TEXT," +
+                 "photo_required TEXT," +
                 "exclusion_criteria TEXT)");
 
         db.execSQL("CREATE TABLE " + HABITATION_TABLE_NAME + " ("
@@ -54,6 +55,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "eligible_for_auto_exclusion  TEXT," +
                 "habitation_name TEXT," +
                 "exclusion_criteria_id TEXT," +
+                "photo_available TEXT," +
                 "pvname TEXT)");
         db.execSQL("CREATE TABLE " + SAVE_KVVT_DETAILS + " ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"+

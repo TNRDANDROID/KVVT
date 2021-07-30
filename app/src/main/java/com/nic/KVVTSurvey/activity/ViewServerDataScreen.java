@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -143,9 +144,10 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     villageList.setPvName(pvname);
 
                     VillageOrdered.add(villageList);
-                    Log.d("spinnersize", "" + Village.size());
                 } while (VillageList.moveToNext());
             }
+            Log.d("Villagespinnersize", "" + Village.size());
+
         }
         Collections.sort(VillageOrdered, (lhs, rhs) -> lhs.getPvName().compareTo(rhs.getPvName()));
         KVVTSurvey villageListValue = new KVVTSurvey();
@@ -191,9 +193,10 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     habList.setHabitationName(habName);
 
                     HabitationOrdered.add(habList);
-                    Log.d("spinnersize", "" + HabitationOrdered.size());
                 } while (HABList.moveToNext());
             }
+            Log.d("Habitationspinnersize", "" + HabitationOrdered.size());
+
         }
         Collections.sort(HabitationOrdered, (lhs, rhs) -> lhs.getHabitationName().compareTo(rhs.getHabitationName()));
         KVVTSurvey habitationListValue = new KVVTSurvey();
@@ -279,6 +282,21 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        ImageView searchIcon=
+                searchView.findViewById(androidx.appcompat.R.id.search_button);
+        SearchView.SearchAutoComplete searchText=
+                searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        ImageView closeIcon=
+                searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+
+        searchText.setHint("Search by Kvvt Id");
+        searchText.setTextColor(getResources().getColor(R.color.white));
+        searchText.setHintTextColor(getResources().getColor(R.color.grey2));
+        searchIcon.setColorFilter(getResources().getColor(R.color.white),
+                android.graphics.PorterDuff.Mode.SRC_IN);
+        closeIcon.setColorFilter(getResources().getColor(R.color.white),
+                android.graphics.PorterDuff.Mode.SRC_IN);
 
         // listening to search query text change
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

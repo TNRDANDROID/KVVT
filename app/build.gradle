@@ -11,8 +11,8 @@ android {
         multiDexEnabled true
 
         targetSdkVersion 29
-        versionCode 3
-        versionName "3"
+        versionCode 1
+        versionName "1"
     }
     signingConfigs {
         release {

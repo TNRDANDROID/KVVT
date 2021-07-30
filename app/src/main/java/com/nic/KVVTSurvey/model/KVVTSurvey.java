@@ -13,6 +13,8 @@ public class KVVTSurvey {
 
     private String blockCode;
     private String exclusion_criteria_id;
+    private String photo_required;
+    private String photo_availavle;
 
     public String getHabCode() {
         return HabCode;
@@ -35,6 +37,24 @@ public class KVVTSurvey {
     private String personAlive;
     private String buttonText;
     private String eligible_for_auto_exclusion;
+
+    public String getPhoto_availavle() {
+        return photo_availavle;
+    }
+
+    public KVVTSurvey setPhoto_availavle(String photo_availavle) {
+        this.photo_availavle = photo_availavle;
+        return this;
+    }
+
+    public String getPhoto_required() {
+        return photo_required;
+    }
+
+    public KVVTSurvey setPhoto_required(String photo_required) {
+        this.photo_required = photo_required;
+        return this;
+    }
 
     public String getEligible_for_auto_exclusion() {
         return eligible_for_auto_exclusion;
