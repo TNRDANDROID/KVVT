@@ -430,8 +430,7 @@
                                     android:gravity="center_vertical"
                                     android:layout_gravity="center_vertical"
                                     android:layout_height="wrap_content"
-                                    android:text="Father Name"
-                                    android:checked="false" />
+                                    android:text="Father Name" />
                                 <RadioButton
                                     android:id="@+id/radioHusband"
                                     android:layout_weight="1"

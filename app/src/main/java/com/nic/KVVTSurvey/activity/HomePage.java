@@ -298,8 +298,6 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNoLayout.setVisibility(View.GONE);
                     homeScreenBinding.migNo.setChecked(false);
                     homeScreenBinding.migYes.setChecked(false);
-                    homeScreenBinding.radioFather.setChecked(false);
-                    homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.migNo.setEnabled(true);
                     homeScreenBinding.name.setEnabled(false);
                     homeScreenBinding.fatherName.setEnabled(false);
@@ -310,6 +308,17 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNo.setText("");
                     homeScreenBinding.streetSpinner.setSelection(0);
                     homeScreenBinding.communitySpinner.setSelection(0);
+                    if(homeScreenBinding.radioFather.isChecked()){
+                        homeScreenBinding.radioFather.setChecked(false);
+                    }else {
+                        homeScreenBinding.radioFather.setEnabled(true);
+                    }
+                    if(homeScreenBinding.radioHusband.isChecked()){
+                        homeScreenBinding.radioHusband.setChecked(false);
+                    }else {
+                        homeScreenBinding.radioHusband.setEnabled(true);
+                    }
+
                 }else {
                     homeScreenBinding.strLayout.setVisibility(View.GONE);
                     homeScreenBinding.selectStrTv.setVisibility(View.GONE);
@@ -325,8 +334,6 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.benfMigTv.setVisibility(View.VISIBLE);
                     homeScreenBinding.migNo.setChecked(false);
                     homeScreenBinding.migYes.setChecked(false);
-                    homeScreenBinding.radioFather.setChecked(false);
-                    homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.migNo.setEnabled(true);
                     homeScreenBinding.name.setEnabled(false);
                     homeScreenBinding.fatherName.setEnabled(false);
@@ -337,7 +344,6 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNo.setText("");
                     homeScreenBinding.streetSpinner.setSelection(0);
                     homeScreenBinding.communitySpinner.setSelection(0);
-                    isExistingUser="";
                 }
             }
         });
@@ -361,8 +367,6 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.benfMigTv.setVisibility(View.GONE);
                     homeScreenBinding.migNo.setChecked(true);
                     homeScreenBinding.migYes.setChecked(false);
-                    homeScreenBinding.radioFather.setChecked(false);
-                    homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.migNo.setEnabled(false);
                     homeScreenBinding.name.setEnabled(true);
                     homeScreenBinding.fatherName.setEnabled(true);
@@ -373,6 +377,16 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNo.setText("");
                     homeScreenBinding.streetSpinner.setSelection(0);
                     homeScreenBinding.communitySpinner.setSelection(0);
+                    if(homeScreenBinding.radioFather.isChecked()){
+                        homeScreenBinding.radioFather.setChecked(false);
+                    }else {
+                        homeScreenBinding.radioFather.setEnabled(true);
+                    }
+                    if(homeScreenBinding.radioHusband.isChecked()){
+                        homeScreenBinding.radioHusband.setChecked(false);
+                    }else {
+                        homeScreenBinding.radioHusband.setEnabled(true);
+                    }
                 }else {
                     homeScreenBinding.strLayout.setVisibility(View.GONE);
                     homeScreenBinding.selectStrTv.setVisibility(View.GONE);
@@ -388,8 +402,6 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.benfMigTv.setVisibility(View.VISIBLE);
                     homeScreenBinding.migNo.setChecked(false);
                     homeScreenBinding.migYes.setChecked(false);
-                    homeScreenBinding.radioFather.setChecked(false);
-                    homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.migNo.setEnabled(true);
                     homeScreenBinding.name.setEnabled(false);
                     homeScreenBinding.fatherName.setEnabled(false);
@@ -400,7 +412,6 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNo.setText("");
                     homeScreenBinding.streetSpinner.setSelection(0);
                     homeScreenBinding.communitySpinner.setSelection(0);
-                    isExistingUser="";
                 }
             }
         });

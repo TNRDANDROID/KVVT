@@ -122,7 +122,8 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 Log.d("saved_response", "" + responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
-                    Utils.showAlert(this, "Uploaded");
+                  String msg="Beneficiary Id - "+jsonObject.getString("benificiary_id")+" Uploaded!";
+                    Utils.showAlert(this, msg);
                     db.delete(DBHelper.SAVE_KVVT_DETAILS,"id = ?",new String[] {prefManager.getKeyDeleteId()});
                     db.delete(DBHelper.SAVE_KVVT_IMAGES, "kvvt_id = ? ", new String[]{prefManager.getKeyDeleteId()});
                     new fetchPendingtask().execute();
