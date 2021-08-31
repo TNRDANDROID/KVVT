@@ -12,6 +12,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String VILLAGE_TABLE_NAME = " villageTable";
     public static final String SCHEME_TABLE_NAME = " schemeTable";
+    public static final String COMMUNITY_TABLE_NAME = " communityTable";
+    public static final String STREET_TABLE_NAME = " streetTable";
     public static final String HABITATION_TABLE_NAME = " habitaionTable";
     public static final String KVVT_LIST_TABLE_NAME = "KVVTList";
     public static final String SAVE_KVVT_DETAILS = "SaveKVVTDetails";
@@ -38,6 +40,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "exclusion_criteria_id TEXT," +
                  "photo_required TEXT," +
                 "exclusion_criteria TEXT)");
+        db.execSQL("CREATE TABLE " + COMMUNITY_TABLE_NAME + " ("
+                + "community_id TEXT," +
+                "community_name TEXT)");
 
         db.execSQL("CREATE TABLE " + HABITATION_TABLE_NAME + " ("
                 + "dcode TEXT," +
@@ -45,6 +50,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "pvcode TEXT," +
                 "habitation_code TEXT," +
                 "habitation_name TEXT)");
+        db.execSQL("CREATE TABLE " + STREET_TABLE_NAME + " ("
+                + "dcode TEXT," +
+                "bcode TEXT," +
+                "pvcode TEXT," +
+                "hab_code TEXT," +
+                "street_code TEXT," +
+                "street_name_e TEXT," +
+                "street_name_t TEXT)");
 
         db.execSQL("CREATE TABLE " + KVVT_LIST_TABLE_NAME + " ("
                 + "pvcode  TEXT," +
@@ -68,10 +81,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "benificiary_id TEXT," +
                 "exclusion_criteria_id TEXT," +
                 "beneficiary_name TEXT," +
-                "person_alive TEXT," +
-                "legal_heir_available TEXT," +
                 "person_eligible TEXT," +
+                "existing_user TEXT," +
                 "button_text TEXT," +
+                "beneficiary_fat_hus_status TEXT," +
+                "street_code TEXT," +
+                "community_id TEXT," +
+                "door_no TEXT," +
                 "beneficiary_father_name TEXT)");
 
 
@@ -91,6 +107,8 @@ public class DBHelper extends SQLiteOpenHelper {
             //drop table if already exists
             db.execSQL("DROP TABLE IF EXISTS " + VILLAGE_TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + SCHEME_TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + COMMUNITY_TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + STREET_TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + KVVT_LIST_TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + HABITATION_TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + SAVE_KVVT_DETAILS);

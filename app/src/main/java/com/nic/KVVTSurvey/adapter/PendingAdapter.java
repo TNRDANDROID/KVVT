@@ -77,16 +77,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         holder.pendingAdapterBinding.villageName.setText(pendingListValues.get(position).getPvName());
         holder.pendingAdapterBinding.secId.setText(pendingListValues.get(position).getBeneficiaryId());
         holder.pendingAdapterBinding.name.setText(pendingListValues.get(position).getBeneficiaryName());
-        if(!pendingListValues.get(position).getPersonAlive().equalsIgnoreCase("")){
-            holder.pendingAdapterBinding.aliveLayout.setVisibility(View.VISIBLE);
-            holder.pendingAdapterBinding.aliveView.setVisibility(View.VISIBLE);
-            holder.pendingAdapterBinding.beneficiaryAliveTv.setText(pendingListValues.get(position).getPersonAlive());
-        }
-        if(!pendingListValues.get(position).getIsLegel().equalsIgnoreCase("")){
-            holder.pendingAdapterBinding.legalHeirLayout.setVisibility(View.VISIBLE);
-            holder.pendingAdapterBinding.legalView.setVisibility(View.GONE);
-            holder.pendingAdapterBinding.legalHeirTv.setText(pendingListValues.get(position).getIsLegel());
-        }
+        holder.pendingAdapterBinding.beneficiaryNameHeader.setText(pendingListValues.get(position).getBeneficiaryName());
         if(!pendingListValues.get(position).getIsEligible().equalsIgnoreCase("")){
             holder.pendingAdapterBinding.legalView.setVisibility(View.VISIBLE);
             holder.pendingAdapterBinding.beneficiaryMigratedLayout.setVisibility(View.VISIBLE);
@@ -97,6 +88,11 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             holder.pendingAdapterBinding.beneficiaryMigratedTv.setText("Yes");
         }else {
             holder.pendingAdapterBinding.beneficiaryMigratedTv.setText("No");
+        }
+
+        if(pendingListValues.get(position).getExisting_user().toString().equals("N")){
+            holder.pendingAdapterBinding.secId.setText("New User");
+        }else {
         }
 
         String button_text = pendingListValues.get(position).getButtonText();
@@ -171,6 +167,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
     public void viewImages(int position){
         Activity activity = (Activity) context;
         Intent intent = new Intent(context, FullImageActivity.class);
+        intent.putExtra("Key", "Offline");
         intent.putExtra(AppConstant.KVVT_ID, pendingListValues.get(position).getKvvtId());
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
@@ -184,13 +181,17 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         String pvcode = pendingListValues.get(position).getPvCode();
         String habcode = pendingListValues.get(position).getHabCode();
         String exclusion_criteria_id = pendingListValues.get(position).getExclusion_criteria_id();
-        String beneficiary_name = pendingListValues.get(position).getBeneficiaryName();
-        String father_name = pendingListValues.get(position).getFatherName();
         String benificiary_id = pendingListValues.get(position).getBeneficiaryId();
-        String person_alive = pendingListValues.get(position).getPersonAlive();
-        String legal_heir_available = pendingListValues.get(position).getIsLegel();
         String person_eligible = pendingListValues.get(position).getIsEligible();
         String button_text = pendingListValues.get(position).getButtonText();
+
+        String existing_user = pendingListValues.get(position).getExisting_user();
+        String beneficiary_name = pendingListValues.get(position).getBeneficiaryName();
+        String father_husband_name = pendingListValues.get(position).getBeneficiaryFatherName();
+        String doorno = pendingListValues.get(position).getDoor_no();
+        String street_code = pendingListValues.get(position).getStreetCode();
+        String community = pendingListValues.get(position).getCommunity_id();
+        String father_or_husband_type = pendingListValues.get(position).getFat_hus_status();
 
         String kvvt_id = pendingListValues.get(position).getKvvtId();
         prefManager.setKeyDeletePosition(position);
@@ -200,10 +201,15 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             dataset.put(AppConstant.KEY_SERVICE_ID,AppConstant.KVVT_SOURCE_SAVE);
             dataset.put(AppConstant.PV_CODE, pvcode);
             dataset.put(AppConstant.HAB_CODE, habcode);
-            /*dataset.put(AppConstant.BENEFICIARY_NAME, beneficiary_name);
-            dataset.put(AppConstant.BENEFICIARY_FATHER_NAME, father_name);
-            dataset.put(AppConstant.PERSON_ALIVE, person_alive);
-            dataset.put(AppConstant.LEGAL_HEIR_AVAILABLE, legal_heir_available);*/
+            dataset.put(AppConstant.EXISTING_USER, existing_user);
+            if(existing_user.equals("N")){
+                dataset.put("name_head_household", beneficiary_name);
+                dataset.put("father_husband_name", father_husband_name);
+                dataset.put("doorno", doorno);
+                dataset.put(AppConstant.STREET_CODE, street_code);
+                dataset.put("community", community);
+                dataset.put("father_or_husband_type", father_or_husband_type);
+            }
             dataset.put(AppConstant.EXCLUSION_CRITERIA_ID, exclusion_criteria_id);
             dataset.put("eligible_for_auto_exclusion", person_eligible);
             dataset.put("benificiary_id", benificiary_id);

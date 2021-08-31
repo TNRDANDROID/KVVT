@@ -40,6 +40,10 @@ public class PrefManager {
     private static final String KEY_PV_CODE = "Pv_Code";
     private static final String KEY_HAB_CODE = "Hab_Code";
     private static final String KEY_DISTRICT_NAME = "District_Name";
+    private static final String KEY_STREET_NAME = "Street_Name";
+    private static final String KEY_STREET_CODE = "Street_Code";
+    private static final String KEY_COMMUNITY_NAME = "Community_Name";
+    private static final String KEY_COMMUNITY_CODE = "Community_Code";
     private static final String KEY_DESIGNATION = "Designation";
     private static final String KEY_NAME = "Name";
     private static final String KEY_BLOCK_NAME = "Block_Name";
@@ -226,6 +230,43 @@ public class PrefManager {
 
     public String getDistrictName() {
         return pref.getString(KEY_DISTRICT_NAME, null);
+    }
+    public Object setStreetCode(Object key) {
+        editor.putString(KEY_STREET_CODE, String.valueOf(key));
+        editor.commit();
+        return key;
+    }
+
+    public String getStreetCode() {
+        return pref.getString(KEY_STREET_CODE, null);
+    }
+
+    public Object setStreetName(Object key) {
+        editor.putString(KEY_STREET_NAME, String.valueOf(key));
+        editor.commit();
+        return key;
+    }
+
+    public String getStreetName() {
+        return pref.getString(KEY_STREET_NAME, null);
+    }
+    public Object setCommunityCode(Object key) {
+        editor.putString(KEY_COMMUNITY_CODE, String.valueOf(key));
+        editor.commit();
+        return key;
+    }
+
+    public String getCommunityCode() {
+        return pref.getString(KEY_COMMUNITY_CODE, null);
+    }
+    public Object setCommunityName(Object key) {
+        editor.putString(KEY_COMMUNITY_NAME, String.valueOf(key));
+        editor.commit();
+        return key;
+    }
+
+    public String getCommunityName() {
+        return pref.getString(KEY_COMMUNITY_NAME, null);
     }
 
     public Object setBlockName(Object key) {

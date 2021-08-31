@@ -28,6 +28,9 @@ public class AppConstant {
 
     public static String DISTRICT_CODE = "dcode";
     public static String DISTRICT_NAME = "dname";
+ public static String STREET_CODE = "street_code";
+    public static String STREET_NAME_EN = "street_name_e";
+    public static String STREET_NAME_TA = "street_name_t";
 
     public static String BLOCK_CODE = "bcode";
     public static String PV_CODE = "pvcode";
@@ -44,7 +47,9 @@ public class AppConstant {
 
     public static String KEY_VILLAGE_LIST_DISTRICT_BLOCK_WISE = "village_list_district_block_wise";
     public static String KEY_HABITATION_LIST_DISTRICT_BLOCK_WISE = "habitation_list_district_block_wise";
+    public static String KEY_STREET_LIST_DISTRICT_VILLAGE_HAB_WISE = "street_list_district_village_hab_wise";
     public static String KEY_AUTOMATIC_EXCLUSION_CRITERIA = "automatic_exclusion_criteria";
+    public static String KEY_COMMUNITY = "kvvt_community";
 
     public static String BENEFICIARY_ID = "benificiary_id";
     public static String BENEFICIARY_NAME = "beneficiary_name";
@@ -57,9 +62,7 @@ public class AppConstant {
     public static String KVVT_SOURCE_SAVE = "kvvt_source_save";
     public static String KEY_TRACK_DATA = "track_data";
     public static String KVVT_ID = "kvvt_id";
-    public static String KEY_KVVT_SOURCE_DATA_PHOTO = "kvvt_source_data_photo";
-    public static String PERSON_ALIVE = "person_alive";
-    public static String LEGAL_HEIR_AVAILABLE = "legal_heir_available";
+    public static String KEY_KVVT_SOURCE_DATA_PHOTO ="kvvt_source_data_photo";
     public static String PERSON_ELIGIBLE = "person_eligible";
     public static String EXCLUSION_CRITERIA_ID = "exclusion_criteria_id";
     public static String EXCLUSION_CRITERIA = "exclusion_criteria";
@@ -67,6 +70,11 @@ public class AppConstant {
     public static String PHOTO_AVAILABLE = "photo_available";
     public static String ELIGIBLE_FOR_AUTO_EXCLUSION = "eligible_for_auto_exclusion";
     public static String BUTTON_TEXT = "button_text";
+    public static String EXISTING_USER = "existing_user";
+    public static String COMMUNITY_ID = "community_id";
+    public static String COMMUNITY_NAME = "community_name";
+    public static String DOOR_NO = "door_no";
+    public static String BENEFICIARY_FAT_HUS_STATUS = "beneficiary_fat_hus_status";
 
 
 

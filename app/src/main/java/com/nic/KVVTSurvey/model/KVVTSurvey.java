@@ -10,9 +10,14 @@ public class KVVTSurvey {
 
     private String distictCode;
     private String districtName;
+    private String streetCode;
+    private String streetName;
+    private String streetNameTa;
 
     private String blockCode;
     private String exclusion_criteria_id;
+    private String community_id;
+    private String community_name;
     private String photo_required;
     private String photo_availavle;
 
@@ -33,10 +38,85 @@ public class KVVTSurvey {
     private String BeneficiaryId;
     private String HabitationName;
     private String kvvtId;
-    private String fatherName;
-    private String personAlive;
+
     private String buttonText;
     private String eligible_for_auto_exclusion;
+    private String existing_user;
+    private String fat_hus_status;
+    private String door_no;
+
+
+    public String getDoor_no() {
+        return door_no;
+    }
+
+    public KVVTSurvey setDoor_no(String door_no) {
+        this.door_no = door_no;
+        return this;
+    }
+
+    public String getFat_hus_status() {
+        return fat_hus_status;
+    }
+
+    public KVVTSurvey setFat_hus_status(String fat_hus_status) {
+        this.fat_hus_status = fat_hus_status;
+        return this;
+    }
+
+    public String getStreetNameTa() {
+        return streetNameTa;
+    }
+
+    public KVVTSurvey setStreetNameTa(String streetNameTa) {
+        this.streetNameTa = streetNameTa;
+        return this;
+    }
+
+    public String getCommunity_id() {
+        return community_id;
+    }
+
+    public KVVTSurvey setCommunity_id(String community_id) {
+        this.community_id = community_id;
+        return this;
+    }
+
+    public String getCommunity_name() {
+        return community_name;
+    }
+
+    public KVVTSurvey setCommunity_name(String community_name) {
+        this.community_name = community_name;
+        return this;
+    }
+
+    public String getStreetCode() {
+        return streetCode;
+    }
+
+    public KVVTSurvey setStreetCode(String streetCode) {
+        this.streetCode = streetCode;
+        return this;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public KVVTSurvey setStreetName(String streetName) {
+        this.streetName = streetName;
+        return this;
+    }
+
+    public String getExisting_user() {
+        return existing_user;
+    }
+
+    public KVVTSurvey setExisting_user(String existing_user) {
+        this.existing_user = existing_user;
+        return this;
+    }
 
     public String getPhoto_availavle() {
         return photo_availavle;
@@ -100,13 +180,6 @@ public class KVVTSurvey {
         this.buttonText = buttonText;
     }
 
-    public String getPersonAlive() {
-        return personAlive;
-    }
-
-    public void setPersonAlive(String personAlive) {
-        this.personAlive = personAlive;
-    }
 
     public String getIsLegel() {
         return isLegel;
@@ -126,14 +199,6 @@ public class KVVTSurvey {
 
     private String isLegel;
     private String isEligible;
-
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
-    }
 
     public String getKvvtId() {
         return kvvtId;

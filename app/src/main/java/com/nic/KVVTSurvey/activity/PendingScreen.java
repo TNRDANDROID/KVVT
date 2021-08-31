@@ -106,6 +106,7 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
             e.printStackTrace();
         }
 
+        Log.d("saveKVVTDataSet", "" + saveKVVTDataSet);
         Log.d("saveKVVTImages", "" + dataSet);
         return dataSet;
     }

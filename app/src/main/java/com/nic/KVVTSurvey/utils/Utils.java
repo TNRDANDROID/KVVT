@@ -65,7 +65,7 @@ import com.nic.KVVTSurvey.constant.AppConstant;
 import com.nic.KVVTSurvey.session.PrefManager;
 
 import static com.nic.KVVTSurvey.constant.AppConstant.KEY_AUTOMATIC_EXCLUSION_CRITERIA;
-
+import static com.nic.KVVTSurvey.constant.AppConstant.KEY_COMMUNITY;
 
 
 public class Utils {
@@ -1184,9 +1184,14 @@ public class Utils {
         prefManager = new PrefManager(activity);
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_SERVICE_ID, KEY_AUTOMATIC_EXCLUSION_CRITERIA);
-       /* dataSet.put(AppConstant.DISTRICT_CODE, prefManager.getDistrictCode());
-        dataSet.put(AppConstant.BLOCK_CODE, prefManager.getBlockCode());*/
         Log.d("schemeListDistBlock", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject communityListJsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, KEY_COMMUNITY);
+        Log.d("communityList", "" + dataSet);
         return dataSet;
     }
 
@@ -1197,6 +1202,17 @@ public class Utils {
         dataSet.put(AppConstant.DISTRICT_CODE, prefManager.getDistrictCode());
         dataSet.put(AppConstant.BLOCK_CODE, prefManager.getBlockCode());
         Log.d("HabListDistBlock", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject StreetListJsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_STREET_LIST_DISTRICT_VILLAGE_HAB_WISE);
+        dataSet.put(AppConstant.DISTRICT_CODE, prefManager.getDistrictCode());
+        dataSet.put(AppConstant.BLOCK_CODE, prefManager.getBlockCode());
+        dataSet.put(AppConstant.PV_CODE, prefManager.getPvCode());
+        dataSet.put(AppConstant.HABIT_CODE, prefManager.getHabCode());
+        Log.d("StreetList", "" + dataSet);
         return dataSet;
     }
 

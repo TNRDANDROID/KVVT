@@ -60,9 +60,16 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
         fullImageRecyclerBinding.imagePreviewRecyclerview.setNestedScrollingEnabled(false);
         fullImageRecyclerBinding.imagePreviewRecyclerview.setFocusable(false);
         fullImageRecyclerBinding.imagePreviewRecyclerview.setAdapter(fullImageAdapter);
-        new fetchImagetask().execute();
-        if(Utils.isOnline()){
-            getOnlineImage();
+
+        final String Key = getIntent().getStringExtra("Key");
+        if(Key.equalsIgnoreCase("Online")){
+            if(Utils.isOnline()){
+                getOnlineImage();
+            }else {
+                Utils.showAlert(FullImageActivity.this, FullImageActivity.this.getResources().getString(R.string.no_internet));
+            }
+        }else {
+            new fetchImagetask().execute();
         }
 
 
@@ -128,7 +135,7 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
-        Log.d("utils_ImageEncrydataSet", "" + authKey);
+        Log.d("utils_ImageEncrydataSet", "" + dataSet);
         return dataSet;
     }
 

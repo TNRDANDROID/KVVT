@@ -64,6 +64,16 @@ public class dbData {
 
         return kvvtSurvey;
     }
+    public KVVTSurvey insertCommunity(KVVTSurvey kvvtSurvey) {
+
+        ContentValues values = new ContentValues();
+        values.put(AppConstant.COMMUNITY_ID, kvvtSurvey.getCommunity_id());
+        values.put(AppConstant.COMMUNITY_NAME, kvvtSurvey.getCommunity_name());
+        long id = db.insert(DBHelper.COMMUNITY_TABLE_NAME,null,values);
+        Log.d("Inserted_id_Community", String.valueOf(id));
+
+        return kvvtSurvey;
+    }
     public ArrayList<KVVTSurvey> getAll_Village(String dcode, String bcode) {
 
         ArrayList<KVVTSurvey> cards = new ArrayList<>();
@@ -128,6 +138,35 @@ public class dbData {
         }
         return cards;
     }
+    public ArrayList<KVVTSurvey> getAll_community() {
+
+        ArrayList<KVVTSurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.COMMUNITY_TABLE_NAME,null);
+            // cursor = db.query(CardsDBHelper.TABLE_CARDS,
+            //       COLUMNS, null, null, null, null, null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    KVVTSurvey card = new KVVTSurvey();
+                    card.setCommunity_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.COMMUNITY_ID)));
+                    card.setCommunity_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.COMMUNITY_NAME)));
+
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
 
     public KVVTSurvey insertHabitation(KVVTSurvey kvvtSurvey) {
 
@@ -140,6 +179,22 @@ public class dbData {
 
         long id = db.insert(DBHelper.HABITATION_TABLE_NAME,null,values);
         Log.d("Inserted_id_habitation", String.valueOf(id));
+
+        return kvvtSurvey;
+    }
+    public KVVTSurvey insertStreet(KVVTSurvey kvvtSurvey) {
+
+        ContentValues values = new ContentValues();
+        values.put(AppConstant.DISTRICT_CODE, kvvtSurvey.getDistictCode());
+        values.put(AppConstant.BLOCK_CODE, kvvtSurvey.getBlockCode());
+        values.put(AppConstant.PV_CODE, kvvtSurvey.getPvCode());
+        values.put(AppConstant.HABIT_CODE, kvvtSurvey.getHabCode());
+        values.put(AppConstant.STREET_CODE, kvvtSurvey.getStreetCode());
+        values.put(AppConstant.STREET_NAME_EN, kvvtSurvey.getStreetName());
+        values.put(AppConstant.STREET_NAME_TA, kvvtSurvey.getStreetNameTa());
+
+        long id = db.insert(DBHelper.STREET_TABLE_NAME,null,values);
+        Log.d("Inserted_id_street", String.valueOf(id));
 
         return kvvtSurvey;
     }
@@ -165,6 +220,45 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.HABB_CODE)));
                     card.setHabitationName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.HABITATION_NAME)));
+
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<KVVTSurvey> getAll_Street(String dcode, String bcode, String pvcode, String hab_code) {
+
+        ArrayList<KVVTSurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.STREET_TABLE_NAME+" where dcode = "+dcode+" and bcode = "+bcode+" and pvcode = "+pvcode+" and hab_code = "+hab_code+" order by street_name_e asc",null);
+            // cursor = db.query(CardsDBHelper.TABLE_CARDS,
+            //       COLUMNS, null, null, null, null, null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    KVVTSurvey card = new KVVTSurvey();
+                    card.setDistictCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.DISTRICT_CODE)));
+                    card.setBlockCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.BLOCK_CODE)));
+                    card.setPvCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PV_CODE)));
+                    card.setHabCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.HABIT_CODE)));
+                    card.setStreetCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.STREET_CODE)));
+                    card.setStreetName(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.STREET_NAME_EN)));
+                    card.setStreetNameTa(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.STREET_NAME_TA)));
 
                     cards.add(card);
                 }
@@ -289,16 +383,22 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
                     card.setBeneficiaryName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_NAME)));
-                    card.setFatherName(cursor.getString(cursor
+                    card.setBeneficiaryFatherName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_FATHER_NAME)));
-                    card.setPersonAlive(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.PERSON_ALIVE)));
-                    card.setIsLegel(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.LEGAL_HEIR_AVAILABLE)));
                     card.setIsEligible(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PERSON_ELIGIBLE)));
                     card.setButtonText(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BUTTON_TEXT)));
+                    card.setExisting_user(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXISTING_USER)));
+                    card.setFat_hus_status(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.BENEFICIARY_FAT_HUS_STATUS)));
+                    card.setStreetCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.STREET_CODE)));
+                    card.setDoor_no(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.DOOR_NO)));
+                    card.setCommunity_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.COMMUNITY_ID)));
 
 
                     cards.add(card);
@@ -340,17 +440,22 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
                     card.setBeneficiaryName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_NAME)));
-                    card.setFatherName(cursor.getString(cursor
+                    card.setBeneficiaryFatherName(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_FATHER_NAME)));
-                    card.setPersonAlive(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.PERSON_ALIVE)));
-                    card.setIsLegel(cursor.getString(cursor
-                            .getColumnIndexOrThrow(AppConstant.LEGAL_HEIR_AVAILABLE)));
                     card.setIsEligible(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PERSON_ELIGIBLE)));
                     card.setButtonText(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BUTTON_TEXT)));
-
+                    card.setExisting_user(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXISTING_USER)));
+                    card.setFat_hus_status(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.BENEFICIARY_FAT_HUS_STATUS)));
+                    card.setStreetCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.STREET_CODE)));
+                    card.setDoor_no(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.DOOR_NO)));
+                    card.setCommunity_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.COMMUNITY_ID)));
 
                     cards.add(card);
                 }
@@ -424,6 +529,10 @@ public class dbData {
     public void deleteVillageTable() {
         db.execSQL("delete from " + DBHelper.VILLAGE_TABLE_NAME);
     }
+    public void deleteSchemeTable() { db.execSQL("delete from " + DBHelper.SCHEME_TABLE_NAME); }
+    public void deleteCommunityTable() { db.execSQL("delete from " + DBHelper.COMMUNITY_TABLE_NAME); }
+    public void deleteStreetTable() { db.execSQL("delete from " + DBHelper.STREET_TABLE_NAME); }
+    public void deleteHabTable() { db.execSQL("delete from " + DBHelper.HABITATION_TABLE_NAME); }
 
     public void deleteKVVTTable() {
         db.execSQL("delete from " + DBHelper.KVVT_LIST_TABLE_NAME);
@@ -439,6 +548,10 @@ public class dbData {
     public void deleteAll() {
 
         deleteVillageTable();
+        deleteSchemeTable();
+        deleteCommunityTable();
+        deleteStreetTable();
+        deleteHabTable();
         deleteKVVTTable();
         deleteKVVTDetails();
         deleteKVVTImages();

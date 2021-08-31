@@ -131,6 +131,7 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
     public void viewServerImages(int pos) {
         Activity activity = (Activity) context;
         Intent intent = new Intent(activity, FullImageActivity.class);
+        intent.putExtra("Key", "Online");
         intent.putExtra(AppConstant.PV_CODE, serverDataListValuesFiltered.get(pos).getPvCode());
         intent.putExtra(AppConstant.HAB_CODE, serverDataListValuesFiltered.get(pos).getHabCode());
         intent.putExtra(AppConstant.KVVT_ID, serverDataListValuesFiltered.get(pos).getBeneficiaryId());

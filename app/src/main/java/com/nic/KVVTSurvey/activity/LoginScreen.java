@@ -158,10 +158,10 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     public void checkLoginScreen() {
-        /*loginScreenBinding.userName.setText("maedemo");
+       /* loginScreenBinding.userName.setText("maedemo");
         loginScreenBinding.password.setText("test123#$");*/
-        /*loginScreenBinding.userName.setText("prmaltrpy1");
-        loginScreenBinding.password.setText("pmay552#$");*/
+        loginScreenBinding.userName.setText("prmaltrpy1");
+        loginScreenBinding.password.setText("pmay552#$");
         final String username = loginScreenBinding.userName.getText().toString().trim();
         final String password = loginScreenBinding.password.getText().toString().trim();
         prefManager.setUserPassword(password);
@@ -248,6 +248,13 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             e.printStackTrace();
         }
     }
+    public void getCommunityList() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("CommunityList", Api.Method.POST, UrlGenerator.getKVVTListUrl(), CommunityListJsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void getHabList() {
         try {
@@ -256,7 +263,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             e.printStackTrace();
         }
     }
-
 
 
 
@@ -275,6 +281,14 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
         Log.d("schemeListDistrictWise", "" + dataSet);
+        return dataSet;
+    }
+    public JSONObject CommunityListJsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.communityListJsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("CommunityListData", "" + dataSet);
         return dataSet;
     }
 
@@ -316,6 +330,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         prefManager.setName(String.valueOf(jsonObject.get(AppConstant.DESIG_NAME)));
                         Log.d("userdata", "" + prefManager.getDistrictCode() + prefManager.getBlockCode() + prefManager.getPvCode() + prefManager.getDistrictName() + prefManager.getBlockName() + prefManager.getName());
                         prefManager.setUserPassKey(decryptedKey);
+                        getCommunityList();
                         getVillageList();
                         getHabList();
                         getSchemeList();
@@ -334,6 +349,17 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 }
 
             }
+            if ("CommunityList".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                Log.d("CommunityListResponse", "" + responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new InsertcommunityTask().execute(jsonObject);
+                }
+
+            }
+
             if ("VillageList".equals(urlType) && loginResponse != null) {
                 String key = loginResponse.getString(AppConstant.ENCODE_DATA);
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
@@ -425,6 +451,39 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                             villageListValue.setPhoto_required(jsonArray.getJSONObject(i).getString("photo_required"));
 
                             dbData.insertscheme(villageListValue);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+
+            }
+            return null;
+        }
+
+    }
+    public class InsertcommunityTask extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+            ArrayList<KVVTSurvey> communitylist_count = dbData.getAll_community();
+            if (communitylist_count.size() <= 0) {
+                if (params.length > 0) {
+                    JSONArray jsonArray = new JSONArray();
+                    try {
+                        jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        KVVTSurvey communityListValue = new KVVTSurvey();
+                        try {
+                            communityListValue.setCommunity_id(jsonArray.getJSONObject(i).getString("community_id"));
+                            communityListValue.setCommunity_name(jsonArray.getJSONObject(i).getString("community_name"));
+
+                            dbData.insertCommunity(communityListValue);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
