@@ -274,7 +274,11 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
                     isFaHus="F";
+                    homeScreenBinding.radioFH.clearCheck();
+                    homeScreenBinding.radioFather.setEnabled(true);
+                    homeScreenBinding.radioFather.setChecked(true);
                     homeScreenBinding.radioHusband.setChecked(false);
+                    Log.d("RisFaHus",isFaHus);
                 }
             }
         });
@@ -283,7 +287,11 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
                     isFaHus="H";
+                    homeScreenBinding.radioFH.clearCheck();
+                    homeScreenBinding.radioHusband.setEnabled(true);
+                    homeScreenBinding.radioHusband.setChecked(true);
                     homeScreenBinding.radioFather.setChecked(false);
+                    Log.d("RHisFaHus",isFaHus);
                 }
             }
         });
@@ -1152,6 +1160,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
         long id = db.insert(DBHelper.SAVE_KVVT_DETAILS, null, registerValue);
         Log.d("insert_id",String.valueOf(id));
+        Log.d("isFaHus",isFaHus);
         flag=false;
 
         if(buttonTxt.equals("Take Photo")){
