@@ -268,13 +268,23 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                 }
             }
         });
-        homeScreenBinding.radioFH.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // checkedId is the RadioButton selected
-                RadioButton rb=(RadioButton)findViewById(checkedId);
-                isFaHus=rb.getText().toString();
-                //Toast.makeText(getApplicationContext(), rb.getText(), Toast.LENGTH_SHORT).show();
+
+        homeScreenBinding.radioFather.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    isFaHus="F";
+                    homeScreenBinding.radioHusband.setChecked(false);
+                }
+            }
+        });
+        homeScreenBinding.radioHusband.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    isFaHus="H";
+                    homeScreenBinding.radioFather.setChecked(false);
+                }
             }
         });
 
@@ -308,15 +318,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNo.setText("");
                     homeScreenBinding.streetSpinner.setSelection(0);
                     homeScreenBinding.communitySpinner.setSelection(0);
-
-                    if(homeScreenBinding.radioFather.isChecked()){
-                        homeScreenBinding.radioFather.setChecked(false);
-                    }else if(homeScreenBinding.radioHusband.isChecked()){
-                        homeScreenBinding.radioHusband.setChecked(false);
-                    }
+                    homeScreenBinding.radioFather.setChecked(false);
+                    homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.radioFather.setEnabled(true);
                     homeScreenBinding.radioHusband.setEnabled(true);
-
 
                 }else {
                     homeScreenBinding.strLayout.setVisibility(View.GONE);
@@ -343,6 +348,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNo.setText("");
                     homeScreenBinding.streetSpinner.setSelection(0);
                     homeScreenBinding.communitySpinner.setSelection(0);
+                    homeScreenBinding.radioFather.setChecked(false);
+                    homeScreenBinding.radioHusband.setChecked(false);
+                    homeScreenBinding.radioFather.setEnabled(true);
+                    homeScreenBinding.radioHusband.setEnabled(true);
                 }
             }
         });
@@ -376,15 +385,11 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNo.setText("");
                     homeScreenBinding.streetSpinner.setSelection(0);
                     homeScreenBinding.communitySpinner.setSelection(0);
-                    if(homeScreenBinding.radioFather.isChecked()){
-                        homeScreenBinding.radioFather.setChecked(false);
-                    }else if(homeScreenBinding.radioHusband.isChecked()){
-                        homeScreenBinding.radioHusband.setChecked(false);
-                    }
 
+                    homeScreenBinding.radioFather.setChecked(false);
+                    homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.radioFather.setEnabled(true);
                     homeScreenBinding.radioHusband.setEnabled(true);
-
                 }else {
                     homeScreenBinding.strLayout.setVisibility(View.GONE);
                     homeScreenBinding.selectStrTv.setVisibility(View.GONE);
@@ -410,6 +415,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNo.setText("");
                     homeScreenBinding.streetSpinner.setSelection(0);
                     homeScreenBinding.communitySpinner.setSelection(0);
+                    homeScreenBinding.radioFather.setChecked(false);
+                    homeScreenBinding.radioHusband.setChecked(false);
+                    homeScreenBinding.radioFather.setEnabled(true);
+                    homeScreenBinding.radioHusband.setEnabled(true);
                 }
             }
         });
@@ -1100,7 +1109,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void takePhoto(String buttonTxt) {
         Log.d("buttonTxt",""+buttonTxt);
-        String beneficiary_fat_hus_status = "";
+
         String street_code = "";
         String community_id = "";
         String door_no = "";
@@ -1110,11 +1119,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         String benificiary_id = homeScreenBinding.benificiaryId.getText().toString();
         String benificiary_name = homeScreenBinding.name.getText().toString();
         String benificiary_fatherName = homeScreenBinding.fatherName.getText().toString();
-        if(isFaHus.equalsIgnoreCase("Father Name")){
-             beneficiary_fat_hus_status = "F";
-        }else if(isFaHus.equalsIgnoreCase("Husband Name")){
-             beneficiary_fat_hus_status = "H";
-        }else { beneficiary_fat_hus_status = ""; }
+
 
         if(isExistingUser.equalsIgnoreCase("N")){
              street_code = Street.get(homeScreenBinding.streetSpinner.getSelectedItemPosition()).getStreetCode();
@@ -1140,7 +1145,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         registerValue.put(AppConstant.PERSON_ELIGIBLE, isEligible);
         registerValue.put(AppConstant.BUTTON_TEXT, buttonTxt);
         registerValue.put(AppConstant.EXISTING_USER, isExistingUser);
-        registerValue.put(AppConstant.BENEFICIARY_FAT_HUS_STATUS, beneficiary_fat_hus_status);
+        registerValue.put(AppConstant.BENEFICIARY_FAT_HUS_STATUS, isFaHus);
         registerValue.put(AppConstant.STREET_CODE, street_code);
         registerValue.put(AppConstant.COMMUNITY_ID, community_id);
         registerValue.put(AppConstant.DOOR_NO, door_no);
