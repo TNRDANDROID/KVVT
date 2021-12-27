@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/margin"
             android:text="Take Photo"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="@dimen/_12sdp" />
 
         <ImageView
             android:id="@+id/back_img"
@@ -168,8 +168,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
                 android:background="@drawable/button_background"
-                android:onClick="@{()-> activity.saveActivityImage()}"
-                android:text="SAVE IMAGE"
+                android:onClick="@{()-> activity.save_and_delete_alert()}"
+                android:text="@string/save_image"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
@@ -179,13 +179,12 @@
         android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_below="@+id/empty"
         android:layout_alignParentBottom="true"
         android:padding="15dp"
-        android:text="Sofware Designed &amp; Developed by NIC"
+        android:text="Software Designed &amp; Developed by NIC"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/_14sdp"
+        android:textSize="@dimen/_12sdp"
         android:background="@drawable/background"
         style="@string/font_circular_medium" />
 

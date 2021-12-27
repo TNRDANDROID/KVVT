@@ -73,6 +73,57 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
         }else {
             holder.viewServerDataAdapterBinding.eligibleId.setText("No");
         }
+
+        if(serverDataListValuesFiltered.get(position).getPatta_available_status()!=null && !serverDataListValuesFiltered.get(position).getPatta_available_status().equals("")){
+            if(serverDataListValuesFiltered.get(position).getPatta_available_status().equals("Y")){
+                holder.viewServerDataAdapterBinding.beneficiaryPattaTv.setText("Yes");
+            }
+            else {
+                holder.viewServerDataAdapterBinding.beneficiaryPattaTv.setText("No");
+            }
+        }
+        else {
+            holder.viewServerDataAdapterBinding.beneficiaryPattaTv.setText("-");
+        }
+        if(serverDataListValuesFiltered.get(position).getIs_awaas_plus_list()!=null && !serverDataListValuesFiltered.get(position).getIs_awaas_plus_list().equals("")){
+            if(serverDataListValuesFiltered.get(position).getIs_awaas_plus_list().equals("Y")){
+                holder.viewServerDataAdapterBinding.beneficiaryAwaasTv.setText("Yes");
+            }
+            else {
+                holder.viewServerDataAdapterBinding.beneficiaryAwaasTv.setText("No");
+            }
+
+        }
+        else {
+            holder.viewServerDataAdapterBinding.beneficiaryAwaasTv.setText("-");
+        }
+
+        if(serverDataListValuesFiltered.get(position).getIS_DOCUMENT_AVAILABLE()!=null && !serverDataListValuesFiltered.get(position).getIS_DOCUMENT_AVAILABLE().equals("")){
+            if(serverDataListValuesFiltered.get(position).getIS_DOCUMENT_AVAILABLE().equals("Y")){
+                holder.viewServerDataAdapterBinding.documentStatusTv.setText("Yes");
+            }
+            else {
+                holder.viewServerDataAdapterBinding.documentStatusTv.setText("No");
+            }
+
+        }
+        else {
+            holder.viewServerDataAdapterBinding.documentStatusTv.setText("-");
+        }
+        if(serverDataListValuesFiltered.get(position).getIS_NATHAM_LAND_AVAILABLE()!=null && !serverDataListValuesFiltered.get(position).getIS_NATHAM_LAND_AVAILABLE().equals("")){
+            if(serverDataListValuesFiltered.get(position).getIS_NATHAM_LAND_AVAILABLE().equals("Y")){
+                holder.viewServerDataAdapterBinding.nathamLandStatusTv.setText("Yes");
+            }
+            else {
+                holder.viewServerDataAdapterBinding.nathamLandStatusTv.setText("No");
+            }
+
+        }
+        else {
+            holder.viewServerDataAdapterBinding.nathamLandStatusTv.setText("-");
+        }
+
+
         if(serverDataListValuesFiltered.get(position).getPhoto_availavle().toString().equals("Y")){
             holder.viewServerDataAdapterBinding.viewServerImages.setVisibility(View.VISIBLE);
         }else {

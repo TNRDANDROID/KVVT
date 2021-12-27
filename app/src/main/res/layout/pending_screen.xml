@@ -42,7 +42,7 @@
                         android:layout_marginTop="@dimen/margin"
                         android:text="Upload Data"
                         android:textColor="@android:color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <ImageView
                         android:id="@+id/back_img"

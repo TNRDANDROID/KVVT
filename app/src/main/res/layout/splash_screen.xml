@@ -40,7 +40,7 @@
             android:paddingBottom="10dp"
             android:text="KVVT Survey"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/_15sdp" />
+            android:textSize="@dimen/_12sdp" />
 
     </RelativeLayout>
 

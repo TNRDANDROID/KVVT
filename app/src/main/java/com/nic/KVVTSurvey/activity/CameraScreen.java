@@ -3,6 +3,7 @@ package com.nic.KVVTSurvey.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +24,9 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -84,6 +88,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     public static SQLiteDatabase db;
     private dbData dbData = new dbData(this);
     String kvvt_id;
+    String type_of_photo="";
 
 
 
@@ -111,6 +116,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         mlocListener = new MyLocationListener();
 
         kvvt_id = getIntent().getStringExtra("lastInsertedID");
+        type_of_photo = getIntent().getStringExtra(AppConstant.TYPE_OF_PHOTO);
 
     }
 
@@ -126,7 +132,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         dbData.open();
 
         long id = 0; String whereClause = "";String[] whereArgs = null;
-        String type_of_photo = getIntent().getStringExtra(AppConstant.TYPE_OF_PHOTO);
+
         Log.d("type_of_photo",type_of_photo);
 
 
@@ -164,7 +170,14 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                         Log.d("isWithin10m", String.valueOf(distanceInMeters));
                         boolean isWithin10m = distanceInMeters < 15.0;
                         Log.d("isWithin10m", String.valueOf(isWithin10m));
-                        distFrom(latitude, longitude, offlatTextValue, offlongTextValue);
+                        //distFrom(latitude, longitude, offlatTextValue, offlongTextValue);
+                        if(isInCampus(latitude, longitude, offlatTextValue, offlongTextValue)){
+                            continue;
+                        }
+                        else {
+                            Utils.showAlert(this, "Capturing must be within 10 metres");
+                            return;
+                        }
 //                        if (isWithin10m) {
 //                            continue;
 //                        }
@@ -462,6 +475,81 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         setResult(Activity.RESULT_CANCELED);
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
     }
+    public static double getDistance(double lat1, double lon1, double lat2, double lon2) {
+        final int R = 6371; // Radius of the earth
 
+        double latDistance = Math.toRadians(Math.abs(lat2 - lat1));
+        double lonDistance = Math.toRadians(Math.abs(lon2 - lon1));
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        double distance = R * c * 1000; // distance in meter
+
+        distance = Math.pow(distance, 2);
+        return Math.sqrt(distance);
+    }
+
+    private boolean isInCampus(double lat,double longtitude,double x,double y){
+
+        // the lat and long of : Webel-IT Park
+        final double previous_lat = lat;
+        final double previous_long = longtitude;
+
+        // radiusToCheck is defined as 200
+        // radius up to 200 m is checked
+        if(getDistance(previous_lat,previous_long,x,y) <= 50.0){
+            Log.d("SuccessMeter",""+getDistance(previous_lat,previous_long,x,y));
+            //Utils.showAlert(this,"This location is inside of circle!");
+            return true;
+        }
+        else{
+            Log.d("failedMeter",""+getDistance(previous_lat,previous_long,x,y));
+           // Utils.showAlert(this,"This location is out of circle!");
+            return false;
+        }
+    }
+
+    public void save_and_delete_alert(){
+        try {
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.alert_dialog);
+
+            TextView text = (TextView) dialog.findViewById(R.id.tv_message);
+            if(type_of_photo.equals("1")) {
+                text.setText(getResources().getString(R.string.user_image_satisfaction));
+            }
+            else if(type_of_photo.equals("2")){
+                text.setText(getResources().getString(R.string.user_house_satisfaction));
+            }
+
+            Button yesButton = (Button) dialog.findViewById(R.id.btn_ok);
+            Button noButton = (Button) dialog.findViewById(R.id.btn_cancel);
+            noButton.setVisibility(View.VISIBLE);
+            noButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        saveActivityImage();
+                        dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

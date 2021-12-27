@@ -55,7 +55,7 @@
                             android:text="Durai"
                             android:textAlignment="gravity"
                             android:textColor="#000080"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
                             android:visibility="gone" />
 
                         <RelativeLayout
@@ -76,7 +76,7 @@
                                 android:text="View Server Images"
                                 android:textAlignment="center"
                                 android:textColor="@android:color/white"
-                                android:textSize="18sp"
+                                android:textSize="15sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
 
@@ -103,7 +103,7 @@
 
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
 
                             </LinearLayout>
@@ -124,7 +124,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -145,7 +145,7 @@
                                     android:text="Name"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -169,10 +169,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:text="Father Name"
+                                    android:text="@string/father_name"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -192,7 +192,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -213,12 +213,12 @@
                                     android:text="father"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1.5dp"
+                            android:layout_height="0.7dp"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
@@ -244,10 +244,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:text="Village Name"
+                                    android:text="@string/village"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -267,7 +267,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -288,14 +288,14 @@
                                     android:text="Village"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
 
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1.5dp"
+                            android:layout_height="0.7dp"
                             android:layout_gravity="bottom"
 
                             android:layout_marginLeft="15dp"
@@ -322,11 +322,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:text="Hab Name"
+                                    android:text="@string/habitation"
 
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
 
                             </LinearLayout>
@@ -347,7 +347,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -368,13 +368,13 @@
                                     android:text="Hab name"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1.5dp"
+                            android:layout_height="0.7dp"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
@@ -401,10 +401,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:text="KVVT Id"
+                                    android:text="@string/kvvt_id"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -424,7 +424,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -445,13 +445,13 @@
                                     android:text="Id"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1.5dp"
+                            android:layout_height="0.7dp"
                             android:layout_gravity="bottom"
                             android:visibility="visible"
                             android:layout_marginLeft="15dp"
@@ -478,10 +478,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:text="Auto Exclusion"
+                                    android:text="@string/auto_exclusion"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -501,7 +501,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -522,9 +522,322 @@
                                     android:text="Id"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
+
+                        <View
+                            android:id="@+id/legal_view_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.7dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/background"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/beneficiary_patta_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+
+                                    style="@string/font_circular_book"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:text="@string/patta_available_text"
+                                    android:textAlignment="viewEnd"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+
+                                    style="@string/font_circular_book"
+                                    android:layout_width="wrap_content"
+
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text=":"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/beneficiary_patta_tv"
+                                    style="@string/font_circular_book"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text="Y"
+                                    android:textAlignment="inherit"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <View
+                            android:id="@+id/legal_view_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.7dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/background"
+                             />
+
+                        <LinearLayout
+                            android:id="@+id/beneficiary_awaas_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+
+                                    style="@string/font_circular_book"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:text="@string/is_awaas_plus"
+                                    android:textAlignment="viewEnd"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+
+                                    style="@string/font_circular_book"
+                                    android:layout_width="wrap_content"
+
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text=":"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/beneficiary_awaas_tv"
+                                    style="@string/font_circular_book"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text="Y"
+                                    android:textAlignment="inherit"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/legal_view_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.7dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/background"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/document_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+
+                                    style="@string/font_circular_book"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:text="@string/document_status"
+                                    android:textAlignment="viewEnd"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+
+                                    style="@string/font_circular_book"
+                                    android:layout_width="wrap_content"
+
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text=":"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/document_status_tv"
+                                    style="@string/font_circular_book"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text="Y"
+                                    android:textAlignment="inherit"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/legal_view_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.7dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/background"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/natham_land_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+
+                                    style="@string/font_circular_book"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:text="@string/natham_land_status"
+                                    android:textAlignment="viewEnd"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+
+                                    style="@string/font_circular_book"
+                                    android:layout_width="wrap_content"
+
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text=":"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/natham_land_status_tv"
+                                    style="@string/font_circular_book"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text="Y"
+                                    android:textAlignment="inherit"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
 
                         <LinearLayout
                             android:id="@+id/alive_layout"
@@ -549,7 +862,7 @@
                                     android:text="Beneficiary Alive"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -569,7 +882,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -590,14 +903,14 @@
                                     android:text="Y"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
 
                         <View
                             android:id="@+id/alive_view"
                             android:layout_width="match_parent"
-                            android:layout_height="1.5dp"
+                            android:layout_height="0.7dp"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
@@ -626,7 +939,7 @@
                                     android:text="Legal Heir"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -646,7 +959,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -667,14 +980,14 @@
                                     android:text="Y"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
 
                         <View
                             android:id="@+id/legal_view"
                             android:layout_width="match_parent"
-                            android:layout_height="1.5dp"
+                            android:layout_height="0.7dp"
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
@@ -704,7 +1017,7 @@
                                     android:text="Migrated"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -724,7 +1037,7 @@
                                     android:padding="10dp"
                                     android:text=":"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -745,7 +1058,7 @@
                                     android:text="Y"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -773,10 +1086,10 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginRight="@dimen/_10sdp"
                                 android:gravity="center"
-                                android:text="View Server Images"
+                                android:text="@string/view_online_image"
                                 android:textAlignment="center"
                                 android:textColor="@android:color/white"
-                                android:textSize="18sp"
+                                android:textSize="15sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
                         </RelativeLayout>

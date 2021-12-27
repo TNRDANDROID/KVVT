@@ -48,6 +48,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -79,6 +80,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     String pref_Village;
     String pref_Scheme;
     String photoRequired="";
+    String auto_rejection="";
+
+    String patta_avilable_status="";
+    String is_awaas_plus_list="";
+    String is_document_available="";
+    String is_natham_land_available="";
+    int current_year=0;
+    int previous_year=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,15 +102,17 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         } catch (Exception e) {
             e.printStackTrace();
         }
+        villageFilterSpinner(prefManager.getBlockCode());
+        schemeFilterSpinner(prefManager.getBlockCode());
+        communityFilterSpinner();
+
+        getCurrentYearPreviousYear();
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {
             isHome = bundle.getString("Home");
         }
-        villageFilterSpinner(prefManager.getBlockCode());
-        schemeFilterSpinner(prefManager.getBlockCode());
-        communityFilterSpinner();
-        homeScreenBinding.selectScheTv.setVisibility(View.GONE);
-        homeScreenBinding.scheLayout.setVisibility(View.GONE);
+        //homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+        //homeScreenBinding.scheLayout.setVisibility(View.GONE);
         homeScreenBinding.seecIdLayout.setVisibility(View.GONE);
         homeScreenBinding.nameLayout.setVisibility(View.GONE);
         homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
@@ -110,6 +121,16 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         homeScreenBinding.communityLayout.setVisibility(View.GONE);
         homeScreenBinding.selectCommunityTv.setVisibility(View.GONE);
         homeScreenBinding.doorNoLayout.setVisibility(View.GONE);
+        homeScreenBinding.benfMigTv.setVisibility(View.GONE);
+        homeScreenBinding.beneficiaryMigratedLayout.setVisibility(View.GONE);
+        homeScreenBinding.pattaAvailableTv.setVisibility(View.GONE);
+        homeScreenBinding.pattaAvailableLayout.setVisibility(View.GONE);
+        homeScreenBinding.awaasTv.setVisibility(View.GONE);
+        homeScreenBinding.awaasLayout.setVisibility(View.GONE);
+        homeScreenBinding.documentAvailableLayout.setVisibility(View.GONE);
+        homeScreenBinding.documentAvailableTv.setVisibility(View.GONE);
+        homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+        homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
 
         homeScreenBinding.villageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -148,14 +169,48 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
 
+                    is_awaas_plus_list="";
+                    patta_avilable_status="";
+
+                    is_document_available="";
+                    is_natham_land_available="";
+
+                    homeScreenBinding.awassNo.setChecked(false);
+                    homeScreenBinding.awaasYes.setChecked(false);
+                    homeScreenBinding.pattaYes.setChecked(false);
+                    homeScreenBinding.pattaNo.setChecked(false);
+
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableLayout.setVisibility(View.GONE);
+
                     pref_Scheme = Scheme.get(position).getExclusion_criteria();
                     photoRequired = Scheme.get(position).getPhoto_required();
+                    auto_rejection = Scheme.get(position).getEleigible_auto_rejection();
                     prefManager.setKeySchemeListName(pref_Scheme);
                     prefManager.setKeySchemeCode(Scheme.get(position).getExclusion_criteria_id());
                     if(photoRequired.equals("Y")){
                         homeScreenBinding.saveData.setText("Take Photo");
                     }else {
                         homeScreenBinding.saveData.setText("Save details");
+                    }
+                    if(auto_rejection.equals("Y")){
+                        homeScreenBinding.pattaAvailableTv.setVisibility(View.GONE);
+                        homeScreenBinding.pattaAvailableLayout.setVisibility(View.GONE);
+                        homeScreenBinding.awaasTv.setVisibility(View.GONE);
+                        homeScreenBinding.awaasLayout.setVisibility(View.GONE);
+                    }
+                    else {
+                        homeScreenBinding.pattaAvailableTv.setVisibility(View.VISIBLE);
+                        homeScreenBinding.pattaAvailableLayout.setVisibility(View.VISIBLE);
+                        homeScreenBinding.awaasTv.setVisibility(View.VISIBLE);
+                        homeScreenBinding.awaasLayout.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -250,8 +305,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                 }else {
                     homeScreenBinding.schemeSpinner.setSelection(0);
                     prefManager.setKeySchemeCode("");
-                    homeScreenBinding.selectScheTv.setVisibility(View.GONE);
-                    homeScreenBinding.scheLayout.setVisibility(View.GONE);
+                    //homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+                    //homeScreenBinding.scheLayout.setVisibility(View.GONE);
                 }
             }
         });
@@ -296,6 +351,137 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             }
         });
 
+        homeScreenBinding.pattaYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    homeScreenBinding.pattaYes.setChecked(true);
+                    homeScreenBinding.pattaNo.setChecked(false);
+                    patta_avilable_status="Y";
+
+                    homeScreenBinding.documentAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+
+                    is_document_available="";
+                    is_natham_land_available="";
+
+                }
+            }
+        });
+        homeScreenBinding.pattaNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    homeScreenBinding.pattaYes.setChecked(false);
+                    homeScreenBinding.pattaNo.setChecked(true);
+                    patta_avilable_status="N";
+
+                    homeScreenBinding.documentAvailableLayout.setVisibility(View.VISIBLE);
+                    homeScreenBinding.documentAvailableTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+
+                    is_document_available="";
+                    is_natham_land_available="";
+
+
+                }
+            }
+        });
+
+        homeScreenBinding.documentYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    homeScreenBinding.documentYes.setChecked(true);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    is_document_available="Y";
+                    is_natham_land_available="";
+
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+
+
+                }
+            }
+        });
+        homeScreenBinding.documentNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(true);
+                    is_document_available="N";
+                    is_natham_land_available="";
+
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.VISIBLE);
+
+
+                }
+            }
+        });
+
+        homeScreenBinding.nathamLandYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    homeScreenBinding.nathamLandYes.setChecked(true);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+                    is_natham_land_available="Y";
+                }
+            }
+        });
+        homeScreenBinding.nathamLandNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(true);
+                    is_natham_land_available="N";
+                }
+            }
+        });
+
+        homeScreenBinding.awaasYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    homeScreenBinding.awaasYes.setChecked(true);
+                    homeScreenBinding.awassNo.setChecked(false);
+                    is_awaas_plus_list="Y";
+                }
+            }
+        });
+        homeScreenBinding.awassNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    homeScreenBinding.awaasYes.setChecked(false);
+                    homeScreenBinding.awassNo.setChecked(true);
+                    is_awaas_plus_list="N";
+                }
+            }
+        });
+
         homeScreenBinding.existingUserYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -307,7 +493,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
                     homeScreenBinding.migYesLayout.setVisibility(View.VISIBLE);
                     homeScreenBinding.migNoLayout.setVisibility(View.VISIBLE);
-                    homeScreenBinding.benfMigTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.benfMigTv.setVisibility(View.GONE);
                     homeScreenBinding.eligibleTv.setVisibility(View.GONE);
                     homeScreenBinding.strLayout.setVisibility(View.GONE);
                     homeScreenBinding.selectStrTv.setVisibility(View.GONE);
@@ -343,7 +529,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.migYesLayout.setVisibility(View.VISIBLE);
                     homeScreenBinding.migNoLayout.setVisibility(View.VISIBLE);
                     homeScreenBinding.eligibleTv.setVisibility(View.GONE);
-                    homeScreenBinding.benfMigTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.benfMigTv.setVisibility(View.GONE);
                     homeScreenBinding.migNo.setChecked(false);
                     homeScreenBinding.migYes.setChecked(false);
                     homeScreenBinding.migNo.setEnabled(true);
@@ -531,15 +717,15 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     public void validateYesNo() {
         if ( isEligible.equalsIgnoreCase("Y")) {
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
-            homeScreenBinding.selectScheTv.setVisibility(View.VISIBLE);
-            homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
+            //homeScreenBinding.selectScheTv.setVisibility(View.VISIBLE);
+            //homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
             homeScreenBinding.saveData.setText("Take Photo");
         } else if (isEligible.equalsIgnoreCase("N")) {
             homeScreenBinding.schemeSpinner.setSelection(0);
             prefManager.setKeySchemeCode("");
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
-            homeScreenBinding.selectScheTv.setVisibility(View.GONE);
-            homeScreenBinding.scheLayout.setVisibility(View.GONE);
+            //homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+            //homeScreenBinding.scheLayout.setVisibility(View.GONE);
             homeScreenBinding.saveData.setText("Take Photo");
         }
     }
@@ -619,7 +805,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
         Scheme.clear();
         KVVTSurvey villageListValue = new KVVTSurvey();
-        villageListValue.setExclusion_criteria("Select Exclusion Criteria");
+        villageListValue.setExclusion_criteria(getResources().getString(R.string.select_automatic_exclusion_creteria));
         Scheme.add(villageListValue);
         if (VillageList.getCount() > 0) {
             if (VillageList.moveToFirst()) {
@@ -628,10 +814,12 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     String EXCLUSION_CRITERIA_ID = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID));
                     String EXCLUSION_CRITERIA = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA));
                     String PHOTO_REQUIRED = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PHOTO_REQUIRED));
+                    String AUTO_REJECTED = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.AUTO_REJECT));
 
                     villageList.setExclusion_criteria_id(EXCLUSION_CRITERIA_ID);
                     villageList.setExclusion_criteria(EXCLUSION_CRITERIA);
                     villageList.setPhoto_required(PHOTO_REQUIRED);
+                    villageList.setEleigible_auto_rejection(AUTO_REJECTED);
 
                     Scheme.add(villageList);
                 } while (VillageList.moveToNext());
@@ -1093,8 +1281,36 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 */
 
     public void checkLegalYesNo() {
-
-        if ((homeScreenBinding.migYes.isChecked()) || homeScreenBinding.migNo.isChecked()) {
+        if (!getResources().getString(R.string.select_automatic_exclusion_creteria).equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria())
+                && (Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria() != null)) {
+            if (auto_rejection.equals("N")) {
+                /*if (homeScreenBinding.pattaYes.isChecked() || homeScreenBinding.pattaNo.isChecked()) {
+                    if (homeScreenBinding.awaasYes.isChecked() || homeScreenBinding.awassNo.isChecked()) {
+                        if (photoRequired.equals("Y")) {
+                            takePhoto("Take Photo");
+                        } else {
+                            takePhoto("Save details");
+                        }
+                    } else {
+                        Utils.showAlert(this, "Please Choose Awaas Plus List Status!");
+                    }
+                } else {
+                    Utils.showAlert(this, "Please Choose Patta Available Status!");
+                }*/
+                checkBoxConditionCheck();
+            }
+            else {
+                if (photoRequired.equals("Y")) {
+                    takePhoto("Take Photo");
+                } else {
+                    takePhoto("Save details");
+                }
+            }
+        }
+        else {
+            Utils.showAlert(this, getResources().getString(R.string.select_automatic_exclusion_creteria));
+        }
+        /*if ((homeScreenBinding.migYes.isChecked()) || homeScreenBinding.migNo.isChecked()) {
             if((homeScreenBinding.migYes.isChecked())){
                 if (!"Select Exclusion Criteria".equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria())
                 && (Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria() != null)) {
@@ -1106,12 +1322,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                 }else {
                     Utils.showAlert(this, "Select Exclusion Criteria!");
                 }
-            }else if((homeScreenBinding.migNo.isChecked())){
+            }
+            else if((homeScreenBinding.migNo.isChecked())){
                 takePhoto(homeScreenBinding.saveData.getText().toString());
             }
-        } else {
-            Utils.showAlert(this, "Check the beneficiary is Eligible to reject or not!");
         }
+        else {
+            Utils.showAlert(this, "Check the beneficiary is Eligible to reject or not!");
+        }*/
     }
 
 
@@ -1150,13 +1368,17 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         registerValue.put(AppConstant.BENEFICIARY_FATHER_NAME, benificiary_fatherName);
         registerValue.put(AppConstant.BENEFICIARY_ID, benificiary_id);
         registerValue.put(AppConstant.EXCLUSION_CRITERIA_ID, prefManager.getKeySchemeCode());
-        registerValue.put(AppConstant.PERSON_ELIGIBLE, isEligible);
+        registerValue.put(AppConstant.PERSON_ELIGIBLE, auto_rejection);
         registerValue.put(AppConstant.BUTTON_TEXT, buttonTxt);
         registerValue.put(AppConstant.EXISTING_USER, isExistingUser);
         registerValue.put(AppConstant.BENEFICIARY_FAT_HUS_STATUS, isFaHus);
         registerValue.put(AppConstant.STREET_CODE, street_code);
         registerValue.put(AppConstant.COMMUNITY_ID, community_id);
         registerValue.put(AppConstant.DOOR_NO, door_no);
+        registerValue.put(AppConstant.IS_AWAAS_PLUS_LISTED, is_awaas_plus_list);
+        registerValue.put(AppConstant.PATTA_AVAILABLE, patta_avilable_status);
+        registerValue.put(AppConstant.IS_DOCUMENT_AVAILABLE, is_document_available);
+        registerValue.put(AppConstant.IS_NATHAM_LAND_AVAILABLE, is_natham_land_available);
 
         long id = db.insert(DBHelper.SAVE_KVVT_DETAILS, null, registerValue);
         Log.d("insert_id",String.valueOf(id));
@@ -1211,8 +1433,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         homeScreenBinding.schemeSpinner.setSelection(0);
         homeScreenBinding.streetSpinner.setSelection(0);
         homeScreenBinding.communitySpinner.setSelection(0);
-        homeScreenBinding.scheLayout.setVisibility(View.GONE);
-        homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+        //homeScreenBinding.scheLayout.setVisibility(View.GONE);
+        //homeScreenBinding.selectScheTv.setVisibility(View.GONE);
 //        homeScreenBinding.takePicLayout.setVisibility(View.GONE);
         homeScreenBinding.nameLayout.setVisibility(View.GONE);
         homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
@@ -1236,7 +1458,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         homeScreenBinding.existingUserNo.setChecked(false);
         homeScreenBinding.existingUserYes.setChecked(false);
         homeScreenBinding.eligibleTv.setVisibility(View.GONE);
-        homeScreenBinding.benfMigTv.setVisibility(View.VISIBLE);
+        homeScreenBinding.benfMigTv.setVisibility(View.GONE);
         isEligible = "";
         isExistingUser = "";
         isFaHus = "";
@@ -1278,6 +1500,11 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                             kvvtSurvey.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
                             kvvtSurvey.setEligible_for_auto_exclusion(jsonArray.getJSONObject(i).getString(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION));
                             kvvtSurvey.setPhoto_availavle(jsonArray.getJSONObject(i).getString(AppConstant.PHOTO_AVAILABLE));
+                            kvvtSurvey.setPatta_available_status(jsonArray.getJSONObject(i).getString(AppConstant.PATTA_AVAILABLE));
+                            kvvtSurvey.setIs_awaas_plus_list(jsonArray.getJSONObject(i).getString(AppConstant.IS_AWAAS_PLUS_LISTED));
+
+                            kvvtSurvey.setIS_DOCUMENT_AVAILABLE(jsonArray.getJSONObject(i).getString(AppConstant.IS_DOCUMENT_AVAILABLE));
+                            kvvtSurvey.setIS_NATHAM_LAND_AVAILABLE(jsonArray.getJSONObject(i).getString("is_natham_land"));
                             dbData.insertKVVT(kvvtSurvey);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1304,6 +1531,85 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             dataFromServer();
 
         }
+    }
+
+    public void getCurrentYearPreviousYear(){
+        /*int month=0;
+        current_year = Calendar.getInstance().get(Calendar.YEAR);
+        month = Calendar.getInstance().get(Calendar.MONTH);
+        if(month <=3) {
+            previous_year = current_year - 1;
+            homeScreenBinding.headingTextYear.setText(""+previous_year+"-"+current_year);
+        }
+        else if(month > 3){
+            previous_year = current_year + 1;
+            homeScreenBinding.headingTextYear.setText(""+current_year+"-"+previous_year);
+        }*/
+
+        homeScreenBinding.headingTextYear.setText("2020 - 2021");
+    }
+
+    public void checkBoxConditionCheck(){
+        if(homeScreenBinding.pattaYes.isChecked()||homeScreenBinding.pattaNo.isChecked()){
+            if(homeScreenBinding.pattaYes.isChecked()){
+                if (homeScreenBinding.awaasYes.isChecked() || homeScreenBinding.awassNo.isChecked()) {
+                    if (photoRequired.equals("Y")) {
+                        takePhoto("Take Photo");
+                    } else {
+                        takePhoto("Save details");
+                    }
+                } else {
+                    Utils.showAlert(this, "Please Choose Awaas Plus List Status!");
+
+                }
+            }
+            else if(homeScreenBinding.pattaNo.isChecked()) {
+                if(homeScreenBinding.documentYes.isChecked()||homeScreenBinding.documentNo.isChecked()){
+                    if(homeScreenBinding.documentYes.isChecked()){
+                        if (homeScreenBinding.awaasYes.isChecked() || homeScreenBinding.awassNo.isChecked()) {
+                            if (photoRequired.equals("Y")) {
+                                takePhoto("Take Photo");
+                            }
+                            else {
+                                takePhoto("Save details");
+                            }
+                        }
+                        else {
+                            Utils.showAlert(this, "Please Choose Awaas Plus List Status!");
+
+                        }
+                    }
+                    else if(homeScreenBinding.documentNo.isChecked()){
+                        if(homeScreenBinding.nathamLandYes.isChecked()||homeScreenBinding.nathamLandNo.isChecked()){
+                            if (homeScreenBinding.awaasYes.isChecked() || homeScreenBinding.awassNo.isChecked()) {
+                                if (photoRequired.equals("Y")) {
+                                    takePhoto("Take Photo");
+                                }
+                                else {
+                                    takePhoto("Save details");
+                                }
+                            } else {
+                                Utils.showAlert(this, "Please Choose Awaas Plus List Status!");
+                            }
+                        }
+                        else {
+                            Utils.showAlert(this, "Please Choose Natham Land Status!");
+
+                        }
+
+                    }
+                }
+                else {
+                    Utils.showAlert(this, "Please Choose Registration Document Status!");
+
+                }
+            }
+        }
+        else {
+            Utils.showAlert(this, "Please Choose Patta Status!");
+
+        }
+
     }
 
 }

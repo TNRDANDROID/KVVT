@@ -14,6 +14,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.CalendarContract;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -27,12 +28,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.FileProvider;
 
 
+import com.google.android.material.snackbar.Snackbar;
 import com.nic.KVVTSurvey.BuildConfig;
 import com.nic.KVVTSurvey.R;
 
@@ -1217,5 +1220,17 @@ public class Utils {
     }
 
 
+    public static void showSnakBar(Context context,RelativeLayout coordinatorLayout, String msg){
+        Snackbar snackbar = Snackbar.make(
+                coordinatorLayout,
+                msg,
+                Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(Color.RED);
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+        TextView textView = (TextView) snackbarView.findViewById(R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        snackbar.show();
+    }
 
 }

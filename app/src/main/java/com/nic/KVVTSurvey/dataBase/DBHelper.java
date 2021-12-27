@@ -39,6 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + SCHEME_TABLE_NAME + " ("
                 + "exclusion_criteria_id TEXT," +
                  "photo_required TEXT," +
+                 "auto_reject TEXT," +
                 "exclusion_criteria TEXT)");
         db.execSQL("CREATE TABLE " + COMMUNITY_TABLE_NAME + " ("
                 + "community_id TEXT," +
@@ -69,6 +70,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "habitation_name TEXT," +
                 "exclusion_criteria_id TEXT," +
                 "photo_available TEXT," +
+                "patta_available TEXT," +
+                "is_awaas_plus_listed TEXT," +
+                "is_document_available TEXT," +
+                "is_natham_land_available TEXT," +
                 "pvname TEXT)");
         db.execSQL("CREATE TABLE " + SAVE_KVVT_DETAILS + " ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -88,6 +93,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "street_code TEXT," +
                 "community_id TEXT," +
                 "door_no TEXT," +
+                "patta_available TEXT," +
+                "is_awaas_plus_listed TEXT," +
+                "is_document_available TEXT," +
+                "is_natham_land_available TEXT," +
                 "beneficiary_father_name TEXT)");
 
 

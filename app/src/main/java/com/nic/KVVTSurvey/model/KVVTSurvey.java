@@ -44,7 +44,53 @@ public class KVVTSurvey {
     private String existing_user;
     private String fat_hus_status;
     private String door_no;
+    private String eleigible_auto_rejection;
 
+    private String IS_DOCUMENT_AVAILABLE;
+    private String IS_NATHAM_LAND_AVAILABLE;
+
+    public String getIS_DOCUMENT_AVAILABLE() {
+        return IS_DOCUMENT_AVAILABLE;
+    }
+
+    public void setIS_DOCUMENT_AVAILABLE(String IS_DOCUMENT_AVAILABLE) {
+        this.IS_DOCUMENT_AVAILABLE = IS_DOCUMENT_AVAILABLE;
+    }
+
+    public String getIS_NATHAM_LAND_AVAILABLE() {
+        return IS_NATHAM_LAND_AVAILABLE;
+    }
+
+    public void setIS_NATHAM_LAND_AVAILABLE(String IS_NATHAM_LAND_AVAILABLE) {
+        this.IS_NATHAM_LAND_AVAILABLE = IS_NATHAM_LAND_AVAILABLE;
+    }
+
+    private String patta_available_status;
+    private String is_awaas_plus_list;
+
+    public String getPatta_available_status() {
+        return patta_available_status;
+    }
+
+    public void setPatta_available_status(String patta_available_status) {
+        this.patta_available_status = patta_available_status;
+    }
+
+    public String getIs_awaas_plus_list() {
+        return is_awaas_plus_list;
+    }
+
+    public void setIs_awaas_plus_list(String is_awaas_plus_list) {
+        this.is_awaas_plus_list = is_awaas_plus_list;
+    }
+
+    public String getEleigible_auto_rejection() {
+        return eleigible_auto_rejection;
+    }
+
+    public void setEleigible_auto_rejection(String eleigible_auto_rejection) {
+        this.eleigible_auto_rejection = eleigible_auto_rejection;
+    }
 
     public String getDoor_no() {
         return door_no;

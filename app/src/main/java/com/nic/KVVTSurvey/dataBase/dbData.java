@@ -59,6 +59,7 @@ public class dbData {
         values.put(AppConstant.EXCLUSION_CRITERIA_ID, kvvtSurvey.getExclusion_criteria_id());
         values.put(AppConstant.EXCLUSION_CRITERIA, kvvtSurvey.getExclusion_criteria());
         values.put(AppConstant.PHOTO_REQUIRED, kvvtSurvey.getPhoto_required());
+        values.put(AppConstant.AUTO_REJECT, kvvtSurvey.getEleigible_auto_rejection());
         long id = db.insert(DBHelper.SCHEME_TABLE_NAME,null,values);
         Log.d("Inserted_id_criteria", String.valueOf(id));
 
@@ -125,6 +126,8 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA)));
                     card.setPhoto_required(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PHOTO_REQUIRED)));
+                    card.setEleigible_auto_rejection(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.AUTO_REJECT)));
 
                     cards.add(card);
                 }
@@ -286,6 +289,11 @@ public class dbData {
         values.put(AppConstant.EXCLUSION_CRITERIA_ID, kvvtSurvey.getExclusion_criteria_id());
         values.put(AppConstant.PV_NAME, kvvtSurvey.getPvName());
         values.put(AppConstant.PHOTO_AVAILABLE, kvvtSurvey.getPhoto_availavle());
+        values.put(AppConstant.PATTA_AVAILABLE, kvvtSurvey.getPatta_available_status());
+        values.put(AppConstant.IS_AWAAS_PLUS_LISTED, kvvtSurvey.getIs_awaas_plus_list());
+
+        values.put(AppConstant.IS_DOCUMENT_AVAILABLE, kvvtSurvey.getIS_DOCUMENT_AVAILABLE());
+        values.put(AppConstant.IS_NATHAM_LAND_AVAILABLE, kvvtSurvey.getIS_NATHAM_LAND_AVAILABLE());
         long id = db.insert(DBHelper.KVVT_LIST_TABLE_NAME,null,values);
         Log.d("Inserted_id_KVVT_LIST", String.valueOf(id));
 
@@ -332,6 +340,16 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.PV_NAME)));
                     card.setPhoto_availavle(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PHOTO_AVAILABLE)));
+                    card.setIs_awaas_plus_list(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_AWAAS_PLUS_LISTED)));
+                    card.setPatta_available_status(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PATTA_AVAILABLE)));
+
+                    card.setIS_DOCUMENT_AVAILABLE(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_DOCUMENT_AVAILABLE)));
+                    card.setIS_NATHAM_LAND_AVAILABLE(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_NATHAM_LAND_AVAILABLE)));
+
                     cards.add(card);
                 }
             }
@@ -399,6 +417,17 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.DOOR_NO)));
                     card.setCommunity_id(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.COMMUNITY_ID)));
+                    card.setIs_awaas_plus_list(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_AWAAS_PLUS_LISTED)));
+                    card.setPatta_available_status(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PATTA_AVAILABLE)));
+
+                    card.setIS_DOCUMENT_AVAILABLE(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_DOCUMENT_AVAILABLE)));
+                    card.setIS_NATHAM_LAND_AVAILABLE(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_NATHAM_LAND_AVAILABLE)));
+
+
 
 
                     cards.add(card);
@@ -456,6 +485,17 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.DOOR_NO)));
                     card.setCommunity_id(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.COMMUNITY_ID)));
+                    card.setIs_awaas_plus_list(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_AWAAS_PLUS_LISTED)));
+                    card.setPatta_available_status(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PATTA_AVAILABLE)));
+
+                    card.setIS_DOCUMENT_AVAILABLE(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_DOCUMENT_AVAILABLE)));
+                    card.setIS_NATHAM_LAND_AVAILABLE(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_NATHAM_LAND_AVAILABLE)));
+
+
 
                     cards.add(card);
                 }

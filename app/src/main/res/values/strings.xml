@@ -14,6 +14,52 @@
     <string name="view_action">View Action</string>
     <string name="action_taken_tv" tools:ignore="ExtraTranslation">Action Taken Against Inspection Report for High Value Project</string>
     <string name="init_vector">2SN22SkJGDyOAXUU</string>
+    <string name="patta_available">Choose Patta Available</string>
+    <string name="awaas_pluse_list">Whether He/She is Awaas Plus List</string>
+    <string name="heading_text">குக்கிராம வரியாக குடிசைவாழ்  குடும்பங்களின் கணக்கெடுப்பு</string>
+    <string name="user_image_satisfaction">பயனாளியின் உருவம்  தெளிவாக இருக்கிறதா ?</string>
+    <string name="user_house_satisfaction">பயனாளியின் வீட்டின் முகப்பு  தெளிவாக இருக்கிறதா ?</string>
+    <string name="do_u_want_to_delete">இந்தத் தரவை நீக்க விரும்புகிறீர்களா ?</string>
+    <string name="user_image_satisfy">பயனாளியின் உருவம்  தெளிவாக இருக்க வேண்டும்</string>
+    <string name="user_image_house_satisfy">பயனாளியின் உருவம் மற்றும் வீட்டின் முகப்பு தெளிவாக இருக்க வேண்டும்</string>
+    <string name="alert_msg">பயனாளியின் உருவம் மற்றும் வீட்டின் முகப்பு தெளிவாக இருக்க வேண்டும்! பதிவேற்றம் செய்யலாமா?</string>
+
+    ////English
+    <string name="you_need_to_update">You need to update TNEB Application</string>
+    <string name="this_version_is_no_longer_supported">This version of TNEB is no longer supported. Please go to Official Site and install new version</string>
+    <string name="update">UPDATE</string>
+    <string name="save_image">Save Image</string>
+    <string name="select_village">Select Village</string>
+    <string name="select_habitation">Select Habitation</string>
+    <string name="existing_hut_dweeler_or_not">Existing Hut Dweller in KVVT database?</string>
+    <string name="select_street">Select Street</string>
+    <string name="select_community">Select Community</string>
+    <string name="patta_status">பட்டா இருக்கிறதா</string>
+    <string name="sync_data">Sync Data</string>
+    <string name="save_details">Save Details</string>
+    <string name="exixt_hut_dweller">Existing Hut Dweller in KVVT database?</string>
+    <string name="village">Village Name</string>
+    <string name="habitation">Habitation</string>
+    <string name="kvvt_id">KVVT ID</string>
+    <string name="auto_exclusion">Auto Exclusion</string>
+    <string name="select_automatic_exclusion_creteria">Select Category</string>
+    <string name="patta_available_text">Patta Available</string>
+    <string name="is_awaas_plus">Awaas Plus</string>
+    <string name="upload">Upload</string>
+    <string name="delete">Delete</string>
+    <string name="view_image_">View Images</string>
+    <string name="beneficiary_details">Beneficiary Details</string>
+    <string name="beneficiary_image">Beneficiary Image</string>
+    <string name="existing_house_with_beneficiary_image">Existing House With Beneficiary</string>
+    <string name="father_name">Father Name</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="view_online_image">View Online Images</string>
+    <string name="registration_document_yes_no">Registration Document Yes/No</string>
+    <string name="nattam_land_yes_no">Natham Land Yes/No</string>
+    <string name="document_status">Document Status</string>
+    <string name="natham_land_status">Natham Land Status</string>
+
 
 
 

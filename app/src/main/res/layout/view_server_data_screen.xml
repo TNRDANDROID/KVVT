@@ -43,7 +43,7 @@
                         android:layout_marginLeft="@dimen/_8sdp"
                         android:text="View Server Data"
                         android:textColor="@android:color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <ImageView
                         android:id="@+id/back_img"
@@ -92,7 +92,7 @@
                     android:layout_marginRight="@dimen/margin_left_20dp"
                     android:text="Select Village"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_12sdp"
                     style="@string/font_circular_bold" />
 
                 <RelativeLayout
@@ -142,7 +142,7 @@
                     android:layout_marginRight="@dimen/margin_left_20dp"
                     android:text="Select Habitation"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_12sdp"
                     style="@string/font_circular_bold" />
 
                 <RelativeLayout

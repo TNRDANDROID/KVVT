@@ -86,7 +86,7 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
         protected void onPostExecute(ArrayList<KVVTSurvey> kvvtSurveys) {
             super.onPostExecute(kvvtSurveys);
             recyclerView.setVisibility(View.VISIBLE);
-            pendingAdapter = new PendingAdapter(PendingScreen.this, kvvtSurveys);
+            pendingAdapter = new PendingAdapter(PendingScreen.this, kvvtSurveys,dbData);
             recyclerView.setAdapter(pendingAdapter);
         }
     }

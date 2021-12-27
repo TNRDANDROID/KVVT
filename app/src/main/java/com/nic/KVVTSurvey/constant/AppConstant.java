@@ -67,6 +67,7 @@ public class AppConstant {
     public static String EXCLUSION_CRITERIA_ID = "exclusion_criteria_id";
     public static String EXCLUSION_CRITERIA = "exclusion_criteria";
     public static String PHOTO_REQUIRED = "photo_required";
+    public static String AUTO_REJECT = "auto_reject";
     public static String PHOTO_AVAILABLE = "photo_available";
     public static String ELIGIBLE_FOR_AUTO_EXCLUSION = "eligible_for_auto_exclusion";
     public static String BUTTON_TEXT = "button_text";
@@ -75,6 +76,10 @@ public class AppConstant {
     public static String COMMUNITY_NAME = "community_name";
     public static String DOOR_NO = "door_no";
     public static String BENEFICIARY_FAT_HUS_STATUS = "beneficiary_fat_hus_status";
+    public static String PATTA_AVAILABLE = "patta_available";
+    public static String IS_AWAAS_PLUS_LISTED = "is_awaas_plus_listed";
+    public static String IS_DOCUMENT_AVAILABLE = "is_document_available";
+    public static String IS_NATHAM_LAND_AVAILABLE = "is_natham_land_available";
 
 
 

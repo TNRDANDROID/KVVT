@@ -38,7 +38,7 @@
                     android:layout_centerInParent="true"
                     android:text="Home Page"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
 
                 <ImageView
@@ -71,23 +71,58 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/view_server_data">
 
+
                 <RelativeLayout
                     android:id="@+id/parent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_70sdp"
+                        android:id="@+id/heading_layout"
+                        android:background="@drawable/bottom_curved_bg_home">
+                        <TextView
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/heading_text"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold"
+                            android:text="@string/heading_text"></TextView>
+                        <TextView
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:layout_below="@id/heading_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/heading_text_year"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold"
+                            ></TextView>
+
+
+                    </RelativeLayout>
 
                     <TextView
+                        android:layout_below="@+id/heading_layout"
                         android:id="@+id/select_village_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Select Village"
+                        android:text="@string/select_village"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_12sdp"
                         style="@string/font_circular_bold" />
 
                     <RelativeLayout
@@ -110,7 +145,7 @@
                             android:layout_marginLeft="15dp"
 
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 
@@ -135,9 +170,9 @@
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Select Habitation"
+                        android:text="@string/select_habitation"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_12sdp"
                         style="@string/font_circular_bold" />
 
                     <RelativeLayout
@@ -160,7 +195,7 @@
                             android:layout_marginLeft="15dp"
 
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 
@@ -185,9 +220,9 @@
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Existing Hut Dweller in KVVT database?"
+                        android:text="@string/existing_hut_dweeler_or_not"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <RelativeLayout
                         android:id="@+id/existing_user_layout"
@@ -220,7 +255,7 @@
                                 android:layout_marginRight="@dimen/_40sdp"
                                 android:checked="false"
                                 android:gravity="center"
-                                android:text="Yes"
+                                android:text="@string/yes"
                                 android:textColor="@android:color/black"
                                 android:textSize="13sp" />
 
@@ -247,7 +282,7 @@
                                 android:layout_marginRight="@dimen/_40sdp"
                                 android:checked="false"
                                 android:gravity="center"
-                                android:text="No"
+                                android:text="@string/no"
                                 android:textColor="@android:color/black"
                                 android:textSize="13sp" />
 
@@ -270,7 +305,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Enter Benificiary Id"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_circular_medium" />
 
@@ -294,7 +329,7 @@
                                 android:layout_marginLeft="@dimen/margin_left_20dp"
                                 android:text="TN"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:visibility="visible" />
 
                             <View
@@ -318,7 +353,7 @@
                                 android:inputType="number"
                                 android:singleLine="true"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
 
                                 style="@string/font_circular_book" />
                             <ImageView
@@ -355,7 +390,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Beneficiary Name"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_circular_medium" />
 
@@ -381,7 +416,7 @@
                                 android:inputType="textPersonName"
                                 android:singleLine="true"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:enabled="false"
                                 style="@string/font_circular_book" />
 
@@ -407,7 +442,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Father/Husband Name"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_circular_medium" />
                         <RelativeLayout
@@ -463,7 +498,7 @@
                                 android:inputType="textPersonName"
                                 android:singleLine="true"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:enabled="false"
 
                                 style="@string/font_circular_book" />
@@ -481,9 +516,9 @@
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Select Street"
+                        android:text="@string/select_street"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_12sdp"
                         style="@string/font_circular_bold" />
 
                     <RelativeLayout
@@ -506,7 +541,7 @@
                             android:layout_marginLeft="15dp"
 
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 
@@ -537,7 +572,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Enter Door No"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_circular_medium" />
 
@@ -563,7 +598,7 @@
                                 android:inputType="textPersonName"
                                 android:singleLine="true"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
                                 style="@string/font_circular_book" />
 
 
@@ -579,9 +614,9 @@
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Select Community"
+                        android:text="@string/select_community"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_12sdp"
                         style="@string/font_circular_bold" />
 
                     <RelativeLayout
@@ -604,7 +639,7 @@
                             android:layout_marginLeft="15dp"
 
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 
@@ -620,6 +655,7 @@
 
                     </RelativeLayout>
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/benf_mig_tv"
                         style="@string/font_circular_bold"
                         android:layout_width="match_parent"
@@ -630,9 +666,10 @@
                         android:layout_marginRight="@dimen/margin_left_20dp"
                         android:text="Eligible for Auto Reject"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <RelativeLayout
+                        android:visibility="gone"
                         android:id="@+id/beneficiary_migrated_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -652,7 +689,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Eligible for Auto Reject"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <RelativeLayout
 
@@ -710,6 +747,7 @@
 
                         </RelativeLayout>
                     </RelativeLayout>
+
                     <TextView
                         android:id="@+id/select_sche_tv"
                         android:layout_width="match_parent"
@@ -718,9 +756,9 @@
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Select Automatic Exclusion Criteria"
+                        android:text="@string/select_automatic_exclusion_creteria"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_12sdp"
                         style="@string/font_circular_bold" />
 
                     <RelativeLayout
@@ -743,7 +781,7 @@
                             android:layout_marginLeft="15dp"
 
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 
@@ -758,6 +796,378 @@
                             android:gravity="center" />
 
                     </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/patta_available_tv"
+                        style="@string/font_circular_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/sche_layout"
+                        android:layout_marginLeft="@dimen/margin_left_20dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginRight="@dimen/margin_left_20dp"
+                        android:text="@string/patta_available"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <RelativeLayout
+                        android:id="@+id/patta_available_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/patta_available_tv"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/margin_left_20dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginRight="@dimen/margin_left_20dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/patta_available_tv_1"
+                            style="@string/font_circular_bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:text="Eligible for Auto Reject"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/header"
+                            android:layout_gravity="center"
+                            android:id="@+id/patta_yes_layout"
+                            android:visibility="visible"
+                            android:background="@drawable/rectangle_box"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <CheckBox
+                                android:id="@+id/patta_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginRight="@dimen/_40sdp"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:text="@string/yes"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/header"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="center"
+                            android:id="@+id/patta_no_layout"
+                            android:background="@drawable/rectangle_box"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <CheckBox
+                                android:id="@+id/patta_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerInParent="true"
+                                android:layout_marginRight="@dimen/_40sdp"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:text="@string/no"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp" />
+
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/document_available_tv"
+                        style="@string/font_circular_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/patta_available_layout"
+                        android:layout_marginLeft="@dimen/margin_left_20dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginRight="@dimen/margin_left_20dp"
+                        android:text="@string/registration_document_yes_no"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <RelativeLayout
+                        android:id="@+id/document_available_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/document_available_tv"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/margin_left_20dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginRight="@dimen/margin_left_20dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/document_available_tv_1"
+                            style="@string/font_circular_bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:text="Eligible for Auto Reject"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/header"
+                            android:layout_gravity="center"
+                            android:id="@+id/document_yes_layout"
+                            android:visibility="visible"
+                            android:background="@drawable/rectangle_box"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <CheckBox
+                                android:id="@+id/document_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginRight="@dimen/_40sdp"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:text="@string/yes"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/header"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="center"
+                            android:id="@+id/document_no_layout"
+                            android:background="@drawable/rectangle_box"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <CheckBox
+                                android:id="@+id/document_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerInParent="true"
+                                android:layout_marginRight="@dimen/_40sdp"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:text="@string/no"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp" />
+
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/natham_land_available_tv"
+                        style="@string/font_circular_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/document_available_layout"
+                        android:layout_marginLeft="@dimen/margin_left_20dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginRight="@dimen/margin_left_20dp"
+                        android:text="@string/nattam_land_yes_no"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <RelativeLayout
+                        android:id="@+id/natham_land_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/natham_land_available_tv"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/margin_left_20dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginRight="@dimen/margin_left_20dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/natham_land_available_tv_1"
+                            style="@string/font_circular_bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:text="Eligible for Auto Reject"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/header"
+                            android:layout_gravity="center"
+                            android:id="@+id/natham_land_yes_layout"
+                            android:visibility="visible"
+                            android:background="@drawable/rectangle_box"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <CheckBox
+                                android:id="@+id/natham_land_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginRight="@dimen/_40sdp"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:text="@string/yes"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/header"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="center"
+                            android:id="@+id/natham_land_no_layout"
+                            android:background="@drawable/rectangle_box"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <CheckBox
+                                android:id="@+id/natham_land_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerInParent="true"
+                                android:layout_marginRight="@dimen/_40sdp"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:text="@string/no"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp" />
+
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/awaas_tv"
+                        style="@string/font_circular_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/natham_land_layout"
+                        android:layout_marginLeft="@dimen/margin_left_20dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginRight="@dimen/margin_left_20dp"
+                        android:text="@string/awaas_pluse_list"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <RelativeLayout
+                        android:id="@+id/awaas_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/awaas_tv"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/margin_left_20dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginRight="@dimen/margin_left_20dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/awass_1"
+                            style="@string/font_circular_bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:text="Eligible for Auto Reject"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/header"
+                            android:layout_gravity="center"
+                            android:id="@+id/awaas_yes_layout"
+                            android:visibility="visible"
+                            android:background="@drawable/rectangle_box"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <CheckBox
+                                android:id="@+id/awaas_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginRight="@dimen/_40sdp"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:text="@string/yes"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/header"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="center"
+                            android:id="@+id/awaas_no_layout"
+                            android:background="@drawable/rectangle_box"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <CheckBox
+                                android:id="@+id/awass_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerInParent="true"
+                                android:layout_marginRight="@dimen/_40sdp"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:text="@string/no"
+                                android:textColor="@android:color/black"
+                                android:textSize="13sp" />
+
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+
                     <LinearLayout
                         android:padding="@dimen/_8sdp"
                         android:layout_width="wrap_content"
@@ -907,7 +1317,7 @@
                 android:padding="15dp"
                 android:elevation="3dp"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/view_server_data"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/padding"
                 android:layout_marginBottom="@dimen/padding"
                 android:background="@drawable/button_background"
@@ -918,15 +1328,14 @@
                     style="@string/font_circular_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
+                    android:text="@string/sync_data"
                     android:textAlignment="center"
-                    android:text="Sync Data"
-                    android:textStyle="bold"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
 
             </RelativeLayout>
@@ -953,10 +1362,10 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:textAlignment="center"
-                    android:text="Save Details"
+                    android:text="@string/save_details"
                     android:textAllCaps="false"
                     android:textColor="@android:color/black"
-                    android:textSize="17sp" />
+                    android:textSize="@dimen/_12sdp" />
 
 
             </RelativeLayout>
@@ -974,10 +1383,10 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_alignParentBottom="true"
                 android:padding="10dp"
-                android:text="Sofware Designed &amp; Developed by NIC"
+                android:text="Software Designed &amp; Developed by NIC"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:background="@drawable/background"
                 style="@string/font_circular_medium" />
         </RelativeLayout>
@@ -1028,7 +1437,7 @@
                         android:layout_centerInParent="true"
                         android:text="Home Page"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/_15sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
 
                     <ImageView
@@ -1074,7 +1483,7 @@
                         android:layout_marginRight="@dimen/margin_left_20dp"
                         android:text="Select Village"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_12sdp"
                         style="@string/font_circular_bold" />
 
                     <RelativeLayout
@@ -1097,7 +1506,7 @@
                             android:layout_marginLeft="15dp"
 
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 
@@ -1124,7 +1533,7 @@
                         android:layout_marginRight="@dimen/margin_left_20dp"
                         android:text="Select Habitation"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_12sdp"
                         style="@string/font_circular_bold" />
 
                     <RelativeLayout
@@ -1147,7 +1556,7 @@
                             android:layout_marginLeft="15dp"
 
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 
@@ -1173,7 +1582,7 @@
                         android:layout_marginRight="@dimen/margin_left_20dp"
                         android:text="Existing User?"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <RelativeLayout
                         android:id="@+id/existing_user_layout"
@@ -1255,7 +1664,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Enter Benificiary Id"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_circular_medium" />
 
@@ -1279,7 +1688,7 @@
                                 android:layout_marginLeft="@dimen/margin_left_20dp"
                                 android:text="TN"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:visibility="visible" />
 
                             <View
@@ -1303,7 +1712,7 @@
                                 android:inputType="number"
                                 android:singleLine="true"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
 
                                 style="@string/font_circular_book" />
                             <ImageView
@@ -1340,7 +1749,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Enter Beneficiary Name"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_circular_medium" />
 
@@ -1366,7 +1775,7 @@
                                 android:inputType="textPersonName"
                                 android:singleLine="true"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:enabled="false"
                                 style="@string/font_circular_book" />
 
@@ -1392,7 +1801,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Enter Father/Husband Name"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_circular_medium" />
 
@@ -1418,7 +1827,7 @@
                                 android:inputType="textPersonName"
                                 android:singleLine="true"
                                 android:textColor="@android:color/black"
-                                android:textSize="@dimen/_15sdp"
+                                android:textSize="@dimen/_12sdp"
                                 android:enabled="false"
 
                                 style="@string/font_circular_book" />
@@ -1439,7 +1848,7 @@
                         android:layout_marginRight="@dimen/margin_left_20dp"
                         android:text="Eligible for Auto Reject"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <RelativeLayout
                         android:id="@+id/beneficiary_migrated_layout"
@@ -1461,7 +1870,7 @@
                             android:layout_marginRight="@dimen/margin_left_20dp"
                             android:text="Eligible for Auto Reject"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_15sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <RelativeLayout
 
@@ -1529,7 +1938,7 @@
                         android:layout_marginRight="@dimen/margin_left_20dp"
                         android:text="Select Automatic Exclusion Criteria"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_12sdp"
                         style="@string/font_circular_bold" />
 
                     <RelativeLayout
@@ -1552,7 +1961,7 @@
                             android:layout_marginLeft="15dp"
 
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 

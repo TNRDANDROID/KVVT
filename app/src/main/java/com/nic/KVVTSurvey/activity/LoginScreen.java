@@ -22,6 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.android.volley.VolleyError;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.snackbar.Snackbar.SnackbarLayout;
+import com.google.android.material.snackbar.SnackbarContentLayout;
 import com.nic.KVVTSurvey.R;
 import com.nic.KVVTSurvey.api.Api;
 import com.nic.KVVTSurvey.api.ApiService;
@@ -449,6 +452,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                             villageListValue.setExclusion_criteria_id(jsonArray.getJSONObject(i).getString("exclusion_criteria_id"));
                             villageListValue.setExclusion_criteria(jsonArray.getJSONObject(i).getString("exclusion_criteria"));
                             villageListValue.setPhoto_required(jsonArray.getJSONObject(i).getString("photo_required"));
+                            villageListValue.setEleigible_auto_rejection(jsonArray.getJSONObject(i).getString("auto_reject"));
 
                             dbData.insertscheme(villageListValue);
                         } catch (JSONException e) {
@@ -541,7 +545,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void OnError(VolleyError volleyError) {
-        Utils.showAlert(this, "Login Again");
+        Utils.showAlert(LoginScreen.this, "Login Again");
     }
 
 //    @Override

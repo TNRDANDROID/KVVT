@@ -34,14 +34,15 @@ public class SplashScreen extends AppCompatActivity implements
         prefManager = new PrefManager(this);
         if (BuildConfig.BUILD_TYPE.equalsIgnoreCase("production")) {
             if (Utils.isOnline()) {
-//                checkAppVersion();
-                showSignInScreen();
+                checkAppVersion();
+                //showSignInScreen();
             } else {
                 showSignInScreen();
 
             }
         } else {
-            showSignInScreen();
+            //showSignInScreen();
+            checkAppVersion();
         }
     }
 
