@@ -165,6 +165,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         loginScreenBinding.password.setText("test123#$");*/
        /* loginScreenBinding.userName.setText("prmaltrpy1");
         loginScreenBinding.password.setText("pmay552#$");*/
+       /* loginScreenBinding.userName.setText("cudcudrpy1");//pro
+        loginScreenBinding.password.setText("kvvt366#$");*/ //id : 699523
         final String username = loginScreenBinding.userName.getText().toString().trim();
         final String password = loginScreenBinding.password.getText().toString().trim();
         prefManager.setUserPassword(password);

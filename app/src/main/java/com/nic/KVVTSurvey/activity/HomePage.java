@@ -111,8 +111,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         if (bundle != null) {
             isHome = bundle.getString("Home");
         }
-        //homeScreenBinding.selectScheTv.setVisibility(View.GONE);
-        //homeScreenBinding.scheLayout.setVisibility(View.GONE);
+
+        homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+        homeScreenBinding.scheLayout.setVisibility(View.GONE);
+
         homeScreenBinding.seecIdLayout.setVisibility(View.GONE);
         homeScreenBinding.nameLayout.setVisibility(View.GONE);
         homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
@@ -398,6 +400,25 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
 
                 }
+                else {
+                    homeScreenBinding.pattaYes.setChecked(false);
+                    homeScreenBinding.pattaNo.setChecked(false);
+                    patta_avilable_status="";
+
+                    homeScreenBinding.documentAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+
+                    is_document_available="";
+                    is_natham_land_available="";
+
+                }
             }
         });
 
@@ -435,6 +456,19 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.nathamLandAvailableTv.setVisibility(View.VISIBLE);
                     homeScreenBinding.nathamLandLayout.setVisibility(View.VISIBLE);
 
+
+                }
+                else {
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    is_document_available="";
+                    is_natham_land_available="";
+
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
 
                 }
             }
@@ -517,7 +551,35 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.radioFather.setEnabled(true);
                     homeScreenBinding.radioHusband.setEnabled(true);
 
-                }else {
+                    auto_rejection="";
+                    photoRequired="";
+                    is_awaas_plus_list="";
+                    is_natham_land_available="";
+                    is_document_available="";
+                    patta_avilable_status="";
+                    homeScreenBinding.selectScheTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
+                    homeScreenBinding.pattaAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.pattaAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.awaasTv.setVisibility(View.GONE);
+                    homeScreenBinding.awaasLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+                    homeScreenBinding.pattaNo.setChecked(false);
+                    homeScreenBinding.pattaYes.setChecked(false);
+                    homeScreenBinding.awaasYes.setChecked(false);
+                    homeScreenBinding.awassNo.setChecked(false);
+                    homeScreenBinding.schemeSpinner.setSelection(0);
+
+
+                }
+                else {
                     homeScreenBinding.strLayout.setVisibility(View.GONE);
                     homeScreenBinding.selectStrTv.setVisibility(View.GONE);
                     homeScreenBinding.selectCommunityTv.setVisibility(View.GONE);
@@ -546,6 +608,36 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.radioFather.setEnabled(true);
                     homeScreenBinding.radioHusband.setEnabled(true);
+
+                    isExistingUser="";
+
+                    auto_rejection="";
+                    photoRequired="";
+                    is_awaas_plus_list="";
+                    is_natham_land_available="";
+                    is_document_available="";
+                    patta_avilable_status="";
+                    homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+                    homeScreenBinding.scheLayout.setVisibility(View.GONE);
+                    homeScreenBinding.pattaAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.pattaAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.awaasTv.setVisibility(View.GONE);
+                    homeScreenBinding.awaasLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+                    homeScreenBinding.pattaNo.setChecked(false);
+                    homeScreenBinding.pattaYes.setChecked(false);
+                    homeScreenBinding.awaasYes.setChecked(false);
+                    homeScreenBinding.awassNo.setChecked(false);
+                    homeScreenBinding.eligibleTv.setVisibility(View.GONE);
+                    homeScreenBinding.schemeSpinner.setSelection(0);
+
                 }
             }
         });
@@ -565,7 +657,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.doorNoLayout.setVisibility(View.VISIBLE);
                     homeScreenBinding.migYesLayout.setVisibility(View.GONE);
                     homeScreenBinding.migNoLayout.setVisibility(View.VISIBLE);
-                    homeScreenBinding.eligibleTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.eligibleTv.setVisibility(View.GONE);
                     homeScreenBinding.benfMigTv.setVisibility(View.GONE);
                     homeScreenBinding.migNo.setChecked(true);
                     homeScreenBinding.migYes.setChecked(false);
@@ -584,7 +676,39 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.radioFather.setEnabled(true);
                     homeScreenBinding.radioHusband.setEnabled(true);
-                }else {
+
+
+                    auto_rejection="N";
+                    photoRequired="Y";
+                    is_awaas_plus_list="";
+                    is_natham_land_available="";
+                    is_document_available="";
+                    patta_avilable_status="";
+                    homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+                    homeScreenBinding.scheLayout.setVisibility(View.GONE);
+                    homeScreenBinding.pattaAvailableTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.pattaAvailableLayout.setVisibility(View.VISIBLE);
+                    homeScreenBinding.awaasTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.awaasLayout.setVisibility(View.VISIBLE);
+                    homeScreenBinding.documentAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+                    homeScreenBinding.pattaNo.setChecked(false);
+                    homeScreenBinding.pattaYes.setChecked(false);
+                    homeScreenBinding.awaasYes.setChecked(false);
+                    homeScreenBinding.awassNo.setChecked(false);
+                    homeScreenBinding.eligibleTv.setVisibility(View.GONE);
+                    homeScreenBinding.schemeSpinner.setSelection(0);
+
+
+
+                }
+                else {
                     homeScreenBinding.strLayout.setVisibility(View.GONE);
                     homeScreenBinding.selectStrTv.setVisibility(View.GONE);
                     homeScreenBinding.selectCommunityTv.setVisibility(View.GONE);
@@ -596,7 +720,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.migYesLayout.setVisibility(View.VISIBLE);
                     homeScreenBinding.migNoLayout.setVisibility(View.VISIBLE);
                     homeScreenBinding.eligibleTv.setVisibility(View.GONE);
-                    homeScreenBinding.benfMigTv.setVisibility(View.VISIBLE);
+                    homeScreenBinding.benfMigTv.setVisibility(View.GONE);
                     homeScreenBinding.migNo.setChecked(false);
                     homeScreenBinding.migYes.setChecked(false);
                     homeScreenBinding.migNo.setEnabled(true);
@@ -613,6 +737,36 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.radioHusband.setChecked(false);
                     homeScreenBinding.radioFather.setEnabled(true);
                     homeScreenBinding.radioHusband.setEnabled(true);
+
+                    isExistingUser="";
+
+                    auto_rejection="";
+                    photoRequired="";
+                    is_awaas_plus_list="";
+                    is_natham_land_available="";
+                    is_document_available="";
+                    patta_avilable_status="";
+                    homeScreenBinding.selectScheTv.setVisibility(View.GONE);
+                    homeScreenBinding.scheLayout.setVisibility(View.GONE);
+                    homeScreenBinding.pattaAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.pattaAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.awaasTv.setVisibility(View.GONE);
+                    homeScreenBinding.awaasLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.documentAvailableLayout.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandAvailableTv.setVisibility(View.GONE);
+                    homeScreenBinding.nathamLandLayout.setVisibility(View.GONE);
+                    homeScreenBinding.documentYes.setChecked(false);
+                    homeScreenBinding.documentNo.setChecked(false);
+                    homeScreenBinding.nathamLandYes.setChecked(false);
+                    homeScreenBinding.nathamLandNo.setChecked(false);
+                    homeScreenBinding.pattaNo.setChecked(false);
+                    homeScreenBinding.pattaYes.setChecked(false);
+                    homeScreenBinding.awaasYes.setChecked(false);
+                    homeScreenBinding.awassNo.setChecked(false);
+                    homeScreenBinding.eligibleTv.setVisibility(View.GONE);
+                    homeScreenBinding.schemeSpinner.setSelection(0);
+
                 }
             }
         });
@@ -1281,8 +1435,36 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 */
 
     public void checkLegalYesNo() {
-        if (!getResources().getString(R.string.select_automatic_exclusion_creteria).equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria())
-                && (Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria() != null)) {
+        if(isExistingUser.equals("Y")) {
+            if (!getResources().getString(R.string.select_automatic_exclusion_creteria).equalsIgnoreCase(Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria())
+                    && (Scheme.get(homeScreenBinding.schemeSpinner.getSelectedItemPosition()).getExclusion_criteria() != null)) {
+                if (auto_rejection.equals("N")) {
+                /*if (homeScreenBinding.pattaYes.isChecked() || homeScreenBinding.pattaNo.isChecked()) {
+                    if (homeScreenBinding.awaasYes.isChecked() || homeScreenBinding.awassNo.isChecked()) {
+                        if (photoRequired.equals("Y")) {
+                            takePhoto("Take Photo");
+                        } else {
+                            takePhoto("Save details");
+                        }
+                    } else {
+                        Utils.showAlert(this, "Please Choose Awaas Plus List Status!");
+                    }
+                } else {
+                    Utils.showAlert(this, "Please Choose Patta Available Status!");
+                }*/
+                    checkBoxConditionCheck();
+                } else {
+                    if (photoRequired.equals("Y")) {
+                        takePhoto("Take Photo");
+                    } else {
+                        takePhoto("Save details");
+                    }
+                }
+            } else {
+                Utils.showAlert(this, getResources().getString(R.string.select_automatic_exclusion_creteria));
+            }
+        }
+        else {
             if (auto_rejection.equals("N")) {
                 /*if (homeScreenBinding.pattaYes.isChecked() || homeScreenBinding.pattaNo.isChecked()) {
                     if (homeScreenBinding.awaasYes.isChecked() || homeScreenBinding.awassNo.isChecked()) {
@@ -1298,17 +1480,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     Utils.showAlert(this, "Please Choose Patta Available Status!");
                 }*/
                 checkBoxConditionCheck();
-            }
-            else {
+            } else {
                 if (photoRequired.equals("Y")) {
                     takePhoto("Take Photo");
                 } else {
                     takePhoto("Save details");
                 }
             }
-        }
-        else {
-            Utils.showAlert(this, getResources().getString(R.string.select_automatic_exclusion_creteria));
         }
         /*if ((homeScreenBinding.migYes.isChecked()) || homeScreenBinding.migNo.isChecked()) {
             if((homeScreenBinding.migYes.isChecked())){
