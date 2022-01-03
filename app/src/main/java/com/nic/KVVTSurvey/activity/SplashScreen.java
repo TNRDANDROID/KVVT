@@ -24,6 +24,7 @@ public class SplashScreen extends AppCompatActivity implements
     private static int SPLASH_TIME_OUT = 2000;
     private PrefManager prefManager;
     public SplashScreenBinding splashScreenBinding;
+    String localLanguage ="ta";
 
 
     @Override
@@ -48,6 +49,7 @@ public class SplashScreen extends AppCompatActivity implements
 
 
     private void showSignInScreen() {
+        Utils.setLocale(localLanguage,this);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

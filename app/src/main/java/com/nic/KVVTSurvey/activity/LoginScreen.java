@@ -107,7 +107,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         try {
             String versionName = getPackageManager()
                     .getPackageInfo(getPackageName(), 0).versionName;
-            loginScreenBinding.tvVersion.setText("Version" + " " + versionName);
+            loginScreenBinding.tvVersion.setText(getResources().getString(R.string.version) + " " + versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -152,10 +152,10 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
         if (username.isEmpty()) {
             valid = false;
-            Utils.showAlert(this, "Please enter the username");
+            Utils.showAlert(this, getResources().getString(R.string.please_enter_the_user_name));
         } else if (password.isEmpty()) {
             valid = false;
-            Utils.showAlert(this, "Please enter the password");
+            Utils.showAlert(this, getResources().getString(R.string.please_enter_the_password));
         }
         return valid;
     }
@@ -177,14 +177,14 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             else if (prefManager.getUserName().length() > 0 && password.length() > 0) {
                 new ApiService(this).makeRequest("LoginScreen", Api.Method.POST, UrlGenerator.getLoginUrl(), loginParams(), "not cache", this);
             } else {
-                Utils.showAlert(this, "Please enter your username and password!");
+                Utils.showAlert(this, getResources().getString(R.string.please_enter_the_user_name_and_password));
             }
         } else {
             //Utils.showAlert(this, getResources().getString(R.string.no_internet));
             AlertDialog.Builder ab = new AlertDialog.Builder(
                     LoginScreen.this);
-            ab.setMessage("Internet Connection is not avaliable..Please Turn ON Network Connection OR Continue With Off-line Mode..");
-            ab.setPositiveButton("Settings",
+            ab.setMessage(getResources().getString(R.string.please_turn_on_network_or_continue_offline));
+            ab.setPositiveButton(getResources().getString(R.string.settings),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
@@ -193,7 +193,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                             startActivity(I);
                         }
                     });
-            ab.setNegativeButton("Continue With Off-Line",
+            ab.setNegativeButton(getResources().getString(R.string.continue_with_off_line),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
@@ -348,7 +348,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
                     } else {
                         if (response.equals("LOGIN_FAILED")) {
-                            Utils.showAlert(this, "Invalid UserName Or Password");
+                            Utils.showAlert(this, getResources().getString(R.string.invalid_user_name_or_password));
                         }
                     }
                 }
@@ -420,6 +420,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                             villageListValue.setBlockCode(jsonArray.getJSONObject(i).getString(AppConstant.BLOCK_CODE));
                             villageListValue.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
                             villageListValue.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
+                            villageListValue.setPvNameTa(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME_TA));
 
                             dbData.insertVillage(villageListValue);
                         } catch (JSONException e) {
@@ -455,6 +456,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                             villageListValue.setExclusion_criteria(jsonArray.getJSONObject(i).getString("exclusion_criteria"));
                             villageListValue.setPhoto_required(jsonArray.getJSONObject(i).getString("photo_required"));
                             villageListValue.setEleigible_auto_rejection(jsonArray.getJSONObject(i).getString("auto_reject"));
+                            villageListValue.setExclusion_criteria_ta(jsonArray.getJSONObject(i).getString("exclusion_criteria_ta"));
 
                             dbData.insertscheme(villageListValue);
                         } catch (JSONException e) {
@@ -525,6 +527,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                             habListValue.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
                             habListValue.setHabCode(jsonArray.getJSONObject(i).getString(AppConstant.HABB_CODE));
                             habListValue.setHabitationName(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME));
+                            habListValue.setHabitationNameTa(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME_TA));
 
                             dbData.insertHabitation(habListValue);
                         } catch (JSONException e) {
@@ -547,7 +550,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void OnError(VolleyError volleyError) {
-        Utils.showAlert(LoginScreen.this, "Login Again");
+        Utils.showAlert(LoginScreen.this, getResources().getString(R.string.log_in_again));
     }
 
 //    @Override
@@ -570,7 +573,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         if (name.equals(userName) && pass.equals(password)) {
             showHomeScreen();
         } else {
-            Utils.showAlert(this, "No data available for offline. Please Turn On Your Network");
+            Utils.showAlert(this, getResources().getString(R.string.no_data_available_for_offline));
         }
     }
 }

@@ -287,11 +287,11 @@
 
                     <ImageView
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/_80sdp"
                         android:layout_height="@dimen/_80sdp"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@+id/text_view_1"
-                        android:src="@drawable/hut_with_man"></ImageView>
+                        android:src="@mipmap/avatar"></ImageView>
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -354,7 +354,7 @@
                         android:layout_height="@dimen/_80sdp"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@+id/text_view_2"
-                        android:src="@drawable/hutimage"></ImageView>
+                        android:src="@drawable/hut_with_man"></ImageView>
 
 
                     <TextView

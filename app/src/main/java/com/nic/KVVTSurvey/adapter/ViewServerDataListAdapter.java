@@ -63,23 +63,89 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.viewServerDataAdapterBinding.name.setText(serverDataListValuesFiltered.get(position).getBeneficiaryName());
         holder.viewServerDataAdapterBinding.fatherName.setText(serverDataListValuesFiltered.get(position).getBeneficiaryFatherName());
-        holder.viewServerDataAdapterBinding.villageName.setText(serverDataListValuesFiltered.get(position).getPvName());
-        holder.viewServerDataAdapterBinding.habName.setText(serverDataListValuesFiltered.get(position).getHabitationName());
+        holder.viewServerDataAdapterBinding.villageName.setText(serverDataListValuesFiltered.get(position).getPvNameTa());
+        holder.viewServerDataAdapterBinding.habName.setText(serverDataListValuesFiltered.get(position).getHabitationNameTa());
         holder.viewServerDataAdapterBinding.secId.setText(serverDataListValuesFiltered.get(position).getBeneficiaryId());
 //        holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getEligible_for_auto_exclusion());
 
-        if(serverDataListValuesFiltered.get(position).getEligible_for_auto_exclusion().toString().equals("Y")){
-            holder.viewServerDataAdapterBinding.eligibleId.setText("Yes");
-        }else {
-            holder.viewServerDataAdapterBinding.eligibleId.setText("No");
+        /*if(serverDataListValuesFiltered.get(position).getEligible_for_auto_exclusion().toString().equals("Y")){
+            *//*holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.VISIBLE);
+            holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.VISIBLE);
+            //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.yes));
+            holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getExclusion_criteria_ta());
+            *//*
+            holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.GONE);
+            holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.GONE);
+            //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.no));
+            holder.viewServerDataAdapterBinding.eligibleId.setText("-");
+
         }
+        else {
+            if(serverDataListValuesFiltered.get(position).getExclusion_criteria_ta()!=null&&
+                    !serverDataListValuesFiltered.get(position).getExclusion_criteria_ta().equals("")){
+*//*holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.GONE);
+            holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.GONE);
+            //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.no));
+            holder.viewServerDataAdapterBinding.eligibleId.setText("-");
+            *//*
+                holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.VISIBLE);
+                holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.VISIBLE);
+                //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.yes));
+                holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getExclusion_criteria_ta());
+
+            }
+            else {
+*//*holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.GONE);
+            holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.GONE);
+            //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.no));
+            holder.viewServerDataAdapterBinding.eligibleId.setText("-");
+            *//*
+                holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.GONE);
+                holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.GONE);
+                //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.yes));
+                holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getExclusion_criteria_ta());
+
+            }
+
+        }
+*/
+
+
+            if(serverDataListValuesFiltered.get(position).getExclusion_criteria_ta()!=null&&
+                    !serverDataListValuesFiltered.get(position).getExclusion_criteria_ta().equals("")
+            &&!serverDataListValuesFiltered.get(position).getExclusion_criteria_ta().equals("null")){
+/*holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.GONE);
+            holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.GONE);
+            //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.no));
+            holder.viewServerDataAdapterBinding.eligibleId.setText("-");
+            */
+                holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.VISIBLE);
+                holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.VISIBLE);
+                //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.yes));
+                holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getExclusion_criteria_ta());
+
+            }
+            else {
+/*holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.GONE);
+            holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.GONE);
+            //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.no));
+            holder.viewServerDataAdapterBinding.eligibleId.setText("-");
+            */
+                holder.viewServerDataAdapterBinding.eligibleLayout.setVisibility(View.GONE);
+                holder.viewServerDataAdapterBinding.legalView1.setVisibility(View.GONE);
+                //holder.viewServerDataAdapterBinding.eligibleId.setText(context.getResources().getString(R.string.yes));
+                holder.viewServerDataAdapterBinding.eligibleId.setText(serverDataListValuesFiltered.get(position).getExclusion_criteria_ta());
+
+            }
+
+
 
         if(serverDataListValuesFiltered.get(position).getPatta_available_status()!=null && !serverDataListValuesFiltered.get(position).getPatta_available_status().equals("")){
             if(serverDataListValuesFiltered.get(position).getPatta_available_status().equals("Y")){
-                holder.viewServerDataAdapterBinding.beneficiaryPattaTv.setText("Yes");
+                holder.viewServerDataAdapterBinding.beneficiaryPattaTv.setText(context.getResources().getString(R.string.available));
             }
             else {
-                holder.viewServerDataAdapterBinding.beneficiaryPattaTv.setText("No");
+                holder.viewServerDataAdapterBinding.beneficiaryPattaTv.setText(context.getResources().getString(R.string.no));
             }
         }
         else {
@@ -87,10 +153,10 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
         }
         if(serverDataListValuesFiltered.get(position).getIs_awaas_plus_list()!=null && !serverDataListValuesFiltered.get(position).getIs_awaas_plus_list().equals("")){
             if(serverDataListValuesFiltered.get(position).getIs_awaas_plus_list().equals("Y")){
-                holder.viewServerDataAdapterBinding.beneficiaryAwaasTv.setText("Yes");
+                holder.viewServerDataAdapterBinding.beneficiaryAwaasTv.setText(context.getResources().getString(R.string.yes));
             }
             else {
-                holder.viewServerDataAdapterBinding.beneficiaryAwaasTv.setText("No");
+                holder.viewServerDataAdapterBinding.beneficiaryAwaasTv.setText(context.getResources().getString(R.string.no));
             }
 
         }
@@ -100,10 +166,10 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
 
         if(serverDataListValuesFiltered.get(position).getIS_DOCUMENT_AVAILABLE()!=null && !serverDataListValuesFiltered.get(position).getIS_DOCUMENT_AVAILABLE().equals("")){
             if(serverDataListValuesFiltered.get(position).getIS_DOCUMENT_AVAILABLE().equals("Y")){
-                holder.viewServerDataAdapterBinding.documentStatusTv.setText("Yes");
+                holder.viewServerDataAdapterBinding.documentStatusTv.setText(context.getResources().getString(R.string.available));
             }
             else {
-                holder.viewServerDataAdapterBinding.documentStatusTv.setText("No");
+                holder.viewServerDataAdapterBinding.documentStatusTv.setText(context.getResources().getString(R.string.no));
             }
 
         }
@@ -112,10 +178,10 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
         }
         if(serverDataListValuesFiltered.get(position).getIS_NATHAM_LAND_AVAILABLE()!=null && !serverDataListValuesFiltered.get(position).getIS_NATHAM_LAND_AVAILABLE().equals("")){
             if(serverDataListValuesFiltered.get(position).getIS_NATHAM_LAND_AVAILABLE().equals("Y")){
-                holder.viewServerDataAdapterBinding.nathamLandStatusTv.setText("Yes");
+                holder.viewServerDataAdapterBinding.nathamLandStatusTv.setText(context.getResources().getString(R.string.yes));
             }
             else {
-                holder.viewServerDataAdapterBinding.nathamLandStatusTv.setText("No");
+                holder.viewServerDataAdapterBinding.nathamLandStatusTv.setText(context.getResources().getString(R.string.no));
             }
 
         }

@@ -37,6 +37,7 @@ public class KVVTSurvey {
     private String BeneficiaryFatherName;
     private String BeneficiaryId;
     private String HabitationName;
+    private String HabitationNameTa;
     private String kvvtId;
 
     private String buttonText;
@@ -48,6 +49,18 @@ public class KVVTSurvey {
 
     private String IS_DOCUMENT_AVAILABLE;
     private String IS_NATHAM_LAND_AVAILABLE;
+
+    private String exclusion_criteria_ta;
+
+
+
+    public String getHabitationNameTa() {
+        return HabitationNameTa;
+    }
+
+    public void setHabitationNameTa(String habitationNameTa) {
+        HabitationNameTa = habitationNameTa;
+    }
 
     public String getIS_DOCUMENT_AVAILABLE() {
         return IS_DOCUMENT_AVAILABLE;
@@ -275,10 +288,27 @@ public class KVVTSurvey {
 
     private String PvCode;
     private String PvName;
+    private String PvNameTa;
 
     private String blockName;
 
     private String exclusion_criteria;
+
+    public String getExclusion_criteria_ta() {
+        return exclusion_criteria_ta;
+    }
+
+    public void setExclusion_criteria_ta(String exclusion_criteria_ta) {
+        this.exclusion_criteria_ta = exclusion_criteria_ta;
+    }
+
+    public String getPvNameTa() {
+        return PvNameTa;
+    }
+
+    public void setPvNameTa(String pvNameTa) {
+        PvNameTa = pvNameTa;
+    }
 
     public String getExclusion_criteria() {
         return exclusion_criteria;

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "KVVTSurvey";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
 
     public static final String VILLAGE_TABLE_NAME = " villageTable";
@@ -35,11 +35,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "dcode INTEGER," +
                 "bcode INTEGER," +
                 "pvcode INTEGER," +
+                "pvname_ta TEXT,"+
                 "pvname TEXT)");
         db.execSQL("CREATE TABLE " + SCHEME_TABLE_NAME + " ("
                 + "exclusion_criteria_id TEXT," +
                  "photo_required TEXT," +
                  "auto_reject TEXT," +
+                "exclusion_criteria_ta TEXT,"+
                 "exclusion_criteria TEXT)");
         db.execSQL("CREATE TABLE " + COMMUNITY_TABLE_NAME + " ("
                 + "community_id TEXT," +
@@ -50,6 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "bcode TEXT," +
                 "pvcode TEXT," +
                 "habitation_code TEXT," +
+                "habitation_name_ta TEXT,"+
                 "habitation_name TEXT)");
         db.execSQL("CREATE TABLE " + STREET_TABLE_NAME + " ("
                 + "dcode TEXT," +
@@ -69,11 +72,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "eligible_for_auto_exclusion  TEXT," +
                 "habitation_name TEXT," +
                 "exclusion_criteria_id TEXT," +
+                "exclusion_criteria_ta TEXT," +
                 "photo_available TEXT," +
                 "patta_available TEXT," +
                 "is_awaas_plus_listed TEXT," +
                 "is_document_available TEXT," +
                 "is_natham_land_available TEXT," +
+                "pvname_ta TEXT," +
+                "habitation_name_ta TEXT," +
                 "pvname TEXT)");
         db.execSQL("CREATE TABLE " + SAVE_KVVT_DETAILS + " ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -85,6 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "habitation_name TEXT," +
                 "benificiary_id TEXT," +
                 "exclusion_criteria_id TEXT," +
+                "exclusion_criteria_ta TEXT," +
                 "beneficiary_name TEXT," +
                 "person_eligible TEXT," +
                 "existing_user TEXT," +

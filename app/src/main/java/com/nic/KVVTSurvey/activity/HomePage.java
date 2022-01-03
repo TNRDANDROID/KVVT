@@ -81,6 +81,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     String pref_Scheme;
     String photoRequired="";
     String auto_rejection="";
+    String exclusion_criteria_ta="";
 
     String patta_avilable_status="";
     String is_awaas_plus_list="";
@@ -195,12 +196,15 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     pref_Scheme = Scheme.get(position).getExclusion_criteria();
                     photoRequired = Scheme.get(position).getPhoto_required();
                     auto_rejection = Scheme.get(position).getEleigible_auto_rejection();
+                    exclusion_criteria_ta = Scheme.get(position).getExclusion_criteria_ta();
                     prefManager.setKeySchemeListName(pref_Scheme);
                     prefManager.setKeySchemeCode(Scheme.get(position).getExclusion_criteria_id());
                     if(photoRequired.equals("Y")){
-                        homeScreenBinding.saveData.setText("Take Photo");
+                        //homeScreenBinding.saveData.setText("Take Photo");
+                        homeScreenBinding.saveData.setText(getResources().getString(R.string.take_photo));
                     }else {
-                        homeScreenBinding.saveData.setText("Save details");
+                        //homeScreenBinding.saveData.setText("Save details");
+                        homeScreenBinding.saveData.setText(getResources().getString(R.string.save_details));
                     }
                     if(auto_rejection.equals("Y")){
                         homeScreenBinding.pattaAvailableTv.setVisibility(View.GONE);
@@ -873,28 +877,35 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
             //homeScreenBinding.selectScheTv.setVisibility(View.VISIBLE);
             //homeScreenBinding.scheLayout.setVisibility(View.VISIBLE);
-            homeScreenBinding.saveData.setText("Take Photo");
+            //homeScreenBinding.saveData.setText("Take Photo");
+            homeScreenBinding.saveData.setText(getResources().getString(R.string.take_photo));
         } else if (isEligible.equalsIgnoreCase("N")) {
             homeScreenBinding.schemeSpinner.setSelection(0);
             prefManager.setKeySchemeCode("");
             homeScreenBinding.takePicLayout.setVisibility(View.GONE);
             //homeScreenBinding.selectScheTv.setVisibility(View.GONE);
             //homeScreenBinding.scheLayout.setVisibility(View.GONE);
-            homeScreenBinding.saveData.setText("Take Photo");
+            //homeScreenBinding.saveData.setText("Take Photo");
+            homeScreenBinding.saveData.setText(getResources().getString(R.string.take_photo));
         }
     }
 
 //    public boolean validateCheck() {
 //        if (isAlive.equalsIgnoreCase("") || isMigrated.equalsIgnoreCase("Y")) {
 //            homeScreenBinding.saveData.setText("Save details");
+    //homeScreenBinding.saveData.setText(getResources().getString(R.string.save_details));
 //        } else if (isAlive.equalsIgnoreCase("Y") && isMigrated.equalsIgnoreCase("N")) {
 //            homeScreenBinding.saveData.setText("Take Photo");
+    //homeScreenBinding.saveData.setText(getResources().getString(R.string.take_photo));
 //        } else if (isAlive.equalsIgnoreCase("N") && isLegal.equalsIgnoreCase("N")) {
 //            homeScreenBinding.saveData.setText("Save details");
+    //homeScreenBinding.saveData.setText(getResources().getString(R.string.save_details));
 //        } else if (isAlive.equalsIgnoreCase("N") && isLegal.equalsIgnoreCase("Y") && isMigrated.equalsIgnoreCase("Y")) {
 //            homeScreenBinding.saveData.setText("Save details");
+    //homeScreenBinding.saveData.setText(getResources().getString(R.string.save_details));
 //        } else if (isAlive.equalsIgnoreCase("N") && isLegal.equalsIgnoreCase("Y") && isMigrated.equalsIgnoreCase("N")) {
 //            homeScreenBinding.saveData.setText("Take Photo");
+    //homeScreenBinding.saveData.setText(getResources().getString(R.string.take_photo));
 //        }
 //    }
 
@@ -921,11 +932,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     String blockCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.BLOCK_CODE));
                     String pvCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_CODE));
                     String pvname = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_NAME));
+                    String pvname_ta = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_NAME_TA));
 
                     villageList.setDistictCode(districtCode);
                     villageList.setBlockCode(blockCode);
                     villageList.setPvCode(pvCode);
                     villageList.setPvName(pvname);
+                    villageList.setPvNameTa(pvname_ta);
 
                     VillageOrdered.add(villageList);
                 } while (VillageList.moveToNext());
@@ -933,9 +946,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             Log.d("Villagespinnersize", "" + VillageOrdered.size());
 
         }
-        Collections.sort(VillageOrdered, (lhs, rhs) -> lhs.getPvName().compareTo(rhs.getPvName()));
+        Collections.sort(VillageOrdered, (lhs, rhs) -> lhs.getPvNameTa().compareTo(rhs.getPvNameTa()));
         KVVTSurvey villageListValue = new KVVTSurvey();
-        villageListValue.setPvName("Select Village");
+        villageListValue.setPvName(getResources().getString(R.string.select_village));
+        villageListValue.setPvNameTa(getResources().getString(R.string.select_village));
         Village.add(villageListValue);
         for (int i = 0; i < VillageOrdered.size(); i++) {
             KVVTSurvey villageList = new KVVTSurvey();
@@ -943,11 +957,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             String blockCode = VillageOrdered.get(i).getBlockCode();
             String pvCode =  VillageOrdered.get(i).getPvCode();
             String pvname =  VillageOrdered.get(i).getPvName();
+            String pvname_ta =  VillageOrdered.get(i).getPvNameTa();
 
             villageList.setDistictCode(districtCode);
             villageList.setBlockCode(blockCode);
             villageList.setPvCode(pvCode);
             villageList.setPvName(pvname);
+            villageList.setPvNameTa(pvname_ta);
 
             Village.add(villageList);
         }
@@ -960,6 +976,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         Scheme.clear();
         KVVTSurvey villageListValue = new KVVTSurvey();
         villageListValue.setExclusion_criteria(getResources().getString(R.string.select_automatic_exclusion_creteria));
+        villageListValue.setExclusion_criteria_ta(getResources().getString(R.string.select_automatic_exclusion_creteria));
         Scheme.add(villageListValue);
         if (VillageList.getCount() > 0) {
             if (VillageList.moveToFirst()) {
@@ -969,11 +986,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     String EXCLUSION_CRITERIA = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA));
                     String PHOTO_REQUIRED = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PHOTO_REQUIRED));
                     String AUTO_REJECTED = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.AUTO_REJECT));
+                    String EXCLUSION_CRITERIA_TA = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_TA));
 
                     villageList.setExclusion_criteria_id(EXCLUSION_CRITERIA_ID);
                     villageList.setExclusion_criteria(EXCLUSION_CRITERIA);
                     villageList.setPhoto_required(PHOTO_REQUIRED);
                     villageList.setEleigible_auto_rejection(AUTO_REJECTED);
+                    villageList.setExclusion_criteria_ta(EXCLUSION_CRITERIA_TA);
 
                     Scheme.add(villageList);
                 } while (VillageList.moveToNext());
@@ -989,7 +1008,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
         Community.clear();
         KVVTSurvey CommunityListValue = new KVVTSurvey();
-        CommunityListValue.setCommunity_name("Select Community");
+        CommunityListValue.setCommunity_name(getResources().getString(R.string.select_community));
         Community.add(CommunityListValue);
         if (CommunityList.getCount() > 0) {
             if (CommunityList.moveToFirst()) {
@@ -1027,12 +1046,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     String pvCode = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.PV_CODE));
                     String habCode = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.HABB_CODE));
                     String habName = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.HABITATION_NAME));
+                    String habName_ta = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.HABITATION_NAME_TA));
 
                     habList.setDistictCode(districtCode);
                     habList.setBlockCode(blockCode);
                     habList.setPvCode(pvCode);
                     habList.setHabCode(habCode);
                     habList.setHabitationName(habName);
+                    habList.setHabitationNameTa(habName_ta);
 
                     HabitationOrdered.add(habList);
                 } while (HABList.moveToNext());
@@ -1040,9 +1061,10 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             Log.d("Habitationspinnersize", "" + HabitationOrdered.size());
 
         }
-        Collections.sort(HabitationOrdered, (lhs, rhs) -> lhs.getHabitationName().compareTo(rhs.getHabitationName()));
+        Collections.sort(HabitationOrdered, (lhs, rhs) -> lhs.getHabitationNameTa().compareTo(rhs.getHabitationNameTa()));
         KVVTSurvey habitationListValue = new KVVTSurvey();
-        habitationListValue.setHabitationName("Select Habitation");
+        habitationListValue.setHabitationName(getResources().getString(R.string.select_habitation));
+        habitationListValue.setHabitationNameTa(getResources().getString(R.string.select_habitation));
         Habitation.add(habitationListValue);
         for (int i = 0; i < HabitationOrdered.size(); i++) {
             KVVTSurvey habList = new KVVTSurvey();
@@ -1051,12 +1073,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
             String pvCode = HabitationOrdered.get(i).getPvCode();
             String habCode = HabitationOrdered.get(i).getHabCode();
             String habName = HabitationOrdered.get(i).getHabitationName();
+            String habName_ta = HabitationOrdered.get(i).getHabitationNameTa();
 
             habList.setDistictCode(districtCode);
             habList.setBlockCode(blockCode);
             habList.setPvCode(pvCode);
             habList.setHabCode(habCode);
             habList.setHabitationName(habName);
+            habList.setHabitationNameTa(habName_ta);
 
             Habitation.add(habList);
         }
@@ -1097,7 +1121,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         }
         Collections.sort(StreetOrdered, (lhs, rhs) -> lhs.getStreetNameTa().compareTo(rhs.getStreetNameTa()));
         KVVTSurvey strListValue = new KVVTSurvey();
-        strListValue.setStreetNameTa("Select Street");
+        strListValue.setStreetNameTa(getResources().getString(R.string.select_street));
         Street.add(strListValue);
         for (int i = 0; i < StreetOrdered.size(); i++) {
             KVVTSurvey strList = new KVVTSurvey();
@@ -1241,7 +1265,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                     homeScreenBinding.name.setText("");
                     homeScreenBinding.fatherName.setText("");
                     flag=false;
-                    Utils.showAlert(this,"Invalid Benificiary Id!");
+                    Utils.showAlert(this,"Invalid Beneficiary Id!");
                 }else {homeScreenBinding.nameLayout.setVisibility(View.GONE);
                     homeScreenBinding.fatherNameLayout.setVisibility(View.GONE);
                     homeScreenBinding.name.setText("");
@@ -1313,14 +1337,14 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
 
     public void closeApplication() {
-        new MyDialog(this).exitDialog(this, "Are you sure you want to Logout?", "Logout");
+        new MyDialog(this).exitDialog(this, getResources().getString(R.string.are_u_sure_log_out), "Logout");
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                new MyDialog(this).exitDialog(this, "Are you sure you want to exit ?", "Exit");
+                new MyDialog(this).exitDialog(this, getResources().getString(R.string.are_u_sure_exit), "Exit");
                 return false;
             }
         }
@@ -1344,9 +1368,9 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     }
 
     public void validateFields() {
-        if ((homeScreenBinding.villageSpinner.getSelectedItem() != null) &&(!"Select Village".equalsIgnoreCase(Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName()))
+        if ((homeScreenBinding.villageSpinner.getSelectedItem() != null) &&(!getResources().getString(R.string.select_village).equalsIgnoreCase(Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName()))
         && (Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName() != null)) {
-            if ((homeScreenBinding.habitationSpinner.getSelectedItem() != null) &&(!"Select Habitation".equalsIgnoreCase(Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName()))
+            if ((homeScreenBinding.habitationSpinner.getSelectedItem() != null) &&(!getResources().getString(R.string.select_habitation).equalsIgnoreCase(Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName()))
             && (Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName() != null)) {
                 if ((homeScreenBinding.existingUserYes.isChecked()) || homeScreenBinding.existingUserNo.isChecked()) {
                     if((homeScreenBinding.existingUserYes.isChecked())){
@@ -1355,13 +1379,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                         validateNewUser();
                     }
                 } else {
-                    Utils.showAlert(this, "Check the existing user or not!");
+                    Utils.showAlert(this, getResources().getString(R.string.choose_existing_hut_dweeler_or_not));
                 }
             } else {
-                Utils.showAlert(this, "Select Habitation!");
+                Utils.showAlert(this, getResources().getString(R.string.select_habitation));
             }
         } else {
-            Utils.showAlert(this, "Select Village!");
+            Utils.showAlert(this, getResources().getString(R.string.select_village));
         }
 
     }
@@ -1370,31 +1394,31 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         if (!homeScreenBinding.name.getText().toString().isEmpty()) {
             if(homeScreenBinding.radioHusband.isChecked() || homeScreenBinding.radioFather.isChecked()){
             if (!homeScreenBinding.fatherName.getText().toString().isEmpty()) {
-                if ((homeScreenBinding.streetSpinner.getSelectedItem() != null) &&(!"Select Street".equalsIgnoreCase(Street.get(homeScreenBinding.streetSpinner.getSelectedItemPosition()).getStreetNameTa()))
+                if ((homeScreenBinding.streetSpinner.getSelectedItem() != null) &&(!getResources().getString(R.string.select_street).equalsIgnoreCase(Street.get(homeScreenBinding.streetSpinner.getSelectedItemPosition()).getStreetNameTa()))
                 && (Street.get(homeScreenBinding.streetSpinner.getSelectedItemPosition()).getStreetNameTa() != null)) {
                     if (!homeScreenBinding.doorNo.getText().toString().isEmpty()) {
-                        if ((homeScreenBinding.communitySpinner.getSelectedItem() != null) &&(!"Select Community".equalsIgnoreCase(Community.get(homeScreenBinding.communitySpinner.getSelectedItemPosition()).getCommunity_name()))
+                        if ((homeScreenBinding.communitySpinner.getSelectedItem() != null) &&(!getResources().getString(R.string.select_community).equalsIgnoreCase(Community.get(homeScreenBinding.communitySpinner.getSelectedItemPosition()).getCommunity_name()))
                         && (Community.get(homeScreenBinding.communitySpinner.getSelectedItemPosition()).getCommunity_name() != null)) {
                             checkLegalYesNo();
                         }else {
-                            Utils.showAlert(this, "Select Community!");
+                            Utils.showAlert(this, getResources().getString(R.string.select_community));
                         }
                     }else {
-                        Utils.showAlert(this, "Enter Door No!");
+                        Utils.showAlert(this, getResources().getString(R.string.enter_door_no));
                     }
 
                 }else {
-                    Utils.showAlert(this, "Select Street!");
+                    Utils.showAlert(this, getResources().getString(R.string.select_street));
                 }
 
             }else {
-                Utils.showAlert(this, "Enter Father/Husband Name!");
+                Utils.showAlert(this, getResources().getString(R.string.enter_father_or_husband_name));
             }
             }else {
-                Utils.showAlert(this, "Select Father/Husband Name");
+                Utils.showAlert(this, getResources().getString(R.string.choose_father_or_husband_name));
             }
         }else {
-            Utils.showAlert(this, "Enter the benificiary Name!");
+            Utils.showAlert(this, getResources().getString(R.string.enter_beneficiary_name));
         }
     }
 
@@ -1404,15 +1428,15 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                 checkLegalYesNo();
 
             } else {
-                Utils.showAlert(this, "First validate benificiary Id!");
+                Utils.showAlert(this, getResources().getString(R.string.validate_beneficiary_id));
             }
         } else {
-            Utils.showAlert(this, "Enter the benificiary Id!");
+            Utils.showAlert(this, getResources().getString(R.string.enter_beneficiary_id));
         }
     }
 /*
     public void validateFields() {
-        if (!"Select Village".equalsIgnoreCase(Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName())) {
+        if (!getResources().getString(R.string.select_village).equalsIgnoreCase(Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName())) {
             if (!"Select Habitation".equalsIgnoreCase(Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName())) {
                         if (!homeScreenBinding.benificiaryId.getText().toString().isEmpty()) {
                             if (flag) {
@@ -1540,12 +1564,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         registerValue.put(AppConstant.BLOCK_CODE, prefManager.getBlockCode());
         registerValue.put(AppConstant.PV_CODE, pvcode);
         registerValue.put(AppConstant.HAB_CODE, habcode);
-        registerValue.put(AppConstant.PV_NAME, Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvName());
-        registerValue.put(AppConstant.HABITATION_NAME, Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationName());
+        registerValue.put(AppConstant.PV_NAME, Village.get(homeScreenBinding.villageSpinner.getSelectedItemPosition()).getPvNameTa());
+        registerValue.put(AppConstant.HABITATION_NAME, Habitation.get(homeScreenBinding.habitationSpinner.getSelectedItemPosition()).getHabitationNameTa());
         registerValue.put(AppConstant.BENEFICIARY_NAME, benificiary_name);
         registerValue.put(AppConstant.BENEFICIARY_FATHER_NAME, benificiary_fatherName);
         registerValue.put(AppConstant.BENEFICIARY_ID, benificiary_id);
         registerValue.put(AppConstant.EXCLUSION_CRITERIA_ID, prefManager.getKeySchemeCode());
+        registerValue.put(AppConstant.EXCLUSION_CRITERIA_TA, exclusion_criteria_ta);
         registerValue.put(AppConstant.PERSON_ELIGIBLE, auto_rejection);
         registerValue.put(AppConstant.BUTTON_TEXT, buttonTxt);
         registerValue.put(AppConstant.EXISTING_USER, isExistingUser);
@@ -1680,6 +1705,9 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                             kvvtSurvey.setPhoto_availavle(jsonArray.getJSONObject(i).getString(AppConstant.PHOTO_AVAILABLE));
                             kvvtSurvey.setPatta_available_status(jsonArray.getJSONObject(i).getString(AppConstant.PATTA_AVAILABLE));
                             kvvtSurvey.setIs_awaas_plus_list(jsonArray.getJSONObject(i).getString(AppConstant.IS_AWAAS_PLUS_LISTED));
+                            kvvtSurvey.setHabitationNameTa(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME_TA));
+                            kvvtSurvey.setPvNameTa(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME_TA));
+                            kvvtSurvey.setExclusion_criteria_ta(jsonArray.getJSONObject(i).getString(AppConstant.EXCLUSION_CRITERIA_TA));
 
                             kvvtSurvey.setIS_DOCUMENT_AVAILABLE(jsonArray.getJSONObject(i).getString(AppConstant.IS_DOCUMENT_AVAILABLE));
                             kvvtSurvey.setIS_NATHAM_LAND_AVAILABLE(jsonArray.getJSONObject(i).getString("is_natham_land"));
@@ -1737,7 +1765,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                         takePhoto("Save details");
                     }
                 } else {
-                    Utils.showAlert(this, "Please Choose Awaas Plus List Status!");
+                    Utils.showAlert(this, getResources().getString(R.string.choose_awass_list));
 
                 }
             }
@@ -1753,7 +1781,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                             }
                         }
                         else {
-                            Utils.showAlert(this, "Please Choose Awaas Plus List Status!");
+                            Utils.showAlert(this, getResources().getString(R.string.choose_awass_list));
 
                         }
                     }
@@ -1767,24 +1795,24 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                                     takePhoto("Save details");
                                 }
                             } else {
-                                Utils.showAlert(this, "Please Choose Awaas Plus List Status!");
+                                Utils.showAlert(this, getResources().getString(R.string.choose_awass_list));
                             }
                         }
                         else {
-                            Utils.showAlert(this, "Please Choose Natham Land Status!");
+                            Utils.showAlert(this, getResources().getString(R.string.choose_natham_land));
 
                         }
 
                     }
                 }
                 else {
-                    Utils.showAlert(this, "Please Choose Registration Document Status!");
+                    Utils.showAlert(this, getResources().getString(R.string.choose_document_status));
 
                 }
             }
         }
         else {
-            Utils.showAlert(this, "Please Choose Patta Status!");
+            Utils.showAlert(this, getResources().getString(R.string.choose_patta_status));
 
         }
 

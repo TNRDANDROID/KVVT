@@ -39,6 +39,7 @@ public class AppConstant {
     public static String HABB_CODE = "habitation_code";
     public static String BLOCK_NAME = "bname";
     public static String PV_NAME = "pvname";
+    public static String PV_NAME_TA = "pvname_ta";
     public static String DESIG_NAME = "desig_name";
 
 
@@ -55,6 +56,7 @@ public class AppConstant {
     public static String BENEFICIARY_NAME = "beneficiary_name";
     public static String BENEFICIARY_FATHER_NAME = "beneficiary_father_name";
     public static String HABITATION_NAME = "habitation_name";
+    public static String HABITATION_NAME_TA = "habitation_name_ta";
     public static String TYPE_OF_PHOTO = "type_of_photo";
     public static String KEY_LATITUDE = "latitude";
     public static String KEY_LONGITUDE = "longitude";
@@ -66,6 +68,7 @@ public class AppConstant {
     public static String PERSON_ELIGIBLE = "person_eligible";
     public static String EXCLUSION_CRITERIA_ID = "exclusion_criteria_id";
     public static String EXCLUSION_CRITERIA = "exclusion_criteria";
+    public static String EXCLUSION_CRITERIA_TA = "exclusion_criteria_ta";
     public static String PHOTO_REQUIRED = "photo_required";
     public static String AUTO_REJECT = "auto_reject";
     public static String PHOTO_AVAILABLE = "photo_available";

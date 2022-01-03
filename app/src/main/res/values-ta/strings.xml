@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">KVVT Survey</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_username">UserName</string>
-    <string name="btn_login">Login</string>
+    <string name="hint_password">கடவுச்சொல்</string>
+    <string name="hint_username">பயனர் பெயர்</string>
+    <string name="btn_login">உள் நுழை</string>
     <string name="font_circular_medium">circular-medium.ttf</string>
     <string name="font_circular_bold">circular-bold.ttf</string>
     <string name="font_circular_book">circular-book.ttf</string>
@@ -15,8 +15,8 @@
     <string name="view_action">View Action</string>
     <string name="action_taken_tv" tools:ignore="ExtraTranslation">Action Taken Against Inspection Report for High Value Project</string>
     <string name="init_vector">2SN22SkJGDyOAXUU</string>
-    <string name="patta_available">Choose Patta Available</string>
-    <string name="awaas_pluse_list">Whether He/She is Awaas Plus List</string>
+    <string name="patta_available">பத்திரம் / பட்டா  உள்ளதா ?</string>
+    <string name="awaas_pluse_list">சமூக பொருளாதார சாதிவாரி கணக்கெடுப்பு / ஆவாஸ் பிளஸ் கணக்கெடுப்பில் பெயர் இடம் பெற்றுள்ளதா ?</string>
     <string name="heading_text">குக்கிராம வரியாக குடிசைவாழ்  குடும்பங்களின் கணக்கெடுப்பு</string>
     <string name="user_image_satisfaction">பயனாளியின் உருவம்  தெளிவாக இருக்கிறதா ?</string>
     <string name="user_house_satisfaction">பயனாளியின் வீட்டின் முகப்பு  தெளிவாக இருக்கிறதா ?</string>
@@ -29,37 +29,73 @@
     <string name="you_need_to_update">"நீங்கள் KVVT பதிப்பை புதுப்பிக்க வேண்டும்</string>
     <string name="this_version_is_no_longer_supported">இந்தப் பதிப்பு இனி ஆதரிக்கப்படாது. அதிகாரப்பூர்வ தளத்திற்குச் சென்று புதிய பதிப்பை நிறுவவும்</string>
     <string name="update">புதுப்பிக்கவும்</string>
-    <string name="save_image">படத்தை சேமிக்கவும்</string>
-    <string name="select_village">கிராமத்தைத் தேர்ந்தெடுக்கவும்</string>
-    <string name="select_habitation">குக்கிராமத்தைத் தேர்ந்தெடுக்கவும்</string>
-    <string name="existing_hut_dweeler_or_not">கே.வி.வி.டி தரவுத்தளத்தில் தற்போதுள்ள ஹட் குடியிருப்பாளர்</string>
-    <string name="select_street">தெருவைத் தேர்ந்தெடுக்கவும்</string>
-    <string name="select_community">சமூகத்தைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="save_image">புகைப்படத்தை சேமி</string>
+    <string name="select_village">கிராம ஊராட்சியை தேர்வு செய்க</string>
+    <string name="select_habitation">குக்கிராமத்தை தேர்வு செய்க</string>
+    <string name="existing_hut_dweeler_or_not">KVVT 2010 கணக்கெடுப்பில் உள்ளவரா ?</string>
+    <string name="select_street">தெருவின் பெயரை தேர்வு செய்க</string>
+    <string name="select_community">வகுப்பின் பெயரை தேர்வு செய்யவும்</string>
     <string name="patta_status">பட்டா இருக்கிறதா</string>
     <string name="sync_data">ஒத்திசை தரவு</string>
-    <string name="save_details">விவரங்களைச் சேமி</string>
+    <string name="save_details">விபரத்தை சேமி</string>
     <string name="exixt_hut_dweller">Existing Hut Dweller in KVVT database?</string>
-    <string name="village">Village Name</string>
-    <string name="habitation">Habitation</string>
+    <string name="village">கிராமம்</string>
+    <string name="habitation">குக்கிராமம்</string>
     <string name="kvvt_id">KVVT ID</string>
-    <string name="auto_exclusion">Auto Exclusion</string>
-    <string name="select_automatic_exclusion_creteria">Select Automatic Exclusion Criteria</string>
-    <string name="patta_available_text">Patta Available</string>
-    <string name="is_awaas_plus">Patta Available</string>
+    <string name="auto_exclusion">வகை</string>
+    <string name="select_automatic_exclusion_creteria">வகையினை தேர்வுசெய்க</string>
+    <string name="patta_available_text">பத்திரம் / பட்டா</string>
+    <string name="is_awaas_plus">ஆவாஸ் பிளஸ்</string>
     <string name="upload">Upload</string>
     <string name="delete">Delete</string>
     <string name="view_image_">View Image</string>
-    <string name="beneficiary_details">Beneficiary Details</string>
-    <string name="beneficiary_image">Beneficiary Image</string>
-    <string name="existing_house_with_beneficiary_image">Existing House With Beneficiary</string>
-    <string name="father_name">Father Name</string>
+    <string name="beneficiary_details">பயனாளியின் விபரம்</string>
+    <string name="beneficiary_image">பயனாளியின் புகைப்படம்</string>
+    <string name="existing_house_with_beneficiary_image">பயனாளியுடன் தற்போது வசிக்கும் வீட்டின்  புகைப்படம்</string>
+    <string name="father_name">தந்தை பெயர்</string>
     <string name="yes">ஆம்</string>
+    <string name="available">இருக்கிறது</string>
     <string name="no">இல்லை</string>
     <string name="view_online_image">ஆன்லைன் படத்தைக் காண்க</string>
-    <string name="registration_document_yes_no">பதிவு ஆவணம் ஆம்/இல்லை</string>
+    <string name="registration_document_yes_no">பதிவு ஆவணம் உள்ளதா ?</string>
     <string name="nattam_land_yes_no">நத்தம் நிலம் ஆம்/இல்லை</string>
     <string name="document_status">ஆவண நிலை</string>
-    <string name="natham_land_status">நத்தம் நிலத்தின் நிலை</string>
+    <string name="natham_land_status">நத்தம் நிலம்</string>
+
+    <string name="home_page">முகப்பு பக்கம்</string>
+    <string name="enter_beneficiary_id">குடும்பத்தின் அடையாள எண்ணைக் குறிப்பிடவும்</string>
+    <string name="validate_beneficiary_id">முதலில் குடும்பத்தின் அடையாள எண்ணை உறுதி செய்யவும்</string>
+    <string name="beneficiary_name">குடும்பத்தலைவரின் பெயர்</string>
+    <string name="enter_beneficiary_name">குடும்பத்தலைவரின் பெயர் உள்ளீடு செய்யவும்</string>
+    <string name="father_or_husband_name">தந்தை / கணவர் பெயர்</string>
+    <string name="enter_father_or_husband_name">தந்தை / கணவர் பெயர் உள்ளீடு செய்யவும்</string>
+    <string name="choose_father_or_husband_name">தந்தை / கணவர் பெயர் என்பதை தேர்வு செய்க</string>
+    <string name="take_photo">புகைப்படம் எடுக்கவும்</string>
+    <string name="husband_name">கணவர் பெயர்</string>
+    <string name="enter_door_no">கதவு எண்ணை உள்ளீடு செய்யவும்</string>
+    <string name="door_no">கதவு எண்</string>
+    <string name="choose_existing_hut_dweeler_or_not">KVVT 2010 கணக்கெடுப்பில் உள்ளவரா ? என்பதை தேர்வு செய்க</string>
+    <string name="choose_awass_list">சமூக பொருளாதார சாதிவாரி கணக்கெடுப்பு / ஆவாஸ் பிளஸ் கணக்கெடுப்பில் பெயர் இடம் பெற்றுள்ளதா ?என்பதை தேர்வு செய்க</string>
+    <string name="choose_natham_land">சமூக பொருளாதார சாதிவாரி கணக்கெடுப்பு / ஆவாஸ் பிளஸ் கணக்கெடுப்பில் பெயர் இடம் பெற்றுள்ளதா ?என்பதை தேர்வு செய்க</string>
+    <string name="choose_patta_status">பத்திரம் / பட்டா  உள்ளதா ?என்பதை தேர்வு செய்க</string>
+    <string name="choose_document_status">பதிவு ஆவணம் உள்ளதா ?என்பதை தேர்வு செய்க</string>
+    <string name="are_u_sure_exit">"நிச்சயமாக நீங்கள் வெளியேற வேண்டுமா ?"</string>
+    <string name="are_u_sure_log_out">நிச்சயமாக வெளியேற விரும்புகிறீர்களா?</string>
+    <string name="please_enter_the_user_name_and_password">தயவு செய்து உங்கள் பயனர்பெயர் மற்றும் கடவுச்சொல்லை உள்ளிடவும்!</string>
+    <string name="please_turn_on_network_or_continue_offline">இணைய இணைப்பு கிடைக்கவில்லை..தயவுசெய்து பிணைய இணைப்பை இயக்கவும் அல்லது ஆஃப்லைன் பயன்முறையில் தொடரவும்..</string>
+    <string name="settings">அமைப்புகள்</string>
+    <string name="continue_with_off_line">ஆஃப்லைனில் தொடரவும்</string>
+    <string name="invalid_user_name_or_password">தவறான பயனர்பெயர் அல்லது கடவுச்சொல்</string>
+    <string name="no_data_available_for_offline">"ஆஃப்லைனில் தரவு இல்லை. உங்கள் நெட்வொர்க்கை இயக்கவும்</string>
+    <string name="please_enter_the_user_name">தயவு செய்து பயனர்பெயரை உள்ளிடவும்</string>
+    <string name="please_enter_the_password">"தயவு செய்து கடவுச்சொல்லை உள்ளிடவும்</string>
+    <string name="log_in_again">மீண்டும் உள்நுழைக</string>
+    <string name="version">பதிப்பு</string>
+
+
+
+
+
 
 
 

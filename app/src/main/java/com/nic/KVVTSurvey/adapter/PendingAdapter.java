@@ -80,18 +80,18 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        holder.pendingAdapterBinding.habName.setText(pendingListValues.get(position).getHabitationName());
-        holder.pendingAdapterBinding.villageName.setText(pendingListValues.get(position).getPvName());
+        holder.pendingAdapterBinding.habName.setText(pendingListValues.get(position).getHabitationNameTa());
+        holder.pendingAdapterBinding.villageName.setText(pendingListValues.get(position).getPvNameTa());
         holder.pendingAdapterBinding.secId.setText(pendingListValues.get(position).getBeneficiaryId());
         holder.pendingAdapterBinding.name.setText(pendingListValues.get(position).getBeneficiaryName());
         holder.pendingAdapterBinding.beneficiaryNameHeader.setText(pendingListValues.get(position).getBeneficiaryName());
 
         if(pendingListValues.get(position).getPatta_available_status()!=null && !pendingListValues.get(position).getPatta_available_status().equals("")){
             if(pendingListValues.get(position).getPatta_available_status().equals("Y")){
-                holder.pendingAdapterBinding.beneficiaryPattaTv.setText("Yes");
+                holder.pendingAdapterBinding.beneficiaryPattaTv.setText(context.getResources().getString(R.string.available));
             }
             else {
-                holder.pendingAdapterBinding.beneficiaryPattaTv.setText("No");
+                holder.pendingAdapterBinding.beneficiaryPattaTv.setText(context.getResources().getString(R.string.no));
             }
 
         }
@@ -100,10 +100,10 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         }
         if(pendingListValues.get(position).getIs_awaas_plus_list()!=null && !pendingListValues.get(position).getIs_awaas_plus_list().equals("")){
             if(pendingListValues.get(position).getIs_awaas_plus_list().equals("Y")){
-                holder.pendingAdapterBinding.beneficiaryAwaasTv.setText("Yes");
+                holder.pendingAdapterBinding.beneficiaryAwaasTv.setText(context.getResources().getString(R.string.yes));
             }
             else {
-                holder.pendingAdapterBinding.beneficiaryAwaasTv.setText("No");
+                holder.pendingAdapterBinding.beneficiaryAwaasTv.setText(context.getResources().getString(R.string.no));
             }
 
         }
@@ -113,10 +113,10 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
         if(pendingListValues.get(position).getIS_DOCUMENT_AVAILABLE()!=null && !pendingListValues.get(position).getIS_DOCUMENT_AVAILABLE().equals("")){
             if(pendingListValues.get(position).getIS_DOCUMENT_AVAILABLE().equals("Y")){
-                holder.pendingAdapterBinding.documentStatusTv.setText("Yes");
+                holder.pendingAdapterBinding.documentStatusTv.setText(context.getResources().getString(R.string.available));
             }
             else {
-                holder.pendingAdapterBinding.documentStatusTv.setText("No");
+                holder.pendingAdapterBinding.documentStatusTv.setText(context.getResources().getString(R.string.no));
             }
 
         }
@@ -125,10 +125,10 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         }
         if(pendingListValues.get(position).getIS_NATHAM_LAND_AVAILABLE()!=null && !pendingListValues.get(position).getIS_NATHAM_LAND_AVAILABLE().equals("")){
             if(pendingListValues.get(position).getIS_NATHAM_LAND_AVAILABLE().equals("Y")){
-                holder.pendingAdapterBinding.nathamLandStatusTv.setText("Yes");
+                holder.pendingAdapterBinding.nathamLandStatusTv.setText(context.getResources().getString(R.string.yes));
             }
             else {
-                holder.pendingAdapterBinding.nathamLandStatusTv.setText("No");
+                holder.pendingAdapterBinding.nathamLandStatusTv.setText(context.getResources().getString(R.string.no));
             }
 
         }
@@ -145,14 +145,31 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         }
 
         if(pendingListValues.get(position).getIsEligible().toString().equals("Y")){
-            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText("Yes");
+            /*holder.pendingAdapterBinding.beneficiaryMigratedLayout.setVisibility(View.VISIBLE);
+            holder.pendingAdapterBinding.legalView1.setVisibility(View.VISIBLE);
+            //holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(context.getResources().getString(R.string.yes));
+            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(pendingListValues.get(position).getExclusion_criteria_ta());*/
+
         }else {
-            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText("No");
+            /*holder.pendingAdapterBinding.beneficiaryMigratedLayout.setVisibility(View.GONE);
+            holder.pendingAdapterBinding.legalView1.setVisibility(View.GONE);
+           // holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(context.getResources().getString(R.string.no));
+            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText("-");*/
+
         }
 
         if(pendingListValues.get(position).getExisting_user().toString().equals("N")){
             holder.pendingAdapterBinding.secId.setText("New User");
+            holder.pendingAdapterBinding.beneficiaryMigratedLayout.setVisibility(View.GONE);
+            holder.pendingAdapterBinding.legalView1.setVisibility(View.GONE);
+            // holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(context.getResources().getString(R.string.no));
+            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText("-");
         }else {
+            holder.pendingAdapterBinding.beneficiaryMigratedLayout.setVisibility(View.VISIBLE);
+            holder.pendingAdapterBinding.legalView1.setVisibility(View.VISIBLE);
+            //holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(context.getResources().getString(R.string.yes));
+            holder.pendingAdapterBinding.beneficiaryMigratedTv.setText(pendingListValues.get(position).getExclusion_criteria_ta());
+
         }
 
         String button_text = pendingListValues.get(position).getButtonText();
@@ -337,6 +354,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
         if (Utils.isOnline()) {
             ((PendingScreen)context).saveKVVTImagesJsonParams(dataset);
+            Log.d("JSONDATA",dataset.toString());
         } else {
             Utils.showAlert(context, "Turn On Mobile Data To Upload");
         }

@@ -47,6 +47,7 @@ public class dbData {
         values.put(AppConstant.BLOCK_CODE, kvvtSurvey.getBlockCode());
         values.put(AppConstant.PV_CODE, kvvtSurvey.getPvCode());
         values.put(AppConstant.PV_NAME, kvvtSurvey.getPvName());
+        values.put(AppConstant.PV_NAME_TA, kvvtSurvey.getPvNameTa());
 
         long id = db.insert(DBHelper.VILLAGE_TABLE_NAME,null,values);
         Log.d("Inserted_id_village", String.valueOf(id));
@@ -58,6 +59,7 @@ public class dbData {
         ContentValues values = new ContentValues();
         values.put(AppConstant.EXCLUSION_CRITERIA_ID, kvvtSurvey.getExclusion_criteria_id());
         values.put(AppConstant.EXCLUSION_CRITERIA, kvvtSurvey.getExclusion_criteria());
+        values.put(AppConstant.EXCLUSION_CRITERIA_TA, kvvtSurvey.getExclusion_criteria_ta());
         values.put(AppConstant.PHOTO_REQUIRED, kvvtSurvey.getPhoto_required());
         values.put(AppConstant.AUTO_REJECT, kvvtSurvey.getEleigible_auto_rejection());
         long id = db.insert(DBHelper.SCHEME_TABLE_NAME,null,values);
@@ -179,6 +181,7 @@ public class dbData {
         values.put(AppConstant.PV_CODE, kvvtSurvey.getPvCode());
         values.put(AppConstant.HABB_CODE, kvvtSurvey.getHabCode());
         values.put(AppConstant.HABITATION_NAME, kvvtSurvey.getHabitationName());
+        values.put(AppConstant.HABITATION_NAME_TA, kvvtSurvey.getHabitationNameTa());
 
         long id = db.insert(DBHelper.HABITATION_TABLE_NAME,null,values);
         Log.d("Inserted_id_habitation", String.valueOf(id));
@@ -286,11 +289,14 @@ public class dbData {
         values.put(AppConstant.BENEFICIARY_FATHER_NAME, kvvtSurvey.getBeneficiaryFatherName());
         values.put(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION, kvvtSurvey.getEligible_for_auto_exclusion());
         values.put(AppConstant.HABITATION_NAME, kvvtSurvey.getHabitationName());
+        values.put(AppConstant.HABITATION_NAME_TA, kvvtSurvey.getHabitationNameTa());
         values.put(AppConstant.EXCLUSION_CRITERIA_ID, kvvtSurvey.getExclusion_criteria_id());
         values.put(AppConstant.PV_NAME, kvvtSurvey.getPvName());
+        values.put(AppConstant.PV_NAME_TA, kvvtSurvey.getPvNameTa());
         values.put(AppConstant.PHOTO_AVAILABLE, kvvtSurvey.getPhoto_availavle());
         values.put(AppConstant.PATTA_AVAILABLE, kvvtSurvey.getPatta_available_status());
         values.put(AppConstant.IS_AWAAS_PLUS_LISTED, kvvtSurvey.getIs_awaas_plus_list());
+        values.put(AppConstant.EXCLUSION_CRITERIA_TA, kvvtSurvey.getExclusion_criteria_ta());
 
         values.put(AppConstant.IS_DOCUMENT_AVAILABLE, kvvtSurvey.getIS_DOCUMENT_AVAILABLE());
         values.put(AppConstant.IS_NATHAM_LAND_AVAILABLE, kvvtSurvey.getIS_NATHAM_LAND_AVAILABLE());
@@ -349,6 +355,13 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.IS_DOCUMENT_AVAILABLE)));
                     card.setIS_NATHAM_LAND_AVAILABLE(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.IS_NATHAM_LAND_AVAILABLE)));
+                    card.setHabitationNameTa(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.HABITATION_NAME_TA)));
+                    card.setPvNameTa(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PV_NAME_TA)));
+                    card.setExclusion_criteria_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_TA)));
+
 
                     cards.add(card);
                 }
@@ -391,9 +404,9 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.PV_CODE)));
                     card.setHabCode(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.HAB_CODE)));
-                    card.setPvName(cursor.getString(cursor
+                    card.setPvNameTa(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PV_NAME)));
-                    card.setHabitationName(cursor.getString(cursor
+                    card.setHabitationNameTa(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.HABITATION_NAME)));
                     card.setBeneficiaryId(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_ID)));
@@ -426,6 +439,9 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.IS_DOCUMENT_AVAILABLE)));
                     card.setIS_NATHAM_LAND_AVAILABLE(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.IS_NATHAM_LAND_AVAILABLE)));
+                    card.setExclusion_criteria_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_TA)));
+
 
 
 
@@ -459,9 +475,9 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.PV_CODE)));
                     card.setHabCode(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.HAB_CODE)));
-                    card.setPvName(cursor.getString(cursor
+                    card.setPvNameTa(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PV_NAME)));
-                    card.setHabitationName(cursor.getString(cursor
+                    card.setHabitationNameTa(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.HABITATION_NAME)));
                     card.setBeneficiaryId(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.BENEFICIARY_ID)));
@@ -494,6 +510,9 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.IS_DOCUMENT_AVAILABLE)));
                     card.setIS_NATHAM_LAND_AVAILABLE(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.IS_NATHAM_LAND_AVAILABLE)));
+                    card.setExclusion_criteria_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_TA)));
+
 
 
 

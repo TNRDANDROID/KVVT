@@ -137,11 +137,13 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     String blockCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.BLOCK_CODE));
                     String pvCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_CODE));
                     String pvname = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_NAME));
+                    String pvname_ta = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_NAME_TA));
 
                     villageList.setDistictCode(districtCode);
                     villageList.setBlockCode(blockCode);
                     villageList.setPvCode(pvCode);
                     villageList.setPvName(pvname);
+                    villageList.setPvNameTa(pvname_ta);
 
                     VillageOrdered.add(villageList);
                 } while (VillageList.moveToNext());
@@ -151,7 +153,8 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
         }
         Collections.sort(VillageOrdered, (lhs, rhs) -> lhs.getPvName().compareTo(rhs.getPvName()));
         KVVTSurvey villageListValue = new KVVTSurvey();
-        villageListValue.setPvName("Select Village");
+        villageListValue.setPvName(getResources().getString(R.string.select_village));
+        villageListValue.setPvNameTa(getResources().getString(R.string.select_village));
         Village.add(villageListValue);
         for (int i = 0; i < VillageOrdered.size(); i++) {
             KVVTSurvey villageList = new KVVTSurvey();
@@ -159,11 +162,13 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
             String blockCode = VillageOrdered.get(i).getBlockCode();
             String pvCode = VillageOrdered.get(i).getPvCode();
             String pvname = VillageOrdered.get(i).getPvName();
+            String pvname_ta = VillageOrdered.get(i).getPvNameTa();
 
             villageList.setDistictCode(districtCode);
             villageList.setBlockCode(blockCode);
             villageList.setPvCode(pvCode);
             villageList.setPvName(pvname);
+            villageList.setPvNameTa(pvname_ta);
 
             Village.add(villageList);
         }
@@ -185,12 +190,14 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
                     String pvCode = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.PV_CODE));
                     String habCode = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.HABB_CODE));
                     String habName = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.HABITATION_NAME));
+                    String habName_ta = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.HABITATION_NAME_TA));
 
                     habList.setDistictCode(districtCode);
                     habList.setBlockCode(blockCode);
                     habList.setPvCode(pvCode);
                     habList.setHabCode(habCode);
                     habList.setHabitationName(habName);
+                    habList.setHabitationNameTa(habName_ta);
 
                     HabitationOrdered.add(habList);
                 } while (HABList.moveToNext());
@@ -198,9 +205,10 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
             Log.d("Habitationspinnersize", "" + HabitationOrdered.size());
 
         }
-        Collections.sort(HabitationOrdered, (lhs, rhs) -> lhs.getHabitationName().compareTo(rhs.getHabitationName()));
+        Collections.sort(HabitationOrdered, (lhs, rhs) -> lhs.getHabitationNameTa().compareTo(rhs.getHabitationNameTa()));
         KVVTSurvey habitationListValue = new KVVTSurvey();
-        habitationListValue.setHabitationName("Select Habitation");
+        habitationListValue.setHabitationName(getResources().getString(R.string.select_habitation));
+        habitationListValue.setHabitationNameTa(getResources().getString(R.string.select_habitation));
         Habitation.add(habitationListValue);
         for (int i = 0; i < HabitationOrdered.size(); i++) {
             KVVTSurvey habList = new KVVTSurvey();
@@ -209,12 +217,15 @@ public class ViewServerDataScreen extends AppCompatActivity implements Api.Serve
             String pvCode = HabitationOrdered.get(i).getPvCode();
             String habCode = HabitationOrdered.get(i).getHabCode();
             String habName = HabitationOrdered.get(i).getHabitationName();
+            String habName_ta = HabitationOrdered.get(i).getHabitationNameTa();
+
 
             habList.setDistictCode(districtCode);
             habList.setBlockCode(blockCode);
             habList.setPvCode(pvCode);
             habList.setHabCode(habCode);
             habList.setHabitationName(habName);
+            habList.setHabitationNameTa(habName_ta);
 
             Habitation.add(habList);
         }

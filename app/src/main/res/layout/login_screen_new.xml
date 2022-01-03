@@ -83,10 +83,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_centerHorizontal="true"
-
                         android:layout_toRightOf="@+id/image"
                         android:background="@android:color/transparent"
-                        android:hint="User Name"
+                        android:hint="@string/hint_username"
                         android:inputType="text"
                         android:singleLine="true"
                         android:padding="@dimen/_10sdp"
@@ -138,7 +137,7 @@
                         android:background="@android:color/transparent"
                         android:padding="@dimen/_10sdp"
 
-                        android:hint="Password"
+                        android:hint="@string/hint_password"
                         android:inputType="textPassword"
                         android:singleLine="true"
                         android:textColor="@android:color/black"
@@ -177,7 +176,7 @@
                 android:layout_marginRight="40dp"
                 android:background="@drawable/button_background"
                 android:onClick="@{()-> activity.checkLoginScreen()}"
-                android:text="SIGN IN"
+                android:text="@string/btn_login"
                 android:textColor="@android:color/white" />
 
 
