@@ -305,6 +305,28 @@ public class dbData {
 
         return kvvtSurvey;
     }
+    public KVVTSurvey insertAllKVVT(KVVTSurvey kvvtSurvey) {
+
+        ContentValues values = new ContentValues();
+        values.put(AppConstant.PV_CODE, kvvtSurvey.getPvCode());
+        values.put(AppConstant.HAB_CODE, kvvtSurvey.getHabCode());
+        values.put(AppConstant.BENEFICIARY_ID, kvvtSurvey.getBeneficiaryId());
+        values.put(AppConstant.BENEFICIARY_NAME, kvvtSurvey.getBeneficiaryName());
+        values.put(AppConstant.BENEFICIARY_FATHER_NAME, kvvtSurvey.getBeneficiaryFatherName());
+        values.put(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION, kvvtSurvey.getEligible_for_auto_exclusion());
+        values.put(AppConstant.HABITATION_NAME, kvvtSurvey.getHabitationName());
+        values.put(AppConstant.EXCLUSION_CRITERIA_ID, kvvtSurvey.getExclusion_criteria_id());
+        values.put(AppConstant.PV_NAME, kvvtSurvey.getPvName());
+        values.put(AppConstant.PATTA_AVAILABLE, kvvtSurvey.getPatta_available_status());
+        values.put(AppConstant.IS_AWAAS_PLUS_LISTED, kvvtSurvey.getIs_awaas_plus_list());
+        values.put(AppConstant.IS_DOCUMENT_AVAILABLE, kvvtSurvey.getIS_DOCUMENT_AVAILABLE());
+        values.put(AppConstant.IS_NATHAM_LAND_AVAILABLE, kvvtSurvey.getIS_NATHAM_LAND_AVAILABLE());
+
+        long id = db.insert(DBHelper.ALL_KVVT_LIST_TABLE_NAME,null,values);
+        Log.d("Inserted_id_KVVT_LIST", String.valueOf(id));
+
+        return kvvtSurvey;
+    }
 
     public ArrayList<KVVTSurvey> getAll_KVVTList(String pvcode, String habcode) {
 
@@ -361,6 +383,68 @@ public class dbData {
                             .getColumnIndexOrThrow(AppConstant.PV_NAME_TA)));
                     card.setExclusion_criteria_ta(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_TA)));
+
+
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<KVVTSurvey> getSourceAll_KVVTList(String pvcode, String habcode) {
+
+        ArrayList<KVVTSurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        String condition = "";
+
+        if (habcode != "") {
+            condition = " where pvcode = '" + pvcode+"' and habcode = '" + habcode+"'" ;
+        }else {
+            condition = "";
+        }
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.ALL_KVVT_LIST_TABLE_NAME + condition,null);
+            // cursor = db.query(CardsDBHelper.TABLE_CARDS,
+            //       COLUMNS, null, null, null, null, null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    KVVTSurvey card = new KVVTSurvey();
+                    card.setPvCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PV_CODE)));
+                    card.setHabCode(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.HAB_CODE)));
+                    card.setBeneficiaryId(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.BENEFICIARY_ID)));
+                    card.setBeneficiaryName(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.BENEFICIARY_NAME)));
+                    card.setBeneficiaryFatherName(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.BENEFICIARY_FATHER_NAME)));
+                    card.setEligible_for_auto_exclusion(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.ELIGIBLE_FOR_AUTO_EXCLUSION)));
+                    card.setHabitationName(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.HABITATION_NAME)));
+                    card.setExclusion_criteria_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.EXCLUSION_CRITERIA_ID)));
+                    card.setPvName(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PV_NAME)));
+                    card.setIs_awaas_plus_list(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_AWAAS_PLUS_LISTED)));
+                    card.setPatta_available_status(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.PATTA_AVAILABLE)));
+
+                    card.setIS_DOCUMENT_AVAILABLE(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_DOCUMENT_AVAILABLE)));
+                    card.setIS_NATHAM_LAND_AVAILABLE(cursor.getString(cursor
+                            .getColumnIndexOrThrow(AppConstant.IS_NATHAM_LAND_AVAILABLE)));
+
 
 
                     cards.add(card);
@@ -596,6 +680,9 @@ public class dbData {
     public void deleteKVVTTable() {
         db.execSQL("delete from " + DBHelper.KVVT_LIST_TABLE_NAME);
     }
+    public void deleteAllKVVTTable() {
+        db.execSQL("delete from " + DBHelper.ALL_KVVT_LIST_TABLE_NAME);
+    }
 
     public void deleteKVVTDetails() { db.execSQL("delete from " + DBHelper.SAVE_KVVT_DETAILS); }
 
@@ -614,6 +701,7 @@ public class dbData {
         deleteKVVTTable();
         deleteKVVTDetails();
         deleteKVVTImages();
+        deleteAllKVVTTable();
     }
 
 

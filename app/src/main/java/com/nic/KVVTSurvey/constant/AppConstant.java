@@ -12,7 +12,7 @@ public class AppConstant {
     public static String DATA_CONTENT = "data_content";
     public static String ENCODE_DATA = "enc_data";
 
-//    public static String KEY_KVVT_SOURCE_ALL = "kvvt_source_data";
+    public static String KEY_KVVT_SOURCE_DATA_ALL = "kvvt_source_data";
     public static String KEY_KVVT_SOURCE_ALL = "kvvt_source_data_enterd";
     public static String KEY_VALIDATE_BENIFICIARY_ID = "kvvt_source_data_single_benificiary";
 
@@ -28,7 +28,7 @@ public class AppConstant {
 
     public static String DISTRICT_CODE = "dcode";
     public static String DISTRICT_NAME = "dname";
- public static String STREET_CODE = "street_code";
+    public static String STREET_CODE = "street_code";
     public static String STREET_NAME_EN = "street_name_e";
     public static String STREET_NAME_TA = "street_name_t";
 

@@ -1314,6 +1314,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="@dimen/padding"
+                    android:onClick="@{()-> activity.viewServerData()}"
                     android:layout_marginBottom="@dimen/padding"
                     android:src="@drawable/ic_database"
                     app:fabSize="normal"

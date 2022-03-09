@@ -1164,6 +1164,12 @@ public class Utils {
         Log.d("object", "" + dataSet);
         return dataSet;
     }
+    public static JSONObject AllkvvtListJsonParams() throws JSONException {
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_KVVT_SOURCE_DATA_ALL);
+        Log.d("object", "" + dataSet);
+        return dataSet;
+    }
     public static JSONObject validateBeniIdJsonParamsJsonParams(String pvCode, String habCode, String benificiaryId) throws JSONException {
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_VALIDATE_BENIFICIARY_ID);

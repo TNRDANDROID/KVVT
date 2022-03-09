@@ -91,14 +91,14 @@
     <string name="please_enter_the_password">"தயவு செய்து கடவுச்சொல்லை உள்ளிடவும்</string>
     <string name="log_in_again">மீண்டும் உள்நுழைக</string>
     <string name="version">பதிப்பு</string>
-
-
-
-
-
-
-
-
+    <string name="gps_is_not_turned_on">GPS is not turned on...</string>
+    <string name="satelite_communication_not_available">Satellite communication not available to get GPS Co-ordination Please Capture Photo in Open Area..</string>
+    <string name="todo">TODO</string>
+    <string name="enter_description">Enter Description</string>
+    <string name="software_designed_amp_developed_by_nic"><![CDATA[Software Designed & Developed by NIC]]></string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear all</string>
 
 
 </resources>

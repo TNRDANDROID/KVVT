@@ -91,11 +91,14 @@
     <string name="log_in_again">Login Again</string>
     <string name="no_data_available_for_offline">No data available for offline. Please Turn On Your Network</string>
     <string name="available">Yes</string>
-
-
-
-
-
+    <string name="gps_is_not_turned_on">GPS is not turned on...</string>
+    <string name="satelite_communication_not_available">Satellite communication not available to get GPS Co-ordination Please Capture Photo in Open Area..</string>
+    <string name="todo">TODO</string>
+    <string name="enter_description">Enter Description</string>
+    <string name="software_designed_amp_developed_by_nic"><![CDATA[Software Designed & Developed by NIC]]></string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear all</string>
 
 
 </resources>

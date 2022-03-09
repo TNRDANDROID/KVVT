@@ -16,6 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String STREET_TABLE_NAME = " streetTable";
     public static final String HABITATION_TABLE_NAME = " habitaionTable";
     public static final String KVVT_LIST_TABLE_NAME = "KVVTList";
+    public static final String ALL_KVVT_LIST_TABLE_NAME = "all_KVVTList";
     public static final String SAVE_KVVT_DETAILS = "SaveKVVTDetails";
     public static final String SAVE_KVVT_IMAGES = "SaveKVVTImages";
 
@@ -81,6 +82,20 @@ public class DBHelper extends SQLiteOpenHelper {
                 "pvname_ta TEXT," +
                 "habitation_name_ta TEXT," +
                 "pvname TEXT)");
+        db.execSQL("CREATE TABLE " + ALL_KVVT_LIST_TABLE_NAME + " ("
+                + "pvcode  TEXT," +
+                "habcode  TEXT," +
+                "benificiary_id  TEXT," +
+                "beneficiary_name  TEXT," +
+                "beneficiary_father_name  TEXT," +
+                "eligible_for_auto_exclusion  TEXT," +
+                "habitation_name TEXT," +
+                "exclusion_criteria_id TEXT," +
+                "patta_available TEXT," +
+                "is_awaas_plus_listed TEXT," +
+                "is_document_available TEXT," +
+                "is_natham_land_available TEXT," +
+                "pvname TEXT)");
         db.execSQL("CREATE TABLE " + SAVE_KVVT_DETAILS + " ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "dcode TEXT," +
@@ -129,6 +144,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + HABITATION_TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + SAVE_KVVT_DETAILS);
             db.execSQL("DROP TABLE IF EXISTS " + SAVE_KVVT_IMAGES);
+            db.execSQL("DROP TABLE IF EXISTS " + ALL_KVVT_LIST_TABLE_NAME);
             onCreate(db);
         }
     }

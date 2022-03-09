@@ -163,10 +163,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     public void checkLoginScreen() {
        /* loginScreenBinding.userName.setText("maedemo");
         loginScreenBinding.password.setText("test123#$");*/
-       /* loginScreenBinding.userName.setText("prmaltrpy1");
+        /*loginScreenBinding.userName.setText("prmaltrpy1");
         loginScreenBinding.password.setText("pmay552#$");*/
-       /* loginScreenBinding.userName.setText("cudcudrpy1");//pro
-        loginScreenBinding.password.setText("kvvt366#$");*/ //id : 699523
+        /*loginScreenBinding.userName.setText("cudcudrpy1");//pro
+        loginScreenBinding.password.setText("kvvt366#$"); //id : 699523*/
+        /*loginScreenBinding.userName.setText("dpierurpy1");//pro
+        loginScreenBinding.password.setText("rdas569#$"); //id : 699523*/
         final String username = loginScreenBinding.userName.getText().toString().trim();
         final String password = loginScreenBinding.password.getText().toString().trim();
         prefManager.setUserPassword(password);
@@ -326,6 +328,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         String userDataDecrypt = Utils.decrypt(prefManager.getEncryptPass(), user_data);
                         Log.d("userdatadecry", "" + userDataDecrypt);
                         jsonObject = new JSONObject(userDataDecrypt);
+                        prefManager.setUserName(loginScreenBinding.userName.getText().toString());
+                        prefManager.setUserPassword(loginScreenBinding.password.getText().toString());
                         prefManager.setDistrictCode(jsonObject.get(AppConstant.DISTRICT_CODE));
                         prefManager.setBlockCode(jsonObject.get(AppConstant.BLOCK_CODE));
                         prefManager.setPvCode(jsonObject.get(AppConstant.PV_CODE));

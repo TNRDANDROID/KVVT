@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -29,6 +30,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -36,6 +38,9 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.android.volley.VolleyError;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -90,7 +95,8 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     String kvvt_id;
     String type_of_photo="";
 
-
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationRequest locationRequest;
 
 
     @Override
@@ -171,13 +177,13 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                         boolean isWithin10m = distanceInMeters < 15.0;
                         Log.d("isWithin10m", String.valueOf(isWithin10m));
                         //distFrom(latitude, longitude, offlatTextValue, offlongTextValue);
-                        if(isInCampus(latitude, longitude, offlatTextValue, offlongTextValue)){
+                        /*if(isInCampus(latitude, longitude, offlatTextValue, offlongTextValue)){
                             continue;
                         }
                         else {
                             Utils.showAlert(this, "Capturing must be within 10 metres");
                             return;
-                        }
+                        }*/
 //                        if (isWithin10m) {
 //                            continue;
 //                        }
@@ -550,6 +556,126 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
+    }
+
+    public void getExactLocation() {
+
+        mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mlocListener = new MyLocationListener();
+
+
+        //mlocManager.requestLocationUpdates(best, 50, 0, this);
+
+        // permission was granted, yay! Do the
+        // location-related task you need to do.
+        if (ContextCompat.checkSelfPermission(CameraScreen.this,
+                ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            //Request location updates:
+            mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+
+        }
+
+        if (mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            // check permission
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, CAMERA},
+                        1000);
+                // reuqest for permission
+
+            }
+            else {
+                mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+                locationRequest = LocationRequest.create();
+                locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+                //locationRequest.setInterval(0);
+
+                mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+                    if (location != null) {
+                        offlatTextValue = location.getLatitude();
+                        offlongTextValue = location.getLongitude();
+                        Log.d("LocationAccuracy", "" + location.getAccuracy());
+                        Log.d("Locations", "" + offlatTextValue + "," + offlongTextValue);
+                        if (CameraUtils.checkPermissions(CameraScreen.this)) {
+                            captureImage();
+                        } else {
+                            requestCameraPermission(MEDIA_TYPE_IMAGE);
+                        }
+                    } else {
+                        Utils.showAlert(CameraScreen.this, getResources().getString(R.string.satelite_communication_not_available));
+
+                    }
+                });
+            }
+        }
+        else {
+            Utils.showAlert(CameraScreen.this, getResources().getString(R.string.gps_is_not_turned_on));
+        }
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1000: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+                    locationRequest = LocationRequest.create();
+                    locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+                    //locationRequest.setInterval(0);
+
+                    mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    mlocListener = new MyLocationListener();
+
+
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(CameraScreen.this,
+                            ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        //Request location updates:
+                        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+
+                    }
+
+                    if (mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+                            if (location != null) {
+                                offlatTextValue = location.getLatitude();
+                                offlongTextValue = location.getLongitude();
+                                Log.d("LocationAccuracy", "" + location.getAccuracy());
+                                Log.d("Locations", "" + offlatTextValue + "," + offlongTextValue);
+                                if (CameraUtils.checkPermissions(CameraScreen.this)) {
+                                    captureImage();
+                                } else {
+                                    requestCameraPermission(MEDIA_TYPE_IMAGE);
+                                }
+                            } else {
+                                Utils.showAlert(CameraScreen.this, getResources().getString(R.string.satelite_communication_not_available));
+                            }
+                        });
+                    }
+                    else {
+                        Utils.showAlert(CameraScreen.this, getResources().getString(R.string.gps_is_not_turned_on));
+                    }
+                } else {
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+
+
+                break;
+            }
+        }
     }
 
 }
